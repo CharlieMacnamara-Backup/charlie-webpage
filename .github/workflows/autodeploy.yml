@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [main]
+    branches: [main, clean-main]
   pull_request:
     branches: [main]
 
@@ -16,7 +16,7 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
-      - run: npm ci --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund --include=optional
       - run: npm run validate:mdx
       - run: npm run lint
       - run: npm test
