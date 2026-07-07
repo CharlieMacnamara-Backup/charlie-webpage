@@ -33,17 +33,47 @@ function ActiveSites() {
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <span>Websites I Maintain</span>
       </h2>
-      <p className="mt-2 text-sm text-zinc-700 [&amp;>a]:font-medium [&amp;>a]:text-zinc-900 [&amp;>a]:underline [&amp;>a]:underline-offset-2 dark:text-zinc-300 [&amp;>a]:dark:text-zinc-100">
+      <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
         Alongside technical writing, I also build and actively maintain
-        full-stack web applications (like this one).{' '}
-        <a href="https://sicamon.com/">Sicamon</a>
-        {' — '}Stripe as CMS; inventory/pricing managed through Stripe
-        dashboard. Cloudflare Workers propagate automatically and safely.{' '}
-        <a href="https://qualitykilts.com/">QualityKilts.com</a>
-        {' — '}4 Cloudflare Workers (frontend, calendar, reviews, admin
-        dashboard).{' '}
-        <a href="/blog/davison-menswear">read the Davison Menswear blog</a>.
+        full-stack web applications (like this one).
       </p>
+      <ul className="mt-4 space-y-4">
+        <li className="text-sm">
+          <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+            <a
+              href="https://sicamon.com/"
+              className="underline underline-offset-2"
+            >
+              Sicamon
+            </a>
+          </span>
+          <p className="mt-1 text-zinc-600 dark:text-zinc-400">
+            Stripe as CMS — inventory and pricing managed through the Stripe
+            dashboard. Cloudflare Workers propagate changes automatically and
+            safely.
+          </p>
+        </li>
+        <li className="text-sm">
+          <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+            <a
+              href="https://qualitykilts.com/"
+              className="underline underline-offset-2"
+            >
+              QualityKilts.com
+            </a>
+          </span>
+          <p className="mt-1 text-zinc-600 dark:text-zinc-400">
+            4 Cloudflare Workers (frontend, calendar, reviews, admin dashboard){' '}
+            <a
+              href="/blog/davison-menswear"
+              className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+            >
+              read the full story
+            </a>
+            .
+          </p>
+        </li>
+      </ul>
     </div>
   )
 }
@@ -64,8 +94,14 @@ export default function Portfolio() {
           Shopify mugs...
           <br />
           <br />
-          Here&apos;s some varied work. For extra examples, please feel free to
-          reach out.
+          Here&apos;s some varied work. For more examples,{' '}
+          <a
+            href="mailto:mail@charliemacnamara.uk"
+            className="text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+          >
+            drop me a line
+          </a>
+          .
         </>
       }
     >
