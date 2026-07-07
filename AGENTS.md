@@ -2,6 +2,20 @@
 
 Personal portfolio + blog built with Next.js 15 (app router), Tailwind CSS v4, MDX.
 
+## CI/CD Pipeline
+
+`.github/workflows/autodeploy.yml` — three jobs:
+
+| Job | Trigger | What it does |
+|-----|---------|-------------|
+| **check** | Every push/PR to `main` | validate:mdx → lint → test → build → worker syntax check → upload artifact. **Dependency review** runs inline on PRs (requires Dependency graph enabled in repo settings). 15-min timeout. |
+| **codeql** | Push to `main` | JavaScript/TypeScript security analysis (async, doesn't block deploy). |
+| **deploy** | Push to `main` | Rebuilds (same as check), deploys to Cloudflare Workers via `wrangler-action`. |
+
+**Concurrency**: `cancel-in-progress: true` per branch — if you push again while a run is active, the old one is cancelled.
+
+**Pre-push hook** (`.githooks/pre-push`): runs `npm run check` before any push. Skip with `git push --no-verify`.
+
 ## Commands
 
 ```sh
@@ -19,7 +33,7 @@ npm run validate:mdx  # checks all <Definition term=""> usages have glossary ent
 
 - **Static export** — `next.config.js` sets `output: 'export'`. No SSR/API routes in prod.
 - **Babel** overrides SWC via `.babelrc`. The `@/` alias is handled by Next.js's built-in path resolution via `jsconfig.json` (`@/* → ./src/*`). The old `babel-plugin-module-resolver` was removed because it conflicted with Next.js's own alias resolution, causing client-side webpack chunk loading errors.
-- **Deploy**: AWS Amplify (auto from `main` branch push via `.github/workflows/autodeploy.yml`) + manual seedbox via `scripts/deploy.sh`.
+- **Deploy**: Cloudflare Workers via `.github/workflows/autodeploy.yml`. Pushes to `main` deploy automatically. Manual seedbox via `scripts/deploy.sh`.
 
 ## Stale cache gotchas
 

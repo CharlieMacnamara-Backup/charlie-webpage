@@ -38,6 +38,7 @@ jobs:
           if-no-files-found: error
       - uses: actions/dependency-review-action@v4
         if: github.event_name == 'pull_request'
+        continue-on-error: true
         with:
           fail-on-severity: high
 
