@@ -1,32 +1,23 @@
-name: Auto Deploy App
+name: CI
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Setup Node.js 18.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.19.1
-        cache: 'npm'
-    - name: Display environment info
-      run: |
-        echo "Node version: $(node -v)"
-        echo "NPM version: $(npm -v)"
-        echo "Working directory: $(pwd)"
-        ls -la
-    - name: Install dependencies
-      run: npm ci --no-audit --no-fund
-    - name: Build verification
-      run: NODE_OPTIONS="--max_old_space_size=4096" npm run build
-    - name: Build succeeded
-      run: echo "✅ Build verification successful! AWS Amplify will automatically deploy from the GitHub push."
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run validate:mdx
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build

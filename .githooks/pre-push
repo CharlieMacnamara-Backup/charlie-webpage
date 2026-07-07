@@ -1,0 +1,16 @@
+#!/bin/sh
+# Pre-push hook — runs full check suite before allowing a push.
+# Skip with: git push --no-verify
+
+echo "Running pre-push checks (npm run check)..."
+npm run validate:mdx && npm run lint && npm test && npm run build
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "❌ Pre-push checks failed. Fix errors above, then push again."
+  echo "   To skip (not recommended): git push --no-verify"
+  exit 1
+fi
+
+echo "✅ Pre-push checks passed."
+exit 0
