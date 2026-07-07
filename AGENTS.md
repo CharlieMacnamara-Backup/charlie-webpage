@@ -16,6 +16,8 @@ Personal portfolio + blog built with Next.js 15 (app router), Tailwind CSS v4, M
 
 **Pre-push hook** (`.githooks/pre-push`): runs `npm run check` before any push. Skip with `git push --no-verify`.
 
+**Branch protection** (`main`): requires `check` status to pass, 1 PR approval, linear history, dismisses stale reviews. Enforced for admins. Force pushes and deletions blocked.
+
 ## Commands
 
 ```sh
