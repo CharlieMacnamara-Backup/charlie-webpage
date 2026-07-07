@@ -16,7 +16,9 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
-      - run: npm install --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund
+      - name: Ensure native bindings (workaround npm optional dep bug)
+        run: npm install @rolldown/binding-linux-x64-gnu --no-save --ignore-scripts || true
       - run: npm run validate:mdx
       - run: npm run lint
       - run: npm test
