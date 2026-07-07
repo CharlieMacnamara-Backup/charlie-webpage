@@ -37,3 +37,4 @@ tailwindui-spotlight/
 
 # Cloudflare Wrangler
 .wrangler/
+worker-configuration.d.ts
