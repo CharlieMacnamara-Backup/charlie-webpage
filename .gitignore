@@ -34,3 +34,6 @@ tailwindui-spotlight/
 .vscode/
 *.swp
 *.swo
+
+# Cloudflare Wrangler
+.wrangler/
