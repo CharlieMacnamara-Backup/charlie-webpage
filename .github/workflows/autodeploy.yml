@@ -16,7 +16,7 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
-      - run: npm ci --no-audit --no-fund --include=optional
+      - run: npm install --no-audit --no-fund
       - run: npm run validate:mdx
       - run: npm run lint
       - run: npm test
