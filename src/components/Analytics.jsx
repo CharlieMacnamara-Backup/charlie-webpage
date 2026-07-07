@@ -43,15 +43,10 @@ export function Analytics() {
 
     const trackWebVitals = () => {
       try {
-        if (
-          typeof window !== 'undefined' &&
-          'PerformanceObserver' in window
-        ) {
-          const navigation =
-            performance.getEntriesByType('navigation')[0]
+        if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+          const navigation = performance.getEntriesByType('navigation')[0]
           if (navigation) {
-            const ttfb =
-              navigation.responseStart - navigation.requestStart
+            const ttfb = navigation.responseStart - navigation.requestStart
             sendToAnalyticsEndpoint('webvital', {
               id: `ttfb-${Date.now()}`,
               name: 'TTFB',
@@ -90,7 +85,9 @@ export function Analytics() {
             })
           } catch {}
 
-          if (PerformanceObserver.supportedEntryTypes?.includes('layout-shift')) {
+          if (
+            PerformanceObserver.supportedEntryTypes?.includes('layout-shift')
+          ) {
             try {
               let clsValue = 0
               const clsObserver = new PerformanceObserver((list) => {
@@ -147,10 +144,7 @@ export function Analytics() {
 
     return () => {
       clearTimeout(timer)
-      document.removeEventListener(
-        'visibilitychange',
-        handleVisibilityChange
-      )
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
       window.removeEventListener('beforeunload', handleBeforeUnload)
       trackEngagement()
     }

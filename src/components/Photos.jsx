@@ -45,12 +45,14 @@ export const Photos = memo(function Photos() {
             {/* Gradient shadows for scroll indication */}
             <div className="pointer-events-none absolute -inset-x-4 top-0 h-8 bg-linear-to-b from-zinc-50 dark:from-zinc-900" />
             <div className="pointer-events-none absolute -inset-x-4 bottom-0 h-8 bg-linear-to-t from-zinc-50 dark:from-zinc-900" />
-            
+
             {/* Scrollable container */}
-            <div className="-mx-4 flex snap-x snap-mandatory items-center gap-4 overflow-x-auto overflow-y-visible px-4 pb-16 pt-8
+            <div
+              className="-mx-4 flex snap-x snap-mandatory items-center gap-4 overflow-x-auto overflow-y-visible px-4 pb-16 pt-8
               scrollbar-thin scrollbar-track-transparent scrollbar-thumb-zinc-300 
               hover:scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700 
-              dark:hover:scrollbar-thumb-zinc-600">
+              dark:hover:scrollbar-thumb-zinc-600"
+            >
               {images.map((image, imageIndex) => (
                 <div
                   key={image.src.src}
@@ -60,7 +62,7 @@ export const Photos = memo(function Photos() {
                     className={clsx(
                       'relative h-72 w-72 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800',
                       rotations[imageIndex % rotations.length],
-                      'transform transition duration-300 ease-in-out hover:-translate-y-4 hover:shadow-xl'
+                      'transform transition duration-300 ease-in-out hover:-translate-y-4 hover:shadow-xl',
                     )}
                     onClick={() => setSelectedImage(image)}
                     role="button"
@@ -96,4 +98,4 @@ export const Photos = memo(function Photos() {
       />
     </>
   )
-}) 
+})

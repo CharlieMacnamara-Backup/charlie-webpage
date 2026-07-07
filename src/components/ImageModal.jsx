@@ -34,10 +34,13 @@ export function ImageModal({ isOpen, onClose, image, description }) {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-zinc-50 p-6 text-left align-middle shadow-xl transition-all dark:bg-zinc-900">
-                <div className="relative w-full overflow-hidden rounded-lg" style={{ maxHeight: '80vh' }}>
+                <div
+                  className="relative w-full overflow-hidden rounded-lg"
+                  style={{ maxHeight: '80vh' }}
+                >
                   <Image
                     src={image}
-                    alt={description || ""}
+                    alt={description || ''}
                     className="object-contain"
                     width={1200}
                     height={800}
@@ -57,8 +60,18 @@ export function ImageModal({ isOpen, onClose, image, description }) {
                   className="absolute right-4 top-4 rounded-full bg-zinc-100/80 p-2 text-zinc-500 hover:text-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-400 dark:hover:text-zinc-200"
                   aria-label="Close dialog"
                 >
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M6 18L18 6M6 6l12 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    className="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path
+                      d="M6 18L18 6M6 6l12 12"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
               </Dialog.Panel>
@@ -68,4 +81,4 @@ export function ImageModal({ isOpen, onClose, image, description }) {
       </Dialog>
     </Transition>
   )
-} 
+}

@@ -35,22 +35,28 @@ export function useInfiniteScroll({
     }, 300)
   }, [items, page, itemsPerPage])
 
-  const lastElementRef = useCallback(node => {
-    if (isLoading) return
-    if (observer.current) observer.current.disconnect()
+  const lastElementRef = useCallback(
+    (node) => {
+      if (isLoading) return
+      if (observer.current) observer.current.disconnect()
 
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        loadMore()
-      }
-    }, {
-      root: null,
-      rootMargin: `${threshold}px`,
-      threshold: 0.1,
-    })
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasMore) {
+            loadMore()
+          }
+        },
+        {
+          root: null,
+          rootMargin: `${threshold}px`,
+          threshold: 0.1,
+        },
+      )
 
-    if (node) observer.current.observe(node)
-  }, [isLoading, hasMore, threshold, loadMore])
+      if (node) observer.current.observe(node)
+    },
+    [isLoading, hasMore, threshold, loadMore],
+  )
 
   return {
     displayedItems,
@@ -59,4 +65,4 @@ export function useInfiniteScroll({
     lastElementRef,
     loadMore,
   }
-} 
+}

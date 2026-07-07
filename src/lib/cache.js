@@ -51,8 +51,8 @@ class Cache {
     if (typeof window === 'undefined') return false
     try {
       Object.keys(localStorage)
-        .filter(key => key.startsWith(CACHE_PREFIX))
-        .forEach(key => localStorage.removeItem(key))
+        .filter((key) => key.startsWith(CACHE_PREFIX))
+        .forEach((key) => localStorage.removeItem(key))
       return true
     } catch (error) {
       console.warn('Cache clear failed:', error)
@@ -64,8 +64,8 @@ class Cache {
     if (typeof window === 'undefined') return false
     try {
       Object.keys(localStorage)
-        .filter(key => key.startsWith(CACHE_PREFIX))
-        .forEach(key => {
+        .filter((key) => key.startsWith(CACHE_PREFIX))
+        .forEach((key) => {
           try {
             const item = JSON.parse(localStorage.getItem(key))
             if (Date.now() > item.expiry) {
@@ -83,4 +83,4 @@ class Cache {
   }
 }
 
-export default Cache 
+export default Cache

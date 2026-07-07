@@ -1,6 +1,7 @@
 const defaultMetadata = {
   title: 'Charlie Macnamara',
-  description: 'Charlie Macnamara — Technical writer making complex systems and concepts accessible through clear documentation.',
+  description:
+    'Charlie Macnamara — Technical writer making complex systems and concepts accessible through clear documentation.',
   siteUrl: 'https://charliemacnamara.com',
   siteName: 'Charlie Macnamara',
   locale: 'en_GB',
@@ -51,12 +52,12 @@ export function generateMetadata({
       siteName: defaultMetadata.siteName,
       locale: defaultMetadata.locale,
       type,
-      ...(date && { 
+      ...(date && {
         publishedTime: date,
-        modifiedTime: date, 
+        modifiedTime: date,
       }),
       ...(images.length > 0 && {
-        images: images.map(image => ({
+        images: images.map((image) => ({
           url: image.url,
           width: image.width,
           height: image.height,
@@ -70,11 +71,11 @@ export function generateMetadata({
       description,
       creator: defaultMetadata.twitterHandle,
       site: defaultMetadata.twitterHandle,
-      ...(images.length > 0 && { 
-        images: images.map(image => image.url),
+      ...(images.length > 0 && {
+        images: images.map((image) => image.url),
         image: {
-          alt: images[0]?.alt || 'Article featured image'
-        }
+          alt: images[0]?.alt || 'Article featured image',
+        },
       }),
     },
     robots: {
@@ -90,4 +91,4 @@ export function generateMetadata({
     },
     authors: [{ name: 'Charlie Macnamara' }],
   }
-} 
+}

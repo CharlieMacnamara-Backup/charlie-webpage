@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export function Button(props: any) {
-  return <button {...props} />;
-} 
+  return <button {...props} />
+}

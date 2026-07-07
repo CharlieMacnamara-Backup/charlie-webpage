@@ -12,14 +12,12 @@ const Article = memo(function Article({ article, isLast, lastElementRef }) {
   const articleRef = isLast ? lastElementRef : null
 
   return (
-    <article 
+    <article
       ref={articleRef}
       className="md:grid md:grid-cols-4 md:items-baseline"
     >
       <Card className="md:col-span-3">
-        <Card.Title href={`/blog/${article.slug}`}>
-          {article.title}
-        </Card.Title>
+        <Card.Title href={`/blog/${article.slug}`}>{article.title}</Card.Title>
         <Card.Eyebrow
           as="time"
           dateTime={article.date}
@@ -64,8 +62,8 @@ const ArticlesList = memo(function ArticlesList({ articles }) {
   return (
     <div className="flex max-w-3xl flex-col space-y-16">
       {displayedItems.map((article, index) => (
-        <Article 
-          key={article.slug} 
+        <Article
+          key={article.slug}
           article={article}
           isLast={index === displayedItems.length - 1}
           lastElementRef={lastElementRef}
@@ -97,7 +95,7 @@ export function ClientArticles({ initialArticles }) {
   return (
     <SimpleLayout
       title="Non-work Writing"
-       intro="Thoughts beyond work: movies, tech, personal projects. That sort."
+      intro="Thoughts beyond work: movies, tech, personal projects. That sort."
     >
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <Suspense fallback={<ArticlesLoading />}>
@@ -106,4 +104,4 @@ export function ClientArticles({ initialArticles }) {
       </div>
     </SimpleLayout>
   )
-} 
+}

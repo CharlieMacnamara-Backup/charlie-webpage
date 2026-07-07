@@ -31,7 +31,7 @@ export function useArticles() {
       }
 
       const data = await getAllArticles()
-      
+
       // Sort articles by date
       const sortedData = data.sort((a, b) => {
         return new Date(b.date) - new Date(a.date)
@@ -71,4 +71,4 @@ export function useArticles() {
     error,
     refetch,
   }
-} 
+}

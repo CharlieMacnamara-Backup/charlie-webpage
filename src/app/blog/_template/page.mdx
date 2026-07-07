@@ -1,11 +1,12 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
 
 export const article = {
   author: 'Charlie Macnamara',
   date: 'YYYY-MM',
   title: 'Your Blog Title Here',
   description: 'A concise summary shown on the blog index and homepage.',
-  slug: 'your-slug-here'
+  slug: 'your-slug-here',
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />

@@ -74,12 +74,12 @@ const MoonIcon = memo(function MoonIcon(props) {
 
 const MobileNavItem = memo(function MobileNavItem({ href, children }) {
   const isActive = usePathname() === href
-  
+
   return (
     <li>
-      <Popover.Button 
-        as={Link} 
-        href={href} 
+      <Popover.Button
+        as={Link}
+        href={href}
         className="block py-2"
         aria-current={isActive ? 'page' : undefined}
       >
@@ -92,7 +92,7 @@ const MobileNavItem = memo(function MobileNavItem({ href, children }) {
 const MobileNavigation = memo(function MobileNavigation(props) {
   return (
     <Popover {...props}>
-      <Popover.Button 
+      <Popover.Button
         className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20"
         aria-label="Open navigation menu"
       >
@@ -125,7 +125,10 @@ const MobileNavigation = memo(function MobileNavigation(props) {
             className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800"
           >
             <div className="flex flex-row-reverse items-center justify-between">
-              <Popover.Button aria-label="Close navigation menu" className="-m-1 p-1">
+              <Popover.Button
+                aria-label="Close navigation menu"
+                className="-m-1 p-1"
+              >
                 <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
               </Popover.Button>
               <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
@@ -157,7 +160,7 @@ const MemoizedNavItem = memo(function NavItem({ href, children }) {
           'relative block px-3 py-2 transition',
           isActive
             ? 'text-teal-500 dark:text-teal-400'
-            : 'hover:text-teal-500 dark:hover:text-teal-400'
+            : 'hover:text-teal-500 dark:hover:text-teal-400',
         )}
         aria-current={isActive ? 'page' : undefined}
       >
@@ -215,14 +218,18 @@ function AvatarContainer({ className, ...props }) {
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10'
+        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10',
       )}
       {...props}
     />
   )
 }
 
-const MemoizedAvatar = memo(function Avatar({ large = false, className, ...props }) {
+const MemoizedAvatar = memo(function Avatar({
+  large = false,
+  className,
+  ...props
+}) {
   return (
     <Link
       href="/"
@@ -236,7 +243,7 @@ const MemoizedAvatar = memo(function Avatar({ large = false, className, ...props
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
           'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
-          large ? 'h-16 w-16' : 'h-9 w-9'
+          large ? 'h-16 w-16' : 'h-9 w-9',
         )}
         priority
       />
@@ -268,7 +275,7 @@ export function Header() {
       let scrollY = clamp(
         window.scrollY,
         0,
-        document.body.scrollHeight - window.innerHeight
+        document.body.scrollHeight - window.innerHeight,
       )
 
       if (isInitial.current) {
@@ -320,7 +327,7 @@ export function Header() {
 
       setProperty(
         '--avatar-image-transform',
-        `translate3d(${x}rem, 0, 0) scale(${scale})`
+        `translate3d(${x}rem, 0, 0) scale(${scale})`,
       )
 
       let borderScale = 1 / (toScale / scale)

@@ -27,18 +27,19 @@ function findMdxFiles() {
 function checkImportErrors(content, file) {
   const errors = []
 
-  // Check for stray markdown chars before import statements
   const importHeadingRegex = /^#\s+import\s/gm
   if (importHeadingRegex.test(content)) {
-    errors.push('Stray `# ` before import statement (turns it into a markdown heading)')
+    errors.push(
+      'Stray `# ` before import statement (turns it into a markdown heading)',
+    )
   }
 
-  // Reject relative imports — must use @/ alias
   if (/from\s+['"]\.\.?\/[^'"]+['"]/.test(content)) {
-    errors.push('Relative import detected — use @/ alias instead (e.g. @/components/ArticleLayout)')
+    errors.push(
+      'Relative import detected — use @/ alias instead (e.g. @/components/ArticleLayout)',
+    )
   }
 
-  // Check for @/ imports and verify the target file exists
   const importRegex = /from\s+['"]@\/([^'"]+)['"]/g
   let match
   while ((match = importRegex.exec(content)) !== null) {
@@ -56,6 +57,52 @@ function checkImportErrors(content, file) {
   return errors
 }
 
+function checkNestedProse(content, file) {
+  const errors = []
+  const proseCount = (
+    content.match(/className=["'][^"']*prose[^"']*["']/g) || []
+  ).length
+  if (proseCount > 1) {
+    errors.push(
+      `Found ${proseCount} prose class instances — expected at most 1 (use a single prose wrapper, nest with not-prose for custom components)`,
+    )
+  }
+  return errors
+}
+
+function checkBlogSlugConsistency(content, file) {
+  const errors = []
+  const slugRegex = /blogSlug="([^"]+)"/g
+  const slugs = []
+  let match
+  while ((match = slugRegex.exec(content)) !== null) {
+    slugs.push(match[1])
+  }
+  if (slugs.length > 1) {
+    const uniqueSlugs = [...new Set(slugs)]
+    if (uniqueSlugs.length > 1) {
+      errors.push(
+        `Inconsistent blogSlug values: ${uniqueSlugs.map((s) => `"${s}"`).join(', ')} — all blogSlug references should match the article slug`,
+      )
+    }
+  }
+  return errors
+}
+
+function checkImageImport(content, file) {
+  const errors = []
+  const hasImageUsage = /<Image\s/.test(content)
+  const hasImageImport = /import\s+Image\s+from\s+['"]next\/image['"]/.test(
+    content,
+  )
+  if (hasImageUsage && !hasImageImport) {
+    errors.push(
+      "<Image> component used but `import Image from 'next/image'` is missing",
+    )
+  }
+  return errors
+}
+
 function validate() {
   const glossary = loadGlossary()
   const definedTerms = new Set(Object.keys(glossary))
@@ -68,19 +115,37 @@ function validate() {
     const filePath = path.join(blogDir, file)
     const content = fs.readFileSync(filePath, 'utf-8')
 
-    // Check Definition terms
     const terms = findDefinitionTerms(content)
     for (const term of terms) {
       usedTerms.add(term)
       if (!definedTerms.has(term)) {
-        console.error(`  ERROR: "${term}" used in ${file} but not defined in glossary.json`)
+        console.error(
+          `  ERROR: "${term}" used in ${file} but not defined in glossary.json`,
+        )
         hasErrors = true
       }
     }
 
-    // Check import errors
     const importErrors = checkImportErrors(content, file)
     for (const err of importErrors) {
+      console.error(`  ERROR: ${file} — ${err}`)
+      hasErrors = true
+    }
+
+    const proseErrors = checkNestedProse(content, file)
+    for (const err of proseErrors) {
+      console.error(`  ERROR: ${file} — ${err}`)
+      hasErrors = true
+    }
+
+    const slugErrors = checkBlogSlugConsistency(content, file)
+    for (const err of slugErrors) {
+      console.error(`  ERROR: ${file} — ${err}`)
+      hasErrors = true
+    }
+
+    const imageImportErrors = checkImageImport(content, file)
+    for (const err of imageImportErrors) {
       console.error(`  ERROR: ${file} — ${err}`)
       hasErrors = true
     }
@@ -96,7 +161,7 @@ function validate() {
     process.exit(1)
   }
 
-  console.log('OK: All glossary terms used in MDX are defined, imports look valid')
+  console.log('OK: All MDX content checks passed')
 }
 
 validate()

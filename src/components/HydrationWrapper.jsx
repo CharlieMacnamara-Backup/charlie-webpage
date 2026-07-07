@@ -24,4 +24,4 @@ export function HydrationWrapper({ children }) {
 
   // Once mounted on client, render children normally
   return <Fragment key="hydrated">{children}</Fragment>
-} 
+}
