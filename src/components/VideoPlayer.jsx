@@ -33,7 +33,7 @@ export function VideoPlayer({ src, poster, caption }) {
           playsInline
         >
           <source src={src} type="video/mp4" />
-          <p className="p-4 text-center text-gray-700 dark:text-gray-300">Your browser doesn't support HTML5 video.</p>
+          <p className="p-4 text-center text-gray-700 dark:text-gray-300">Your browser doesn&apos;t support HTML5 video.</p>
         </video>
       </div>
       {caption && (

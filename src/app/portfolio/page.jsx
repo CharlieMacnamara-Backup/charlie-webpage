@@ -54,13 +54,13 @@ export default function Portfolio() {
         <>
           Technical Writers wear many hats. Once I was tasked with designing Shopify mugs...
           <br /><br />
-          Here's some varied work. For extra examples, please feel free to reach out.
+          Here&apos;s some varied work. For extra examples, please feel free to reach out.
         </>
       }
     >
       <div className="space-y-20">
         <ReferenceNote>
-          Due to EVORA's single-user configuration, Zendesk articles were published under Matt Mattias. Matt is a resume reference and former manager. Please check on the reference request.
+          Due to EVORA&apos;s single-user configuration, Zendesk articles were published under Matt Mattias. Matt is a resume reference and former manager. Please check on the reference request.
         </ReferenceNote>
 
         <PortfolioSection title="Blog Posts">

@@ -20,6 +20,21 @@ export function useInfiniteScroll({
     setHasMore(items.length > itemsPerPage)
   }, [items, itemsPerPage])
 
+  const loadMore = useCallback(() => {
+    setIsLoading(true)
+    const nextPage = page + 1
+    const start = (nextPage - 1) * itemsPerPage
+    const end = start + itemsPerPage
+    const newItems = items.slice(0, end)
+
+    setTimeout(() => {
+      setDisplayedItems(newItems)
+      setPage(nextPage)
+      setHasMore(end < items.length)
+      setIsLoading(false)
+    }, 300)
+  }, [items, page, itemsPerPage])
+
   const lastElementRef = useCallback(node => {
     if (isLoading) return
     if (observer.current) observer.current.disconnect()
@@ -35,23 +50,7 @@ export function useInfiniteScroll({
     })
 
     if (node) observer.current.observe(node)
-  }, [isLoading, hasMore, threshold])
-
-  const loadMore = useCallback(() => {
-    setIsLoading(true)
-    const nextPage = page + 1
-    const start = (nextPage - 1) * itemsPerPage
-    const end = start + itemsPerPage
-    const newItems = items.slice(0, end)
-
-    // Simulate network delay for smoother UX
-    setTimeout(() => {
-      setDisplayedItems(newItems)
-      setPage(nextPage)
-      setHasMore(end < items.length)
-      setIsLoading(false)
-    }, 300)
-  }, [items, page, itemsPerPage])
+  }, [isLoading, hasMore, threshold, loadMore])
 
   return {
     displayedItems,

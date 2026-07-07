@@ -36,10 +36,11 @@ export const SimpleVideo = ({
       videoRef.current.addEventListener('loadeddata', handleLoaded)
     }
     
+    const video = videoRef.current
     return () => {
-      if (videoRef.current) {
-        videoRef.current.removeEventListener('error', handleError)
-        videoRef.current.removeEventListener('loadeddata', handleLoaded)
+      if (video) {
+        video.removeEventListener('error', handleError)
+        video.removeEventListener('loadeddata', handleLoaded)
       }
     }
   }, [src])
