@@ -10,11 +10,9 @@ export function ClientLayout({ children }) {
     <HydrationWrapper>
       <ErrorBoundary>
         <Layout>
-          <Fragment key="content">
-            {children}
-          </Fragment>
+          <Fragment key="content">{children}</Fragment>
         </Layout>
       </ErrorBoundary>
     </HydrationWrapper>
   )
-} 
+}

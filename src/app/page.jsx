@@ -7,10 +7,7 @@ import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import { Photos } from '@/components/Photos'
-import {
-  GitHubIcon,
-  LinkedInIcon,
-} from '@/components/SocialIcons'
+import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 
 // Critical images loaded immediately
 import logoEVORA from '@/images/logos/evora_global_logo.svg'
@@ -59,9 +56,7 @@ const ArrowDownIcon = memo(function ArrowDownIcon(props) {
 const Article = memo(function Article({ article }) {
   return (
     <Card as="article">
-      <Card.Title href={`/blog/${article.slug}`}>
-        {article.title}
-      </Card.Title>
+      <Card.Title href={`/blog/${article.slug}`}>{article.title}</Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
         {formatDate(article.date)}
       </Card.Eyebrow>
@@ -113,10 +108,10 @@ const Resume = memo(function Resume() {
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:bg-zinc-700 dark:ring-white/10">
-              <Image 
-                src={role.logo} 
-                alt={`${role.company} company logo`} 
-                className="h-7 w-7" 
+              <Image
+                src={role.logo}
+                alt={`${role.company} company logo`}
+                className="h-7 w-7"
                 loading="lazy"
               />
             </div>
@@ -148,7 +143,7 @@ const Resume = memo(function Resume() {
           </li>
         ))}
       </ol>
-      <Button 
+      <Button
         href="/charlie-macnamara-resume.pdf"
         download="charlie-macnamara-resume.pdf"
         className="group mt-6 w-full"
@@ -172,7 +167,8 @@ export default async function Home() {
             Technical Writer, Web Enthusiast, Amateur Baker
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m Charlie Macnamara — a technical writer who makes concepts clear and engaging.
+            I&apos;m Charlie Macnamara — a technical writer who makes concepts
+            clear and engaging.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink

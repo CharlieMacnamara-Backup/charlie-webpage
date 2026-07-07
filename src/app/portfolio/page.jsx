@@ -51,7 +51,7 @@ function ActiveSites() {
 export const metadata = generateMetadata({
   title: 'Portfolio',
   description: 'Selected Technical Writing.',
-  path: '/portfolio'
+  path: '/portfolio',
 })
 
 export default function Portfolio() {
@@ -60,9 +60,12 @@ export default function Portfolio() {
       title="Selected Works"
       intro={
         <>
-          Technical Writers wear many hats. Once I was tasked with designing Shopify mugs...
-          <br /><br />
-          Here&apos;s some varied work. For extra examples, please feel free to reach out.
+          Technical Writers wear many hats. Once I was tasked with designing
+          Shopify mugs...
+          <br />
+          <br />
+          Here&apos;s some varied work. For extra examples, please feel free to
+          reach out.
         </>
       }
     >
@@ -103,7 +106,7 @@ export default function Portfolio() {
             description="ESG API documentation."
             cta="View"
           />
-          
+
           <ProjectCard
             href="https://docs.wisej.com/docs/releases/whats-new-in-3.1"
             title="What's new in Wisej.NET 3.1"

@@ -4,10 +4,10 @@ import clsx from 'clsx'
 
 const ChevronRightIcon = memo(function ChevronRightIcon(props) {
   return (
-    <svg 
-      viewBox="0 0 16 16" 
-      fill="none" 
-      aria-hidden="true" 
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
       role="img"
       {...props}
     >
@@ -21,7 +21,11 @@ const ChevronRightIcon = memo(function ChevronRightIcon(props) {
   )
 })
 
-export const Card = memo(function Card({ as: Component = 'div', className, children }) {
+export const Card = memo(function Card({
+  as: Component = 'div',
+  className,
+  children,
+}) {
   return (
     <Component
       className={clsx(
@@ -31,7 +35,7 @@ export const Card = memo(function Card({ as: Component = 'div', className, child
         'bg-white ring-2 ring-zinc-200/50 transition-all duration-200',
         'hover:bg-zinc-50 hover:ring-zinc-300/70 hover:shadow-lg',
         'dark:bg-zinc-800/40 dark:ring-zinc-700/40',
-        'dark:hover:bg-zinc-800/60 dark:hover:ring-zinc-700'
+        'dark:hover:bg-zinc-800/60 dark:hover:ring-zinc-700',
       )}
       role={Component === 'article' ? 'article' : undefined}
     >
@@ -43,8 +47,8 @@ export const Card = memo(function Card({ as: Component = 'div', className, child
 Card.Link = memo(function CardLink({ children, ...props }) {
   return (
     <>
-      <div 
-        className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50/70 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/70 sm:-inset-x-6 sm:rounded-2xl" 
+      <div
+        className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50/70 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/70 sm:-inset-x-6 sm:rounded-2xl"
         aria-hidden="true"
       />
       <Link {...props}>
@@ -62,7 +66,9 @@ Card.Title = memo(function CardTitle({ as: Component = 'h2', href, children }) {
         <Card.Link href={href} aria-label={`Read more about ${children}`}>
           {children}
         </Card.Link>
-      ) : children}
+      ) : (
+        children
+      )}
     </Component>
   )
 })
@@ -77,12 +83,13 @@ Card.Description = memo(function CardDescription({ children }) {
 
 Card.Cta = memo(function CardCta({ children }) {
   return (
-    <div
-      className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-600 transition-colors group-hover:text-teal-700 dark:text-teal-400 dark:group-hover:text-teal-300"
-    >
+    <div className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-600 transition-colors group-hover:text-teal-700 dark:text-teal-400 dark:group-hover:text-teal-300">
       <span className="sr-only">Click to </span>
       {children}
-      <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current transition-transform group-hover:translate-x-1" aria-hidden="true" />
+      <ChevronRightIcon
+        className="ml-1 h-4 w-4 stroke-current transition-transform group-hover:translate-x-1"
+        aria-hidden="true"
+      />
     </div>
   )
 })
@@ -99,7 +106,7 @@ Card.Eyebrow = memo(function CardEyebrow({
       className={clsx(
         className,
         'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
-        decorate && 'pl-3.5'
+        decorate && 'pl-3.5',
       )}
       {...props}
     >

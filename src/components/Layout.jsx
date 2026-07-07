@@ -14,15 +14,13 @@ const Background = memo(function Background() {
 
 const Content = memo(function Content({ children }) {
   const childrenArray = Array.isArray(children) ? children : [children]
-  
+
   return (
     <div className="relative flex flex-col w-full min-h-screen">
       <Header />
       <main id="main-content" className="flex-1 w-full pb-16">
         {childrenArray.map((child, index) => (
-          <div key={`content-${index}`}>
-            {child}
-          </div>
+          <div key={`content-${index}`}>{child}</div>
         ))}
       </main>
       <Footer />

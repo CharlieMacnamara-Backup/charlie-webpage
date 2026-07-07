@@ -7,12 +7,12 @@ export function validateEnv() {
     }
 
     const missing = REQUIRED_ENV_VARS.filter(
-      (key) => !process.env[key] || process.env[key]?.trim() === ''
+      (key) => !process.env[key] || process.env[key]?.trim() === '',
     )
 
     if (missing.length > 0) {
       throw new Error(
-        `Missing required production environment variables: ${missing.join(', ')}`
+        `Missing required production environment variables: ${missing.join(', ')}`,
       )
     }
   }

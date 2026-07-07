@@ -20,7 +20,11 @@ const ArrowLeftIcon = memo(function ArrowLeftIcon(props) {
   )
 })
 
-export const ArticleLayout = memo(function ArticleLayout({ children, article, isRssFeed = false }) {
+export const ArticleLayout = memo(function ArticleLayout({
+  children,
+  article,
+  isRssFeed = false,
+}) {
   if (isRssFeed) {
     return children
   }

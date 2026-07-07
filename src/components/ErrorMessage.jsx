@@ -48,7 +48,7 @@ export const ErrorMessage = memo(function ErrorMessage({
   className = '',
 }) {
   return (
-    <div 
+    <div
       className={`rounded-2xl bg-white p-6 dark:bg-zinc-800/90 ${className}`}
       role="alert"
       aria-live="polite"
@@ -77,4 +77,4 @@ export const ErrorMessage = memo(function ErrorMessage({
       </div>
     </div>
   )
-}) 
+})

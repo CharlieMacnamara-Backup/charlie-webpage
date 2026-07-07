@@ -4,17 +4,19 @@ import TableOfContents from '@/components/TableOfContents'
 
 export const article = {
   title: 'Markdown CV Generator: Consistent designs matter',
-  description: 'A markdown resume generator; for those also wronged by free trials.',
+  description:
+    'A markdown resume generator; for those also wronged by free trials.',
   date: '2024-05-15',
   author: 'Charlie Macnamara',
-  slug: 'markdown-cv'
+  slug: 'markdown-cv',
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-After overhauling my site, I looked at my CV and thought, “This sucks.” Time to fix consistency.
+After overhauling my site, I looked at my CV and thought, “This sucks.” Time to
+fix consistency.
 
-<Image 
+<Image
   src="/blog/markdown-cv/misc/markdown-toggled.png"
   alt="Markdown CV Generator Example"
   width={1200}
@@ -23,13 +25,15 @@ After overhauling my site, I looked at my CV and thought, “This sucks.” Time
   priority
 />
 
-I built a small tool: Markdown in, Tailwind styles, Node/Express with Puppeteer for crisp PDFs.
+I built a small tool: Markdown in, Tailwind styles, Node/Express with Puppeteer
+for crisp PDFs.
 
 <TableOfContents />
 
 ## The Problem
 
-Resume templates often disappoint. Paywalled builders are worse. This started after a £60 resume.io lapse.
+Resume templates often disappoint. Paywalled builders are worse. This started
+after a £60 resume.io lapse.
 
 ## The Solution
 
@@ -45,8 +49,11 @@ Clone the repo:
 
 <div className="my-8 overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-700/40 dark:bg-zinc-900/70">
   <div className="border-b border-zinc-200 bg-zinc-50 px-4 py-2 dark:border-zinc-700/40 dark:bg-zinc-800/70">
-    <span className="font-mono text-sm text-zinc-500 dark:text-zinc-400">bash</span>
+    <span className="font-mono text-sm text-zinc-500 dark:text-zinc-400">
+      bash
+    </span>
   </div>
+  {/* prettier-ignore */}
   <div className="p-4 bg-white/80 text-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-200">
 ```bash
 git clone https://github.com/CharlieMacnamara/Markdown-CV-Generator.git
@@ -60,8 +67,11 @@ Edit `example.md`, then run:
 
 <div className="my-8 overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-700/40 dark:bg-zinc-900/70">
   <div className="border-b border-zinc-200 bg-zinc-50 px-4 py-2 dark:border-zinc-700/40 dark:bg-zinc-800/70">
-    <span className="font-mono text-sm text-zinc-500 dark:text-zinc-400">bash</span>
+    <span className="font-mono text-sm text-zinc-500 dark:text-zinc-400">
+      bash
+    </span>
   </div>
+  {/* prettier-ignore */}
   <div className="p-4 bg-white/80 text-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-200">
 ```bash
 markdowncv build --theme light
@@ -73,10 +83,14 @@ Done—your CV is ready.
 
 ## Themes
 
-Three baked-in options: a clean light theme with Playfair headings, a dark theme that switches to light for print, and a softer palette between the two. Add yours in `./themes`.
+Three baked-in options: a clean light theme with Playfair headings, a dark theme
+that switches to light for print, and a softer palette between the two. Add
+yours in `./themes`.
 
 ## What's Next?
 
-Open source, yours to customise. More themes and maybe a web interface. Suggestions welcome at the [repository](https://github.com/CharlieMacnamara/Markdown-CV-Generator).
+Open source, yours to customise. More themes and maybe a web interface.
+Suggestions welcome at the
+[repository](https://github.com/CharlieMacnamara/Markdown-CV-Generator).
 
 After all that work rebuilding my site, at least my CV finally matches.

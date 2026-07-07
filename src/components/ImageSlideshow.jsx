@@ -10,7 +10,11 @@ export function ImageSlideshow({ images, blogSlug = null }) {
   const [current, setCurrent] = useState(0)
 
   const scrollTo = useCallback((index) => {
-    slideRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    slideRefs.current[index]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    })
     setCurrent(index)
   }, [])
 
@@ -31,7 +35,9 @@ export function ImageSlideshow({ images, blogSlug = null }) {
         {images.map((image, index) => (
           <div
             key={index}
-            ref={(el) => { slideRefs.current[index] = el }}
+            ref={(el) => {
+              slideRefs.current[index] = el
+            }}
             className="w-full shrink-0 snap-start flex justify-center"
           >
             <div className="overflow-hidden rounded-xl shadow-xs bg-zinc-100 dark:bg-zinc-800 mx-3 w-full max-w-[min(90vw,800px)]">
@@ -54,7 +60,13 @@ export function ImageSlideshow({ images, blogSlug = null }) {
           className="flex h-12 w-12 min-w-[48px] items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-600 shadow-xs transition active:scale-95 hover:border-zinc-400 hover:text-zinc-800 hover:shadow-sm disabled:opacity-30 disabled:pointer-events-none dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-500 dark:hover:text-zinc-200"
           aria-label="Previous slide"
         >
-          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <path d="M15 19l-7-7 7-7" />
           </svg>
         </button>
@@ -80,7 +92,13 @@ export function ImageSlideshow({ images, blogSlug = null }) {
           className="flex h-12 w-12 min-w-[48px] items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-600 shadow-xs transition active:scale-95 hover:border-zinc-400 hover:text-zinc-800 hover:shadow-sm disabled:opacity-30 disabled:pointer-events-none dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-500 dark:hover:text-zinc-200"
           aria-label="Next slide"
         >
-          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <path d="M9 5l7 7-7 7" />
           </svg>
         </button>

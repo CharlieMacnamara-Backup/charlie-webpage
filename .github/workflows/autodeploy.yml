@@ -26,12 +26,13 @@ jobs:
       - name: Ensure native bindings (workaround npm optional dep bug)
         run: npm install @rolldown/binding-linux-x64-gnu --no-save --ignore-scripts || true
       - run: npm run validate:mdx
+      - run: npm run format:check
       - run: npm run lint
       - run: npm test
       - run: npm run build
       - name: Validate worker syntax
         run: node -c .cloudflare/worker.js
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: build-output
           path: out/
@@ -75,7 +76,7 @@ jobs:
       - name: Build static site
         run: npm run build
       - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

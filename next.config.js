@@ -5,7 +5,7 @@ const withMDX = require('@next/mdx')({
     remarkPlugins: [],
     rehypePlugins: [],
     // Removed providerImportSource to fix createContext error
-  }
+  },
 })
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',

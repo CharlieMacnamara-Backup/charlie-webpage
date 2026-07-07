@@ -7,7 +7,8 @@ import { ClientArticles } from './ClientArticles'
 
 export const metadata = {
   title: 'Non-work Blog',
-  description: 'Thoughts beyond my professional work. Dives into movies, tech, and personal projects.',
+  description:
+    'Thoughts beyond my professional work. Dives into movies, tech, and personal projects.',
 }
 
 // Force static generation
@@ -17,9 +18,7 @@ function Article({ article }) {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
-        <Card.Title href={`/blog/${article.slug}`}>
-          {article.title}
-        </Card.Title>
+        <Card.Title href={`/blog/${article.slug}`}>{article.title}</Card.Title>
         <Card.Eyebrow
           as="time"
           dateTime={article.date}
@@ -44,13 +43,13 @@ function Article({ article }) {
 
 export default function ArticlesIndex() {
   const articles = getAllArticles()
-  
+
   // Debug output during build
   console.log('Articles discovered:', articles.length)
-  articles.forEach(article => {
+  articles.forEach((article) => {
     console.log(`- ${article.slug}: ${article.title} (${article.date})`)
   })
-  
+
   // Use ClientArticles component which handles both CSR and SSR
   return <ClientArticles initialArticles={articles} />
 }

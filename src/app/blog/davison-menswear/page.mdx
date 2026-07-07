@@ -5,7 +5,7 @@ import { ImageSlideshow } from '@/components/ImageSlideshow'
 export const article = {
   author: 'Charlie Macnamara',
   date: '2026-03',
-  title: "4 Cloudflare Workers for a 1927 Kilt Shop",
+  title: '4 Cloudflare Workers for a 1927 Kilt Shop',
   description:
     'How a 1927 Edinburgh kilt shop went from paper notes and missed appointments to an automated booking system — powered by Cloudflare Workers, Google Calendar, and 324 tests.',
   slug: 'davison-menswear',
@@ -13,7 +13,9 @@ export const article = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-My sister got married. I needed a kilt. [Davison Menswear & Kilt Hire](https://qualitykilts.com/) was a few doors down. Hand-painted sign: "Est. 1927."
+My sister got married. I needed a kilt.
+[Davison Menswear & Kilt Hire](https://qualitykilts.com/) was a few doors down.
+Hand-painted sign: "Est. 1927."
 
 <SingleImage
   src="/blog/davison-menswear/screenshot-hero-viewport.png"
@@ -29,18 +31,25 @@ grandfather's day: notepad by the phone, paper diary, appointment slips.
 The methods were proven, but flawed. Calendar bookings misplaced, missed calls,
 staying late to rewrite orders in three places. He was receptive.
 
-His old site had been down for a couple of years. He was ready. We sat down and talked through what he needed.
+His old site had been down for a couple of years. He was ready. We sat down and
+talked through what he needed.
 
 I'd already built [Sicamon](https://sicamon.com) — a full Stripe CMS with
 digital cataloguing. He wanted none of it. No online inventory, no card
 payments. Bank transfers. What he's always done. This system works with that.
 
-Every line of code had to be right. This isn't a side project that can go down
-— it's a sole trader's livelihood. A failed booking is a missed fitting, a lost
+Every line of code had to be right. This isn't a side project that can go down —
+it's a sole trader's livelihood. A failed booking is a missed fitting, a lost
 sale, a customer who doesn't come back. So I tested relentlessly: Vitest for
 fast unit tests, Playwright for end-to-end flows against the real Google
-Calendar API. 324 tests across four workers. And the whole thing — <Definition term="workers">Workers</Definition>, <Definition term="d1">D1</Definition>,
-<Definition term="kv">KV</Definition>, Turnstile, <Definition term="resend">Resend</Definition>, GitHub Actions — costs nothing to run.
+Calendar API. 324 tests across four workers. And the whole thing —
+
+<Definition term="workers">Workers</Definition>,
+<Definition term="d1">D1</Definition>,
+
+<Definition term="kv">KV</Definition>, Turnstile,
+<Definition term="resend">Resend</Definition>, GitHub Actions — costs nothing to
+run.
 
 The strongest identity of this business was heritage. A century in 2027 — I
 wanted a design to reflect this. The visual identity came from a binder:
@@ -170,10 +179,10 @@ kilt waist, seat, length, jacket chest, sleeve, back, height, build notes. All
 optional.
 
 Emails fire on status changes via [Resend](https://resend.com/). The receipt
-includes bank details — stored as Worker secrets, never in the codebase.
-On creation the customer gets payment instructions. When it's ready, a
-collection notice. Not a word typed. CSV export: current tax year, last
-year, or custom range. Clean totals at the bottom for the accountant.
+includes bank details — stored as Worker secrets, never in the codebase. On
+creation the customer gets payment instructions. When it's ready, a collection
+notice. Not a word typed. CSV export: current tax year, last year, or custom
+range. Clean totals at the bottom for the accountant.
 
 Quick Add for reconciling past orders. Archived orders auto-purge after 30 days.
 No payments on-platform — bank transfer, cash, the till. Progress without
@@ -190,6 +199,7 @@ overwhelm.
 infra, already in use.
 [Turnstile](https://www.cloudflare.com/products/turnstile/) over CAPTCHA for the
 same reason: free, invisible, no learning curve. Cancel links use signed
+
 <Definition term="jwt">JWTs</Definition> in the event description — no database
 lookup. Email fires asynchronously so the booking never blocks on a delivery
 failure. [Tailwind](https://tailwindcss.com/) keeps every layout consistent —

@@ -3,10 +3,14 @@
 export function StaticPlayer({ mediaUrl, mediaType }) {
   const isVideo = mediaType === 'video'
   const isAudio = mediaType === 'audio'
-  const mediaLabel = isVideo ? 'Video player' : isAudio ? 'Audio player' : 'Media player'
+  const mediaLabel = isVideo
+    ? 'Video player'
+    : isAudio
+      ? 'Audio player'
+      : 'Media player'
 
   return (
-    <div 
+    <div
       className="w-full h-64 bg-zinc-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center"
       role="region"
       aria-label={mediaLabel}
@@ -35,4 +39,4 @@ export function StaticPlayer({ mediaUrl, mediaType }) {
       )}
     </div>
   )
-} 
+}

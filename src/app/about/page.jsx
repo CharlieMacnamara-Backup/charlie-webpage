@@ -4,13 +4,15 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import {
-  GitHubIcon,
-  LinkedInIcon,
-} from '@/components/SocialIcons'
+import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 import portraitImage from '@/images/portrait.jpg'
 
-const SocialLink = memo(function SocialLink({ className, href, children, icon: Icon }) {
+const SocialLink = memo(function SocialLink({
+  className,
+  href,
+  children,
+  icon: Icon,
+}) {
   return (
     <li className={clsx(className, 'flex')}>
       <Link
@@ -36,8 +38,9 @@ const MailIcon = memo(function MailIcon(props) {
 })
 
 export const metadata = {
-  title: "About",
-  description: "Technical writer in Edinburgh. Clear, usable docs for complex systems.",
+  title: 'About',
+  description:
+    'Technical writer in Edinburgh. Clear, usable docs for complex systems.',
 }
 
 const AboutContent = memo(function AboutContent() {
@@ -59,26 +62,36 @@ const AboutContent = memo(function AboutContent() {
           Charlie Macnamara — technical writer in Edinburgh.
         </h1>
         <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+          <p>Clear, usable docs for complex systems.</p>
           <p>
-            Clear, usable docs for complex systems.
+            With product and engineering, I ship docs that reduce tickets and
+            speed onboarding.
           </p>
           <p>
-            With product and engineering, I ship docs that reduce tickets and speed onboarding.
+            As a dyslexic writer—irony noted—poor docs have blocked me more than
+            once. Years of releases, migrations, and API changes taught me where
+            users stumble—and how to fix it.
           </p>
           <p>
-            As a dyslexic writer—irony noted—poor docs have blocked me more than once. Years of releases, migrations, and API changes taught me where users stumble—and how to fix it.
-          </p>
-          <p>
-            Off hours, I play guitar (mainly black metal and other metal genres... with jazz too) and develop Flutter apps end to end.
+            Off hours, I play guitar (mainly black metal and other metal
+            genres... with jazz too) and develop Flutter apps end to end.
           </p>
         </div>
       </div>
       <div className="lg:pl-20">
         <ul role="list">
-          <SocialLink href="https://github.com/CharlieMacnamara" icon={GitHubIcon} className="mt-4">
+          <SocialLink
+            href="https://github.com/CharlieMacnamara"
+            icon={GitHubIcon}
+            className="mt-4"
+          >
             Follow on GitHub
           </SocialLink>
-          <SocialLink href="https://www.linkedin.com/in/charliemacnamara/" icon={LinkedInIcon} className="mt-4">
+          <SocialLink
+            href="https://www.linkedin.com/in/charliemacnamara/"
+            icon={LinkedInIcon}
+            className="mt-4"
+          >
             Follow on LinkedIn
           </SocialLink>
           <SocialLink

@@ -1,9 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import {
-  generateSessionId,
-  calculateTimeOnPage,
-  isBounce,
-} from './analytics'
+import { generateSessionId, calculateTimeOnPage, isBounce } from './analytics'
 
 describe('generateSessionId', () => {
   it('returns a string', () => {

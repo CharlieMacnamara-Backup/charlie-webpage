@@ -27,9 +27,15 @@ const ThemeWatcher = memo(function ThemeWatcher() {
   return null
 })
 
-const MemoizedThemeProvider = memo(function MemoizedThemeProvider({ children }) {
+const MemoizedThemeProvider = memo(function MemoizedThemeProvider({
+  children,
+}) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      disableTransitionOnChange
+    >
       <ThemeWatcher />
       {children}
     </ThemeProvider>
@@ -37,9 +43,5 @@ const MemoizedThemeProvider = memo(function MemoizedThemeProvider({ children }) 
 })
 
 export function Providers({ children }) {
-  return (
-    <MemoizedThemeProvider>
-      {children}
-    </MemoizedThemeProvider>
-  )
+  return <MemoizedThemeProvider>{children}</MemoizedThemeProvider>
 }

@@ -4,11 +4,7 @@ import { Providers } from './providers'
 import { ClientLayout } from '@/components/ClientLayout'
 import { SkipToMain } from '@/components/SkipToMain'
 import { Analytics } from '@/components/Analytics'
-import {
-  personSchema,
-  websiteSchema,
-  blogSchema,
-} from '@/lib/schema'
+import { personSchema, websiteSchema, blogSchema } from '@/lib/schema'
 
 export const metadata = {
   title: {

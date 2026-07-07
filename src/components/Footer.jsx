@@ -19,25 +19,25 @@ const navigation = {
     {
       name: 'GitHub',
       href: 'https://github.com/CharlieMacnamara',
-      icon: GitHubIcon
+      icon: GitHubIcon,
     },
     {
       name: 'LinkedIn',
       href: 'https://www.linkedin.com/in/charliemacnamara/',
-      icon: LinkedInIcon
+      icon: LinkedInIcon,
     },
     {
       name: 'Email',
       href: 'mailto:mail@charliemacnamara.uk',
-      icon: MailIcon
-    }
+      icon: MailIcon,
+    },
   ],
   tech: [
     { name: 'Next.js', href: 'https://nextjs.org' },
     { name: 'React', href: 'https://react.dev' },
     { name: 'TailwindCSS', href: 'https://tailwindcss.com' },
-    { name: 'AWS', href: 'https://aws.amazon.com' }
-  ]
+    { name: 'AWS', href: 'https://aws.amazon.com' },
+  ],
 }
 
 export const Footer = memo(function Footer() {
@@ -64,12 +64,15 @@ export const Footer = memo(function Footer() {
                     ))}
                   </div>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                    &copy; {new Date().getFullYear()} Charlie Macnamara. All rights reserved.
+                    &copy; {new Date().getFullYear()} Charlie Macnamara. All
+                    rights reserved.
                   </p>
                 </div>
                 <div className="flex flex-wrap justify-center sm:justify-end">
                   <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:justify-end">
-                    <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">Built on: </span>
+                    <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                      Built on:{' '}
+                    </span>
                     {navigation.tech.map((item) => (
                       <Link
                         key={item.name}

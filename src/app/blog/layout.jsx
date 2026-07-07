@@ -3,4 +3,4 @@ export const dynamicParams = false
 
 export default function BlogLayout({ children }) {
   return <>{children}</>
-} 
+}

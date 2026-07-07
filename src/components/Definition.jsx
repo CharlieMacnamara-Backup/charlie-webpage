@@ -15,7 +15,7 @@ export function Definition({ term, children, className }) {
           <span
             className={cn(
               'cursor-help border-b border-dotted border-zinc-300 hover:border-zinc-400 dark:border-zinc-600 dark:hover:border-zinc-400 transition-colors',
-              className
+              className,
             )}
           >
             {children}
