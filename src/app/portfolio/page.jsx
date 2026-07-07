@@ -27,14 +27,22 @@ function ProjectCard({ title, description, event, cta, href }) {
   )
 }
 
-function ReferenceNote({ children }) {
+function ActiveSites() {
   return (
     <div className="rounded-2xl bg-zinc-100 p-6 dark:bg-zinc-800/50">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <span>⚠️ Note on EVORA Global Articles</span>
+        <span>Websites I Maintain</span>
       </h2>
-      <p className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">
-        {children}
+      <p className="mt-2 text-sm text-zinc-700 [&amp;>a]:font-medium [&amp;>a]:text-zinc-900 [&amp;>a]:underline [&amp;>a]:underline-offset-2 dark:text-zinc-300 [&amp;>a]:dark:text-zinc-100">
+        Alongside technical writing, I also build and actively maintain
+        full-stack web applications (like this one).{' '}
+        <a href="https://sicamon.com/">Sicamon</a>
+        {' — '}Stripe as CMS; inventory/pricing managed through Stripe
+        dashboard. Cloudflare Workers propagate automatically and safely.{' '}
+        <a href="https://qualitykilts.com/">QualityKilts.com</a>
+        {' — '}4 Cloudflare Workers (frontend, calendar, reviews, admin
+        dashboard).{' '}
+        <a href="/blog/davison-menswear">read the Davison Menswear blog</a>.
       </p>
     </div>
   )
@@ -59,9 +67,7 @@ export default function Portfolio() {
       }
     >
       <div className="space-y-20">
-        <ReferenceNote>
-          Due to EVORA&apos;s single-user configuration, Zendesk articles were published under Matt Mattias. Matt is a resume reference and former manager. Please check on the reference request.
-        </ReferenceNote>
+        <ActiveSites />
 
         <PortfolioSection title="Blog Posts">
           <ProjectCard
