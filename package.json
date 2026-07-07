@@ -14,7 +14,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "check": "npm run validate:mdx && npm run lint && npm test && npx next build",
+    "check": "npm run validate:mdx && npm run lint && npm test && npm run build",
     "clean": "rm -rf .next .cache",
     "validate:mdx": "node scripts/validate-mdx.js"
   },

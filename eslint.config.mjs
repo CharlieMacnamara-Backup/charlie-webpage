@@ -10,7 +10,7 @@ export default [
       'react-hooks': reactHooksPlugin,
     },
     rules: {
-      'react/no-unescaped-entities': 'warn',
+      'react/no-unescaped-entities': 'off',
     },
     settings: {
       react: {

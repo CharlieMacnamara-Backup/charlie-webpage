@@ -73,10 +73,6 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   compress: true,
-  // Exclude problematic TypeScript pages
-  typescript: {
-    ignoreBuildErrors: true,
-  },
 }
 
 module.exports = withBundleAnalyzer(withMDX(nextConfig))

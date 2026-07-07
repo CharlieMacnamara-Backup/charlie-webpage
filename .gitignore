@@ -29,6 +29,10 @@ yarn-error.log*
 # Local folders
 tailwindui-spotlight/
 
+# Stale sub-projects
+src/app/home/
+src/app/skillio/
+
 # IDE
 .idea/
 .vscode/
@@ -38,3 +42,4 @@ tailwindui-spotlight/
 # Cloudflare Wrangler
 .wrangler/
 worker-configuration.d.ts
+*.tsbuildinfo
