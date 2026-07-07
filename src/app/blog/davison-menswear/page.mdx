@@ -34,22 +34,18 @@ staying late to rewrite orders in three places. He was receptive.
 His old site had been down for a couple of years. He was ready. We sat down and
 talked through what he needed.
 
+## The Requirements
+
 I'd already built [Sicamon](https://sicamon.com) — a full Stripe CMS with
 digital cataloguing. He wanted none of it. No online inventory, no card
-payments. Bank transfers. What he's always done. This system works with that.
-
-Every line of code had to be right. This isn't a side project that can go down —
-it's a sole trader's livelihood. A failed booking is a missed fitting, a lost
-sale, a customer who doesn't come back. So I tested relentlessly: Vitest for
-fast unit tests, Playwright for end-to-end flows against the real Google
-Calendar API. 324 tests across four workers. And the whole thing —
+payments. Bank transfers. What he's always done. The whole thing runs on
 
 <Definition term="workers">Workers</Definition>,
 <Definition term="d1">D1</Definition>,
 
 <Definition term="kv">KV</Definition>, Turnstile,
-<Definition term="resend">Resend</Definition>, GitHub Actions — costs nothing to
-run.
+<Definition term="resend">Resend</Definition>, GitHub Actions — and costs
+nothing to run.
 
 The strongest identity of this business was heritage. A century in 2027 — I
 wanted a design to reflect this. The visual identity came from a binder:
@@ -83,6 +79,13 @@ Fitting" button. The whole point: turning visitors into appointments.
 Mostly minimal. The tartan search is a nice-to-have novelty — a searchable
 directory of clan and district patterns that ships with the site. Not essential,
 but fun.
+
+<SingleImage
+  src="/blog/davison-menswear/tartan.png"
+  alt="Tartan search directory showing clan and district patterns"
+  orientation="horizontal"
+  caption="Searchable directory of clan and district tartans — a fun bonus for visitors"
+/>
 
 Here's what happens when you click:
 
@@ -163,6 +166,13 @@ Pulls Google Reviews on a schedule into
 [KV](https://developers.cloudflare.com/kv/). Stays current without input — fresh
 content, zero effort.
 
+<SingleImage
+  src="/blog/davison-menswear/reviews.png"
+  alt="Google Reviews displayed on the site"
+  orientation="horizontal"
+  caption="Live Google Reviews pulled on a schedule — fresh content with zero effort"
+/>
+
 ---
 
 ## The Admin Dashboard
@@ -171,6 +181,13 @@ The notepad replacement — its own
 [Cloudflare Worker](https://workers.cloudflare.com/) backed by
 [D1](https://developers.cloudflare.com/d1/). The same order in the diary, on a
 slip, and on a sales pad — three times, one customer. Now it's a page.
+
+<SingleImage
+  src="/blog/davison-menswear/screenshot-admin-full.png"
+  alt="Full admin dashboard view with all management features"
+  orientation="horizontal"
+  caption="Full admin dashboard — 139 tests verify the whole system"
+/>
 
 Four statuses: In Progress, Ready, Delivered, Cancelled. Every transition logged
 immutably — who changed it, when, and whether the email went out. Group orders
@@ -187,13 +204,6 @@ range. Clean totals at the bottom for the accountant.
 Quick Add for reconciling past orders. Archived orders auto-purge after 30 days.
 No payments on-platform — bank transfer, cash, the till. Progress without
 overwhelm.
-
-<SingleImage
-  src="/blog/davison-menswear/screenshot-admin-full.png"
-  alt="Full admin dashboard view with all management features"
-  orientation="horizontal"
-  caption="Full admin dashboard — 139 tests verify the whole system"
-/>
 
 [Google Calendar](https://calendar.google.com/) is the database — zero new
 infra, already in use.

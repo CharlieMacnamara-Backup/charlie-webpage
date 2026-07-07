@@ -16,7 +16,7 @@ Personal portfolio + blog built with Next.js 15 (app router), Tailwind CSS v4, M
 
 **Pre-push hook** (`.githooks/pre-push`): runs `npm run check` before any push. Skip with `git push --no-verify`.
 
-**Branch protection** (`main`): requires `check` status to pass, 1 PR approval, linear history, dismisses stale reviews. Enforced for admins. Force pushes and deletions blocked.
+**Branch protection** (`main`): requires `check` status to pass, required linear history. Exempt from PR/tier-2 requirements for admins (`CharlieMacnamara`, `CharlieMacnamara-Backup`). Force pushes and deletions blocked.
 
 ## Commands
 
@@ -26,7 +26,7 @@ npm test           # vitest
 npm run test:watch
 npm run build      # static export via next.config.js output:'export'
 npm run lint       # next lint
-npm run check      # lint + test + build — catch issues before committing
+npm run check      # validate:mdx + format:check + lint + test + build — catch issues before committing
 npm run clean      # rm -rf .next .cache (stale cache fix)
 npm run validate:mdx  # checks all <Definition term=""> usages have glossary entries
 ```
