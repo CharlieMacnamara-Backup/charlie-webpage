@@ -1,18 +1,24 @@
-name: CI
+name: CI/CD
+
 on:
   push:
-    branches: [main, clean-main]
+    branches: [main]
   pull_request:
     branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
           cache: npm
@@ -23,10 +29,34 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
-      - name: Check wrangler config
-        run: npx wrangler --experimental-json-config types 2>/dev/null || echo "wrangler types check skipped"
       - name: Validate worker syntax
         run: node -c .cloudflare/worker.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: out/
+          if-no-files-found: error
+      - uses: actions/dependency-review-action@v4
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        with:
+          fail-on-severity: high
+
+  codeql:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+      - uses: github/codeql-action/analyze@v3
 
   deploy:
     needs: check
@@ -34,8 +64,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
           cache: npm
