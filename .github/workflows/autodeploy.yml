@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [main]
+    branches: [main, clean-main]
   pull_request:
     branches: [main]
 
@@ -9,14 +9,16 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version-file: .node-version
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: Ensure native bindings (workaround npm optional dep bug)
+        run: npm install @rolldown/binding-linux-x64-gnu --no-save --ignore-scripts || true
       - run: npm run validate:mdx
       - run: npm run lint
       - run: npm test
