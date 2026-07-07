@@ -1,7 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "charlie-webpage",
-  "account_id": "935778ed373c03243b43103d32ed29bd",
   "main": ".cloudflare/worker.js",
   "compatibility_date": "2026-07-07",
   "compatibility_flags": ["nodejs_compat"],
