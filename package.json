@@ -17,7 +17,9 @@
     "check": "npm run validate:mdx && npm run format:check && npm run lint && npm test && npm run build",
     "clean": "rm -rf .next .cache",
     "validate:mdx": "node scripts/validate-mdx.js",
-    "format:check": "prettier --check \"src/**/*.{js,jsx,mdx,css}\""
+    "format:check": "prettier --check \"src/**/*.{js,jsx,mdx,css}\"",
+    "diagram": "d2",
+    "diagram:blog:davison": "node scripts/generate-blog-diagram.mjs src/app/blog/davison-menswear/testing-pipeline.d2"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {

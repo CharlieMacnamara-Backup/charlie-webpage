@@ -1,0 +1,15 @@
+{
+  "colors": {
+    "bg": "#27272a",
+    "bgAlt": "#18181b",
+    "accent": "#14b8a6",
+    "accentDim": "#0d9488",
+    "text": "#f4f4f5",
+    "textDim": "#a1a1aa",
+    "pass": "#22c55e",
+    "border": "#14b8a6"
+  },
+  "borderRadius": 12,
+  "fontFamily": "'Trebuchet MS', sans-serif",
+  "strokeWidth": 2
+}

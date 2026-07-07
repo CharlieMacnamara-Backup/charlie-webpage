@@ -5,17 +5,21 @@ import { ImageSlideshow } from '@/components/ImageSlideshow'
 export const article = {
   author: 'Charlie Macnamara',
   date: '2026-03',
-  title: '4 Cloudflare Workers for a 1927 Kilt Shop',
+  title: '4 Cloudflare Workers and a Kilt Shop',
   description:
-    'How a 1927 Edinburgh kilt shop went from paper notes and missed appointments to an automated booking system — powered by Cloudflare Workers, Google Calendar, and 324 tests.',
+    'How a 1927 Edinburgh kilt shop went from paper notes and missed appointments to automated booking — powered by Cloudflare Workers, Google Calendar, and robust tests.',
   slug: 'davison-menswear',
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-My sister got married. I needed a kilt.
-[Davison Menswear & Kilt Hire](https://qualitykilts.com/) was a few doors down.
-Hand-painted sign: "Est. 1927."
+Recently my sister got married — congrats again,
+[Floyd](https://www.instagram.com/art_by_floyd) — so I needed a kilt. Luckily,
+[Davison Menswear & Kilt Hire](https://qualitykilts.com/) is a few doors down
+from me. Outside, the shops easy to spot: hand-painted marquee with logo, Est.
+1927, and a previously broken url.
+
+Thought I'd introduce myself while I got my threads.
 
 <SingleImage
   src="/blog/davison-menswear/screenshot-hero-viewport.png"
@@ -75,6 +79,9 @@ white overlay so the archival photos bleed through as you scroll.
 
 The site is one scroll: header, map, services, tartan search, reviews, a "Book a
 Fitting" button. The whole point: turning visitors into appointments.
+[Tailwind](https://tailwindcss.com/) keeps every layout consistent — utility
+classes enforce a design system, no magic numbers. Typography scales fluidly
+with CSS `clamp()` — no breakpoint jumps, no layout surprises.
 
 Mostly minimal. The tartan search is a nice-to-have novelty — a searchable
 directory of clan and district patterns that ships with the site. Not essential,
@@ -144,6 +151,33 @@ automatically.
   caption="Google Calendar is the database — already in use, the booking system reads and writes to it"
 />
 
+## Testing
+
+This runs a sole trader's business. Every commit, every deploy — it has to work.
+Not "mostly work." Work.
+
+<SingleImage
+  src="/blog/davison-menswear/testing-pipeline.svg"
+  alt="Testing pipeline from static audits through to post-deploy monitoring"
+  orientation="horizontal"
+  caption="Seven layers between a push and production"
+/>
+
+So there are seven layers between a push and production. **Static audits** catch
+hardcoded secrets and broken contracts before a test even runs. **Worker tests**
+mock every external dependency so internal logic can be validated
+deterministically — no network, no credentials. **Live API tests** then prove
+the real integrations work (Google Calendar, Resend, Turnstile). **E2E and
+integration tests** drive the full booking flow and admin lifecycle headless.
+
+A **pre-deploy check** probes all four workers before anything ships. If
+something's degraded, the deploy stops. Once live, **scheduled monitoring**
+probes every six hours, and the calendar worker self-checks every sixty seconds.
+
+It's a lot of ceremony for a booking form and an admin panel. But if a booking
+drops, it's not an alert on a dashboard — it's a customer standing outside a
+locked shop.
+
 ---
 
 ## The Workers
@@ -157,8 +191,14 @@ distributed. No server to babysit.
 ### Calendar Worker
 
 Looks after the booking system — a separate worker with its own credentials.
-Reads `[Closed]` events, checks slot availability, writes new bookings, and
-generates cancel links.
+[Google Calendar](https://calendar.google.com/) is the database, zero new infra,
+already in use. Reads `[Closed]` events, checks slot availability, writes new
+bookings, and generates cancel links using signed
+
+<Definition term="jwt">JWTs</Definition> in the event description — no database
+lookup needed. [Turnstile](https://www.cloudflare.com/products/turnstile/) over
+CAPTCHA on the booking form: free, invisible, no learning curve. Email fires
+asynchronously so the booking never blocks on a delivery failure.
 
 ### Reviews Worker
 
@@ -204,27 +244,6 @@ range. Clean totals at the bottom for the accountant.
 Quick Add for reconciling past orders. Archived orders auto-purge after 30 days.
 No payments on-platform — bank transfer, cash, the till. Progress without
 overwhelm.
-
-[Google Calendar](https://calendar.google.com/) is the database — zero new
-infra, already in use.
-[Turnstile](https://www.cloudflare.com/products/turnstile/) over CAPTCHA for the
-same reason: free, invisible, no learning curve. Cancel links use signed
-
-<Definition term="jwt">JWTs</Definition> in the event description — no database
-lookup. Email fires asynchronously so the booking never blocks on a delivery
-failure. [Tailwind](https://tailwindcss.com/) keeps every layout consistent —
-utility classes enforce a design system, no magic numbers. Typography scales
-fluidly with CSS `clamp()` — no breakpoint jumps, no layout surprises.
-
----
-
-## Testing
-
-Every worker has deterministic tests that mock external APIs and validate
-internal logic. Then live tests hit the real Google Calendar, Resend, and
-Turnstile APIs. A pre-deploy script runs static audit rules to catch hardcoded
-secrets and broken contracts. A health check probes all four workers every six
-hours.
 
 I'm a message away if a fix is needed. The binder is back on the shelf. And the
 marquee with qualitykilts.com is still there — now it works.

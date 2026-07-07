@@ -1,0 +1,59 @@
+grid-columns: 2
+grid-rows: 4
+horizontal-gap: 80
+
+s1: "Static audit" {
+  shape: text
+  style: {
+    font-color: "#52525b"
+    font-size: 12
+  }
+}
+s2: "Isolated logic" {
+  shape: text
+  style: {
+    font-color: "#52525b"
+    font-size: 12
+  }
+}
+s3: "Live integrations" {
+  shape: text
+  style: {
+    font-color: "#52525b"
+    font-size: 12
+  }
+}
+s4: "Full flow E2E" {
+  shape: text
+  style: {
+    font-color: "#52525b"
+    font-size: 12
+  }
+}
+s5: "Pre-deploy probe" {
+  shape: text
+  style: {
+    font-color: "#52525b"
+    font-size: 12
+  }
+}
+s6: "Ship to edge" {
+  shape: text
+  style: {
+    font-color: "#52525b"
+    font-size: 12
+  }
+}
+s7: "Self-heal checks" {
+  shape: text
+  style: {
+    font-color: "#52525b"
+    font-size: 12
+  }
+}
+
+s1 -> s2: { style.stroke: "#14b8a6"; style.stroke-width: 2 }
+s2 -> s3: { style.stroke: "#14b8a6"; style.stroke-width: 2 }
+s3 -> s4: { style.stroke: "#14b8a6"; style.stroke-width: 2 }
+s5 -> s6: { style.stroke: "#14b8a6"; style.stroke-width: 2 }
+s6 -> s7: { style.stroke: "#14b8a6"; style.stroke-width: 2 }
