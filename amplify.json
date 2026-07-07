@@ -1,0 +1,14 @@
+{
+  "projectName": "Charlie-Webpage",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": ".next",
+      "BuildCommand": "npm run build",
+      "StartCommand": "npm run start"
+    }
+  }
+} 

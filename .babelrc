@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": {
+          "modules": false
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    ["transform-remove-console", { "exclude": ["error", "warn"] }]
+  ]
+} 

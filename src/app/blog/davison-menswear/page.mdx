@@ -1,0 +1,216 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import { SingleImage } from '@/components/BlogImages'
+import { ImageSlideshow } from '@/components/ImageSlideshow'
+
+export const article = {
+  author: 'Charlie Macnamara',
+  date: '2026-03',
+  title: "4 Cloudflare Workers for a 1927 Kilt Shop",
+  description:
+    'How a 1927 Edinburgh kilt shop went from paper notes and missed appointments to an automated booking system — powered by Cloudflare Workers, Google Calendar, and 324 tests.',
+  slug: 'davison-menswear',
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Recently my [sister](https://www.instagram.com/art_by_floyd/?hl=en-gb) got
+married and I needed a kilt. Luckily, a few doors down, there's a kilt shop.
+[Davison Menswear & Kilt Hire](https://qualitykilts.com/). Hand-painted sign out
+front: "Est. 1927." — the broken link works now.
+
+<SingleImage
+  src="/blog/davison-menswear/screenshot-hero-viewport.png"
+  alt="Davison Menswear hero section showing the full-page scroll layout with archival background"
+  orientation="vertical"
+  caption="The full hero viewport — archival photos bleed through as you scroll"
+/>
+
+The owner, Marty, hand-sews 12-yard kilts from memory. Three generations of
+craft. He works alone in a showroom that hasn't changed much since his
+grandfather's day: notepad by the phone, paper diary, appointment slips.
+
+The methods were proven, but flawed. Calendar bookings misplaced, missed calls,
+staying late to rewrite orders in three places. He was receptive.
+
+Marty was enthusiastic — his old site had been down for a couple of years. He
+was ready. We sat down and talked through what he needed.
+
+I'd already built [Sicamon](https://sicamon.com) — a full Stripe CMS with
+digital cataloguing. He wanted none of it. No online inventory, no card
+payments. Bank transfers. What he's always done. This system works with that.
+
+Every line of code had to be right. This isn't a side project that can go down
+— it's a sole trader's livelihood. A failed booking is a missed fitting, a lost
+sale, a customer who doesn't come back. So I tested relentlessly: Vitest for
+fast unit tests, Playwright for end-to-end flows against the real Google
+Calendar API. 324 tests across four workers. And the whole thing — Workers, D1,
+KV, Turnstile, Resend, GitHub Actions — costs Marty exactly nothing to run.
+
+The strongest identity of this business was heritage. A century in 2027 — I
+wanted a design to reflect this. The visual identity came from a binder:
+Marketing photos from the 1920s through the 1950s (took ages to scan).
+
+<SingleImage
+  src="/blog/davison-menswear/archive.jpg"
+  alt="Original archival photo of Davison Menswear from the binder, showing the historic shopfront"
+  orientation="horizontal"
+  caption="One of the original archive photos from the binder — the shopfront before Edinburgh's trams were pulled up"
+/>
+
+The shopfront before Edinburgh's trams were pulled up. I scanned them all and
+composited them into the site's background. Every section uses a translucent
+white overlay so the archival photos bleed through as you scroll.
+
+<SingleImage
+  src="/blog/davison-menswear/website_background.jpg"
+  alt="The site's background image composites archival photos of Davison Menswear from the 1920s-1950s"
+  orientation="horizontal"
+  caption="Archival photos composited into the site background — the binder became the brand"
+/>
+
+---
+
+## The Site
+
+The site is one scroll: header, map, services, tartan search, reviews, a "Book a
+Fitting" button. The whole point: turning visitors into appointments in Marty's
+calendar.
+
+Mostly minimal. The tartan search is a nice-to-have novelty — a searchable
+directory of clan and district patterns that ships with the site. Not essential,
+but fun.
+
+Here's what happens when you click:
+
+<SingleImage
+  src="/blog/davison-menswear/booking.png"
+  alt="The booking form with date, time, and customer details fields"
+  orientation="vertical"
+  caption="The booking form — Turnstile bot protection runs invisibly on submit"
+/>
+
+### The Booking Pipeline
+
+- **Bot detection** — <Definition term="turnstile">Turnstile</Definition>,
+  invisible
+- **Input validation** — malformed data rejected
+- **Closure check** — reads Marty's `[Closed]` events
+- **Slot availability** — no double-booking
+- **Event creation** — writes to Google Calendar
+- **Cancel link** — signed <Definition term="jwt">JWT</Definition> in the event
+- **Notifications** — <Definition term="async">async</Definition> emails to both
+  customer and site owner, never blocks
+
+<Definition term="deterministic">Deterministic</Definition>. Someone else books
+the slot mid-form? You're told immediately.
+
+Everything integrates into an existing Google Calendar. Marty closes the shop by
+adding `[Closed]` to his Google Calendar. The site reads that automatically.
+
+<ImageSlideshow
+  images={[
+    {
+      src: '/blog/davison-menswear/booking-confirmed.png',
+      alt: 'Booking confirmation screen showing the successfully booked appointment',
+      caption:
+        'Booking confirmed — the customer sees this first, then both parties receive email alerts',
+    },
+    {
+      src: '/blog/davison-menswear/booking-confirmation-email.png',
+      alt: 'Branded booking confirmation email sent to the customer',
+      caption:
+        'Customer confirmation email with booking details and cancel link',
+    },
+    {
+      src: '/blog/davison-menswear/owner-alert-email.png',
+      alt: 'Owner alert email notifying Marty of a new booking',
+      caption: 'Alert email to Marty — the site owner knows immediately',
+    },
+  ]}
+/>
+
+<SingleImage
+  src="/blog/davison-menswear/google-calendar.png"
+  alt="Google Calendar showing a booked fitting appointment"
+  orientation="horizontal"
+  caption="Google Calendar is the database — Marty already uses it, the booking system reads and writes to it"
+/>
+
+---
+
+## The Workers
+
+### Frontend Worker
+
+The shop window. Serves every page a visitor lands on — hero, map, services, the
+tartan search widget, reviews, and the booking button. Static build, globally
+distributed. No server to babysit.
+
+### Calendar Worker
+
+Looks after the booking system — a separate worker with its own credentials.
+Reads `[Closed]` events, checks slot availability, writes new bookings, and
+generates cancel links.
+
+### Reviews Worker
+
+Pulls Google Reviews on a schedule into
+[KV](https://developers.cloudflare.com/kv/). Stays current without input — fresh
+content, zero effort.
+
+---
+
+## The Admin Dashboard
+
+The notepad replacement — its own
+[Cloudflare Worker](https://workers.cloudflare.com/) backed by
+[D1](https://developers.cloudflare.com/d1/). I watched Marty write the same
+order in his diary, on a slip, and on a sales pad — three times, one customer.
+Now he opens a page.
+
+Four statuses: In Progress, Ready, Delivered, Cancelled. Every transition logged
+immutably — who changed it, when, and whether the email went out. Group orders
+for wedding parties — groom, best man, ushers under one accordion. Measurements:
+kilt waist, seat, length, jacket chest, sleeve, back, height, build notes. All
+optional.
+
+Emails fire on status changes via [Resend](https://resend.com/). The receipt
+includes Marty's bank details — stored as Worker secrets, never in the codebase.
+On creation the customer gets payment instructions. When it's ready, a
+collection notice. He doesn't type a word. CSV export: current tax year, last
+year, or custom range. Clean totals at the bottom for the accountant.
+
+Quick Add for reconciling past orders. Archived orders auto-purge after 30 days.
+No payments on-platform — bank transfer, cash, the till. Progress without
+overwhelm.
+
+<SingleImage
+  src="/blog/davison-menswear/screenshot-admin-full.png"
+  alt="Full admin dashboard view with all management features"
+  orientation="horizontal"
+  caption="Full admin dashboard — 139 tests verify the whole system"
+/>
+
+[Google Calendar](https://calendar.google.com/) is the database — zero new
+infra, Marty already uses it.
+[Turnstile](https://www.cloudflare.com/products/turnstile/) over CAPTCHA for the
+same reason: free, invisible, no learning curve. Cancel links use signed
+<Definition term="jwt">JWTs</Definition> in the event description — no database
+lookup. Email fires asynchronously so the booking never blocks on a delivery
+failure. [Tailwind](https://tailwindcss.com/) keeps every layout consistent —
+utility classes enforce a design system, no magic numbers. Typography scales
+fluidly with CSS `clamp()` — no breakpoint jumps, no layout surprises.
+
+---
+
+## Testing
+
+Every worker has deterministic tests that mock external APIs and validate
+internal logic. Then live tests hit the real Google Calendar, Resend, and
+Turnstile APIs. A pre-deploy script runs static audit rules to catch hardcoded
+secrets and broken contracts. A health check probes all four workers every six
+hours.
+
+Marty knows I'm a message away if he needs a fix or an update. He closes for
+Christmas from his calendar. The giant binder is back in the shop. And that
+marquee with qualitykilts.com is still there — now it works.
