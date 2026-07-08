@@ -28,21 +28,29 @@ Thought I'd introduce myself while I got my threads.
   caption="The full hero viewport — archival photos bleed through as you scroll"
 />
 
-The owner, Marty, hand-sews 12-yard kilts from memory. Three generations of
-craft. He works alone in a showroom that hasn't changed much since his
-grandfather's day: notepad by the phone, paper diary, appointment slips.
+The owner, Marty, hand-sews 12-yard kilts from memory. Generations of talent. He
+works alone in a showroom that hasn't changed much since his Fathers's day:
+notepad by the phone, paper diary, appointment slips.
 
-The methods were proven, but flawed. Calendar bookings misplaced, missed calls,
-staying late to rewrite orders in three places. He was receptive.
-
-His old site had been down for a couple of years. He was ready. We sat down and
-talked through what he needed.
+The methods were proven, but dated. Calendar bookings misplaced, missed calls,
+staying late to rewrite orders. Marty was keen on upgrading - old site had been
+down for several years - so we sat down and talked through needs.
 
 ## The Requirements
 
+Dislikes and boundaries were my largest consideration for this project.
+Expecting a sole trading generational kilt maker to learn several new tools,
+after he's been working on paper for decades, is unrealistic. It was important
+tools felt familiar and intuative, while staying within his scope. Why build a
+feature that won't be used?
+
 I'd already built [Sicamon](https://sicamon.com) — a full Stripe CMS with
-digital cataloguing. He wanted none of it. No online inventory, no card
-payments. Bank transfers. What he's always done. The whole thing runs on
+digital cataloguing. Understandably, this was too much change. Not looking to
+become an online shop. I came up with a design that was modern, but familiar and
+wouldn't overwelm by changing his core practices: No online inventory, no card
+payments. Bank transfers. What he's always done.
+
+Project runs on:
 
 <Definition term="workers">Workers</Definition>,
 <Definition term="d1">D1</Definition>,
@@ -51,9 +59,9 @@ payments. Bank transfers. What he's always done. The whole thing runs on
 <Definition term="resend">Resend</Definition>, GitHub Actions — and costs
 nothing to run.
 
-The strongest identity of this business was heritage. A century in 2027 — I
-wanted a design to reflect this. The visual identity came from a binder:
-Marketing photos from the 1920s through the 1950s (took ages to scan).
+Heritage was the identity I decided; made sense. A century in 2027 — I wanted a
+design to reflect. I was given a binder: Marketing photos from the 1920s through
+the 1950s (took ages to scan).
 
 <SingleImage
   src="/blog/davison-menswear/archive.jpg"
@@ -62,8 +70,7 @@ Marketing photos from the 1920s through the 1950s (took ages to scan).
   caption="One of the original archive photos from the binder — the shopfront before Edinburgh's trams were pulled up"
 />
 
-The shopfront before Edinburgh's trams were pulled up. I scanned them all and
-composited them into the site's background. Every section uses a translucent
+I scanned, and composited a site background. Every section uses a translucent
 white overlay so the archival photos bleed through as you scroll.
 
 <SingleImage
@@ -75,17 +82,17 @@ white overlay so the archival photos bleed through as you scroll.
 
 ---
 
-## The Site
+## The Main Site
 
-The site is one scroll: header, map, services, tartan search, reviews, a "Book a
-Fitting" button. The whole point: turning visitors into appointments.
-[Tailwind](https://tailwindcss.com/) keeps every layout consistent — utility
-classes enforce a design system, no magic numbers. Typography scales fluidly
-with CSS `clamp()` — no breakpoint jumps, no layout surprises.
+The user site is primarily a single page: header, map, services, tartan search,
+reviews, a "Book a Fitting" button. [Tailwind](https://tailwindcss.com/) keeps
+every layout consistent — utility classes enforce a design system, no magic
+numbers. Typography scales fluidly with CSS `clamp()` — no breakpoint jumps, no
+layout surprises.
 
-Mostly minimal. The tartan search is a nice-to-have novelty — a searchable
-directory of clan and district patterns that ships with the site. Not essential,
-but fun.
+Mostly minimal. The tartan search is a nice-to-have novelty — searchable
+directory of clan and district patterns - should help with SEO, though, not
+essential, but fun.
 
 <SingleImage
   src="/blog/davison-menswear/tartan.png"
@@ -94,7 +101,8 @@ but fun.
   caption="Searchable directory of clan and district tartans — a fun bonus for visitors"
 />
 
-Here's what happens when you click:
+Primary user functionality is the booking system; ran via Cloudflare workers and
+existing Google Calendar. What happens when you click:
 
 <SingleImage
   src="/blog/davison-menswear/booking.png"
@@ -115,12 +123,11 @@ Here's what happens when you click:
 - **Notifications** — <Definition term="async">async</Definition> emails to both
   customer and site owner, never blocks
 
-<Definition term="deterministic">Deterministic</Definition>. Someone else books
-the slot mid-form? You're told immediately.
+Everything is secured with Cloudflare. Deterministic security was top of mind.
+Someone else books the slot mid-form? You're told immediately.
 
-Everything integrates into the existing Google Calendar. Closures are set by
-adding `[Closed]` — Christmas, holidays, any day off. The site reads that
-automatically.
+Closures are set by adding `[Closed]` — Christmas, holidays, any day off. The
+worker updates automatically.
 
 <ImageSlideshow
   images={[
