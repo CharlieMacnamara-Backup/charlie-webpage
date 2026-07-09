@@ -29,6 +29,47 @@ npm run lint       # next lint
 npm run check      # validate:mdx + format:check + lint + test + build — catch issues before committing
 npm run clean      # rm -rf .next .cache (stale cache fix)
 npm run validate:mdx  # checks all <Definition term=""> usages have glossary entries
+npm run check:grammar  # harper-cli UK English grammar check on all blog MDX files
+```
+
+## Grammar Checking
+
+[Harper](https://github.com/automattic/harper) is a local, private, Rust-based grammar checker installed at `~/.cargo/bin/harper-cli`. It replaces Grammarly for this project.
+
+### Usage
+
+```sh
+npm run check:grammar       # quick check — filters MDX noise, shows real prose issues
+```
+
+The script pipes each `src/app/blog/*/page.mdx` (excluding `_template`) through harper with:
+- **Dialect**: UK English (`-d uk`)
+- **Ignored rules** (MDX/JSX noise + URL-path noise): `UnclosedQuotes`, `SentenceCapitalization`, `Spaces`, `OrthographicConsistency`, `Dashes`, `UseEllipsisCharacter`, `LongSentences`, `PronounVerbAgreement`, `SpellCheck`, `SplitWords`, `CompoundNouns`
+- **User dictionary**: `~/.config/harper-ls/dictionary.txt` (94 project-specific terms)
+
+### Real findings harper catches
+
+- US→UK spelling mismatches (`flavors`→`flavours`, `center`→`centre`, `caramelization`→`caramelisation`)
+- Real typos like `inital`→`initial`, `prefermented`→`pre-fermented`
+- Formatting: `...`→`…` (ellipsis), `---`→`—` (em dash), `2026-03`→`2026–03` (en dash)
+- Capitalisation: `father's day`→`Father's Day`
+- Readability: long sentence warnings (55+ words)
+- Grammar: pronoun-verb agreement
+
+### Known limitations
+
+- **Harper 0.1.0 dictionary bug**: Words in `dictionary.txt` that are short (≤8 chars) or technical (`d1`, `kv`, `jwt`, `biga`, `davison`, `Markdown`, `diastatic`, `unhydrated`, `caramelisation`) are loaded correctly but still flagged as `SpellCheck`. Cannot be suppressed — `SpellCheck` is the core engine, not a single rule. ~30 hits across all 3 posts.
+- **Glossary term keys** (`D1`, `KV`, `JWT`) and **Cloudflare doc URLs** (`d1/`, `kv/`) are capitalised in source but harper still flags the attribute values and URL segments — unfixable without breaking the lookups or URLs.
+- **prose-rich ai_tells**: ~68 false positives in sourdough-journey from image URLs (`/blog/sourdough-journey/...`) and deliberate no-space em dashes. Not fixable.
+- **prose-rich write-good**: 2 `</div>` false positives in markdown-cv JSX code blocks. Not fixable.
+
+### Adding words to the dictionary
+
+Edit `~/.config/harper-ls/dictionary.txt` (one word per line, sorted alphabetically). Words are case-sensitive — add both `Davison` (prose capitalisation) and `davison` (URL path segments) if needed.
+
+```sh
+# open for editing
+$EDITOR ~/.config/harper-ls/dictionary.txt
 ```
 
 ## Architecture
