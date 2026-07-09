@@ -1,6 +1,7 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
 import { SingleImage } from '@/components/BlogImages'
 import { ImageSlideshow } from '@/components/ImageSlideshow'
+import TableOfContents from '@/components/CollapsibleToc'
 
 export const article = {
   author: 'Charlie Macnamara',
@@ -28,6 +29,8 @@ two pages — a public booking site and a private dashboard for Marty.
   orientation="vertical"
   caption="The full hero viewport — archival photos bleed through as you scroll"
 />
+
+<TableOfContents />
 
 The shop's been in his family since 1927. Marty is third generation. He
 hand-sews kilts from memory — a generational talent. He works alone in a
@@ -87,8 +90,6 @@ overlay so the adverts bleed through as you scroll.
   orientation="horizontal"
   caption="Archival photos composited into the site background — the binder became the brand"
 />
-
----
 
 ## The Main Site
 
@@ -166,7 +167,7 @@ holidays, any day off. The worker handles it automatically.
   caption="Google Calendar is the database — already in use, the booking system reads and writes to it"
 />
 
-## Testing
+### Testing
 
 This runs a business. Every commit, every deploy — it has to work. If a booking
 drops, it's a customer standing outside a locked shop.
@@ -189,29 +190,23 @@ A **pre-deploy check** probes all four workers before anything ships. If
 something's degraded, the deploy stops. Once live, **scheduled monitoring**
 probes every six hours, and the calendar worker self-checks every sixty seconds.
 
-## The Workers
+### The Workers
 
-### Frontend Worker
+**Frontend Worker** — The shop window. Serves every page a visitor lands on —
+hero, map, services, the tartan search widget, reviews, and the booking button.
+Static build, globally distributed. No server to babysit.
 
-The shop window. Serves every page a visitor lands on — hero, map, services, the
-tartan search widget, reviews, and the booking button. Static build, globally
-distributed. No server to babysit.
-
-### Calendar Worker
-
-Looks after the booking system — a separate worker with its own credentials.
-[Google Calendar](https://calendar.google.com/) is the database, zero new infra,
-already in use. Reads `[Closed]` events, checks slot availability, writes new
-bookings, and generates cancel links using signed
+**Calendar Worker** — Looks after the booking system — a separate worker with
+its own credentials. [Google Calendar](https://calendar.google.com/) is the
+database, zero new infra, already in use. Reads `[Closed]` events, checks slot
+availability, writes new bookings, and generates cancel links using signed
 
 <Definition term="jwt">JWTs</Definition> in the event description — no database
 lookup needed. [Turnstile](https://www.cloudflare.com/products/turnstile/) over
 CAPTCHA on the booking form: free, invisible, no learning curve. Email fires
 asynchronously so the booking never blocks on a delivery failure.
 
-### Reviews Worker
-
-Pulls Google Reviews on a schedule into
+**Reviews Worker** — Pulls Google Reviews on a schedule into
 [KV](https://developers.cloudflare.com/kv/). Stays current without input — fresh
 content, zero effort.
 
@@ -221,8 +216,6 @@ content, zero effort.
   orientation="horizontal"
   caption="Live Google Reviews pulled on a schedule — fresh content with zero effort"
 />
-
-That's the customer-facing half. The other half is Marty's dashboard.
 
 ---
 
