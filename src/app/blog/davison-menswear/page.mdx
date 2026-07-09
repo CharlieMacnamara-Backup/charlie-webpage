@@ -7,7 +7,7 @@ export const article = {
   date: '2026-03',
   title: '4 Cloudflare Workers and a Kilt Shop',
   description:
-    'How a 1927 Edinburgh kilt shop went from paper notes and missed appointments to automated booking — powered by Cloudflare Workers, Google Calendar, and robust tests.',
+    'A 1927 Edinburgh kilt shop. Paper diary, missed calls, no website. Now: automated booking on Cloudflare Workers — and not a single new tool for the owner to learn.',
   slug: 'davison-menswear',
 }
 
@@ -15,11 +15,11 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 Recently my sister got married — congrats again,
 [Floyd](https://www.instagram.com/art_by_floyd) — so I needed a kilt. Luckily,
-[Davison Menswear & Kilt Hire](https://qualitykilts.com/) is a few doors down
-from me. Outside, the shops easy to spot: hand-painted marquee with logo, Est.
-1927, and a previously broken url.
+[Davison Menswear & Kilt Hire](https://qualitykilts.com/) is a few doors down.
+The shop's easy to spot: hand-painted marquee with logo, Est. 1927, and a
+previously broken URL.
 
-Thought I'd introduce myself while I got my threads.
+Thought I'd introduce myself while I got tartan threads.
 
 <SingleImage
   src="/blog/davison-menswear/screenshot-hero-viewport.png"
@@ -28,40 +28,40 @@ Thought I'd introduce myself while I got my threads.
   caption="The full hero viewport — archival photos bleed through as you scroll"
 />
 
-The owner, Marty, hand-sews 12-yard kilts from memory. Generations of talent. He
-works alone in a showroom that hasn't changed much since his Fathers's day:
-notepad by the phone, paper diary, appointment slips.
+The shop's been in his family since 1927. Marty is third generation. He hand-sews kilts from memory — a generational talent. He works
+alone in a showroom that hasn't changed much since his father's day.
 
-The methods were proven, but dated. Calendar bookings misplaced, missed calls,
-staying late to rewrite orders. Marty was keen on upgrading - old site had been
-down for several years - so we sat down and talked through needs.
+His methods were proven, but dated: calendar bookings misplaced, missed calls,
+staying late to rewrite orders. Marty was keen on upgrading — old site was down
+for several years — we sat down and talked through what he needed.
 
 ## The Requirements
 
-Dislikes and boundaries were my largest consideration for this project.
-Expecting a sole trading generational kilt maker to learn several new tools,
-after he's been working on paper for decades, is unrealistic. It was important
-tools felt familiar and intuative, while staying within his scope. Why build a
-feature that won't be used?
+Expecting a sole-trader kilt maker to learn several new tools, after he's been
+working on paper for decades, is unrealistic. Tools were designed to feel
+familiar and intuitive.
 
 I'd already built [Sicamon](https://sicamon.com) — a full Stripe CMS with
 digital cataloguing. Understandably, this was too much change. Not looking to
-become an online shop. I came up with a design that was modern, but familiar and
-wouldn't overwelm by changing his core practices: No online inventory, no card
-payments. Bank transfers. What he's always done.
+become an overnight online shop. Stick to what he's always done.
 
 Project runs on:
 
-<Definition term="workers">Workers</Definition>,
-<Definition term="d1">D1</Definition>,
+- <Definition term="workers">Workers</Definition>
+- <Definition term="d1">D1</Definition>
+- <Definition term="kv">KV</Definition>
+- Turnstile
+- <Definition term="resend">Resend</Definition>
+- [GitHub Actions](https://github.com/features/actions)
 
-<Definition term="kv">KV</Definition>, Turnstile,
-<Definition term="resend">Resend</Definition>, GitHub Actions — and costs
-nothing to run.
+The whole stack costs nothing to run.
 
-Heritage was the identity I decided; made sense. A century in 2027 — I wanted a
-design to reflect. I was given a binder: Marketing photos from the 1920s through
-the 1950s (took ages to scan).
+## Design
+
+But the tech was the easy part. Making a century-old shop look like itself online — that was the brief.
+
+Heritage dictated everything: sepia-toned overlays on every section, serif headings that match the 1920s shop sign, nothing on the page newer than the business itself. I was given a binder of marketing photos from the 1920s through
+the 1950s (took ages to scan) — those became the visual foundation.
 
 <SingleImage
   src="/blog/davison-menswear/archive.jpg"
@@ -70,7 +70,7 @@ the 1950s (took ages to scan).
   caption="One of the original archive photos from the binder — the shopfront before Edinburgh's trams were pulled up"
 />
 
-I scanned, and composited a site background. Every section uses a translucent
+I scanned and composited a site background. Every section uses a translucent
 white overlay so the archival photos bleed through as you scroll.
 
 <SingleImage
@@ -91,7 +91,7 @@ numbers. Typography scales fluidly with CSS `clamp()` — no breakpoint jumps, n
 layout surprises.
 
 Mostly minimal. The tartan search is a nice-to-have novelty — searchable
-directory of clan and district patterns - should help with SEO, though, not
+directory of clan and district patterns — should help with SEO, though not
 essential, but fun.
 
 <SingleImage
@@ -101,7 +101,7 @@ essential, but fun.
   caption="Searchable directory of clan and district tartans — a fun bonus for visitors"
 />
 
-Primary user functionality is the booking system; ran via Cloudflare workers and
+Primary user functionality is the booking system; run via Cloudflare Workers and
 existing Google Calendar. What happens when you click:
 
 <SingleImage
@@ -123,11 +123,11 @@ existing Google Calendar. What happens when you click:
 - **Notifications** — <Definition term="async">async</Definition> emails to both
   customer and site owner, never blocks
 
-Everything is secured with Cloudflare. Deterministic security was top of mind.
-Someone else books the slot mid-form? You're told immediately.
+Everything is secured with [Cloudflare](https://cloudflare.com). Someone else books the slot mid-form?
+You're told immediately.
 
-Closures are set by adding `[Closed]` — Christmas, holidays, any day off. The
-worker updates automatically.
+Closures are set by adding `[Closed]` directly to Google Calendar — Christmas,
+holidays, any day off. The worker handles it automatically.
 
 <ImageSlideshow
   images={[
@@ -160,8 +160,8 @@ worker updates automatically.
 
 ## Testing
 
-This runs a sole trader's business. Every commit, every deploy — it has to work.
-Not "mostly work." Work.
+This runs a business. Every commit, every deploy — it has to work. If a booking
+drops, it's a customer standing outside a locked shop.
 
 <SingleImage
   src="/blog/davison-menswear/testing-pipeline.svg"
@@ -170,7 +170,7 @@ Not "mostly work." Work.
   caption="Seven layers between a push and production"
 />
 
-So there are seven layers between a push and production. **Static audits** catch
+There are seven layers between a push and production. **Static audits** catch
 hardcoded secrets and broken contracts before a test even runs. **Worker tests**
 mock every external dependency so internal logic can be validated
 deterministically — no network, no credentials. **Live API tests** then prove
@@ -180,12 +180,6 @@ integration tests** drive the full booking flow and admin lifecycle headless.
 A **pre-deploy check** probes all four workers before anything ships. If
 something's degraded, the deploy stops. Once live, **scheduled monitoring**
 probes every six hours, and the calendar worker self-checks every sixty seconds.
-
-It's a lot of ceremony for a booking form and an admin panel. But if a booking
-drops, it's not an alert on a dashboard — it's a customer standing outside a
-locked shop.
-
----
 
 ## The Workers
 
@@ -252,5 +246,12 @@ Quick Add for reconciling past orders. Archived orders auto-purge after 30 days.
 No payments on-platform — bank transfer, cash, the till. Progress without
 overwhelm.
 
-I'm a message away if a fix is needed. The binder is back on the shelf. And the
-marquee with qualitykilts.com is still there — now it works.
+## The Final Stitch
+
+The binder's back on the shelf, the marquee's still hanging, and
+qualitykilts.com finally works. Sicamon proved I could build complex. This proved I knew when not to.
+
+I'm a message away if anything breaks.
+
+Thanks for reading — reach out at
+[mail@charliemacnamara.uk](mailto:mail@charliemacnamara.uk).
