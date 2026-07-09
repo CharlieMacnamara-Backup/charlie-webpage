@@ -56,6 +56,7 @@ export const messages = {
     followGitHub: 'Follow on GitHub',
     followLinkedIn: 'Follow on LinkedIn',
     email: 'mail@charliemacnamara.uk',
+    phone: '',
     alt: 'Professional headshot of Charlie Macnamara, technical writer and developer',
   },
   portfolio: {
@@ -257,6 +258,7 @@ export const messages = {
     github: 'GitHub',
     linkedin: 'LinkedIn',
     email: 'Email',
+    phone: '',
     copyright: '© {year} Charlie Macnamara. All rights reserved.',
     builtOn: 'Built on:',
     tech: ['Next.js', 'React', 'TailwindCSS', 'AWS'],

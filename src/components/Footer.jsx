@@ -3,7 +3,7 @@
 import { memo } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
-import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
+import { GitHubIcon, LinkedInIcon, PhoneIcon } from '@/components/SocialIcons'
 import { useTranslations } from 'next-intl'
 
 const MailIcon = memo(function MailIcon(props) {
@@ -30,18 +30,26 @@ export const Footer = memo(function Footer() {
               <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
                 <div className="flex flex-col items-center gap-6 sm:items-start">
                   <div className="flex gap-6">
-                    {['github', 'linkedin', 'email'].map((key) => {
+                    {[
+                      'github',
+                      'linkedin',
+                      ...(t('phone') ? ['phone'] : []),
+                      'email',
+                    ].map((key) => {
                       const hrefs = {
                         github: 'https://github.com/CharlieMacnamara',
                         linkedin:
                           'https://www.linkedin.com/in/charliemacnamara/',
+                        phone: `tel:${t('phone')}`,
                         email: 'mailto:mail@charliemacnamara.uk',
                       }
                       const icons = {
                         github: GitHubIcon,
                         linkedin: LinkedInIcon,
+                        phone: PhoneIcon,
                         email: MailIcon,
                       }
+                      const isPhone = key === 'phone'
                       const Icon = icons[key]
                       return (
                         <Link
@@ -49,10 +57,10 @@ export const Footer = memo(function Footer() {
                           href={hrefs[key]}
                           className="group relative inline-block"
                           aria-label={t(key)}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          target={isPhone ? undefined : '_blank'}
+                          rel={isPhone ? undefined : 'noopener noreferrer'}
                         >
-                          <Icon className="h-6 w-6 fill-zinc-500 transition-colors duration-150 ease-in-out group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+                          <Icon className="size-6 fill-zinc-500 transition-colors duration-150 ease-in-out group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
                         </Link>
                       )
                     })}

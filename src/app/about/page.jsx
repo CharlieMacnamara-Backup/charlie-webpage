@@ -4,7 +4,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
+import { GitHubIcon, LinkedInIcon, PhoneIcon } from '@/components/SocialIcons'
 import portraitImage from '@/images/portrait.jpg'
 import { getTranslations } from 'next-intl/server'
 
@@ -87,6 +87,15 @@ const AboutContent = memo(function AboutContent({ t }) {
           >
             {t('followLinkedIn')}
           </SocialLink>
+          {t('phone') && (
+            <SocialLink
+              href={`tel:${t('phone')}`}
+              icon={PhoneIcon}
+              className="mt-4"
+            >
+              {t('phone')}
+            </SocialLink>
+          )}
           <SocialLink
             href="mailto:mail@charliemacnamara.uk"
             icon={MailIcon}
