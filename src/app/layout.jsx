@@ -5,47 +5,50 @@ import { ClientLayout } from '@/components/ClientLayout'
 import { SkipToMain } from '@/components/SkipToMain'
 import { Analytics } from '@/components/Analytics'
 import { personSchema, websiteSchema, blogSchema } from '@/lib/schema'
+import { getTranslations } from 'next-intl/server'
 
-export const metadata = {
-  title: {
-    template: '%s | Charlie Macnamara',
-    default: 'Charlie Macnamara - Technical Writer',
-  },
-  description:
-    'Charlie Macnamara (also Charlie McNamara) — Technical writer making systems and concepts clear and accessible.',
-  metadataBase: new URL('https://charliemacnamara.com'),
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-  },
-  manifest: '/site.webmanifest',
-  openGraph: {
-    title: 'Charlie Macnamara',
-    description:
-      'Charlie Macnamara — Technical writer making systems and concepts clear and accessible.',
-    url: 'https://charliemacnamara.com',
-    siteName: 'Charlie Macnamara',
-    locale: 'en_GB',
-    type: 'website',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata() {
+  const t = await getTranslations('layout')
+
+  return {
+    title: {
+      template: t('title.template'),
+      default: t('title.default'),
+    },
+    description: t('description'),
+    metadataBase: new URL('https://charliemacnamara.com'),
+    icons: {
+      icon: '/favicon.ico',
+      shortcut: '/favicon.ico',
+    },
+    manifest: '/site.webmanifest',
+    openGraph: {
+      title: t('twitterTitle'),
+      description: t('ogDescription'),
+      url: 'https://charliemacnamara.com',
+      siteName: t('siteName'),
+      locale: 'en_GB',
+      type: 'website',
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-  twitter: {
-    title: 'Charlie Macnamara',
-    card: 'summary_large_image',
-  },
-  verification: {
-    google: 'your-google-verification-code',
-  },
+    twitter: {
+      title: t('twitterTitle'),
+      card: 'summary_large_image',
+    },
+    verification: {
+      google: 'your-google-verification-code',
+    },
+  }
 }
 
 export default function RootLayout({ children }) {

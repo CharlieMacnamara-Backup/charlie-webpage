@@ -1,7 +1,9 @@
 'use client'
 
-import { createContext, useEffect, memo } from 'react'
+import { useEffect, memo } from 'react'
 import { ThemeProvider, useTheme } from 'next-themes'
+import { NextIntlClientProvider } from 'next-intl'
+import { messages } from '@/data/locales'
 
 const ThemeWatcher = memo(function ThemeWatcher() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -31,14 +33,16 @@ const MemoizedThemeProvider = memo(function MemoizedThemeProvider({
   children,
 }) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="light"
-      disableTransitionOnChange
-    >
-      <ThemeWatcher />
-      {children}
-    </ThemeProvider>
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="light"
+        disableTransitionOnChange
+      >
+        <ThemeWatcher />
+        {children}
+      </ThemeProvider>
+    </NextIntlClientProvider>
   )
 })
 

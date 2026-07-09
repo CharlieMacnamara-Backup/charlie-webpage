@@ -3,8 +3,11 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export function ImageModal({ isOpen, onClose, image, description }) {
+  const t = useTranslations('imageModal')
+
   if (!image) return null
 
   return (
@@ -58,7 +61,7 @@ export function ImageModal({ isOpen, onClose, image, description }) {
                 <button
                   onClick={onClose}
                   className="absolute right-4 top-4 rounded-full bg-zinc-100/80 p-2 text-zinc-500 hover:text-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-400 dark:hover:text-zinc-200"
-                  aria-label="Close dialog"
+                  aria-label={t('close')}
                 >
                   <svg
                     className="h-5 w-5"

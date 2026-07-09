@@ -5,7 +5,7 @@ import TableOfContents from '@/components/CollapsibleToc'
 
 export const article = {
   author: 'Charlie Macnamara',
-  date: '2026-03',
+  date: '2026–03',
   title: '4 Cloudflare Workers and a Kilt Shop',
   description:
     'A 1927 Edinburgh kilt shop. Paper diary, missed calls, no website. Now: automated booking on Cloudflare Workers — and not a single new tool for the owner to learn.',
@@ -14,13 +14,13 @@ export const article = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-Recently my sister got married — congrats again,
-[Floyd](https://www.instagram.com/art_by_floyd) — so I needed a kilt. Luckily,
-[Davison Menswear & Kilt Hire](https://qualitykilts.com/) is a few doors down.
-The shop's easy to spot: hand-painted marquee with logo, Est. 1927, and a
-previously broken URL.
+My sister got married — congrats again,
+[Floyd](https://www.instagram.com/art_by_floyd) — so I needed a kilt.
+[Davison Menswear & Kilt Hire](https://qualitykilts.com/) happened to be close
+by. The shop's easy to spot: hand-painted marquee with logo, Est. 1927, and a
+URL that didn't work.
 
-Thought I'd introduce myself while I got tartan threads. The project split into
+Thought I'd introduce myself while I got tartan threads. The project splits into
 two pages — a public booking site and a private dashboard for Marty.
 
 <SingleImage
@@ -32,19 +32,19 @@ two pages — a public booking site and a private dashboard for Marty.
 
 <TableOfContents />
 
-The shop's been in his family since 1927. Marty is third generation. He
+The shop's been in his family since 1927. Marty is third-generation. He
 hand-sews kilts from memory — a generational talent. He works alone in a
-showroom that hasn't changed much since his father's day.
+showroom that hasn't changed much since his Father's Day.
 
-His methods were proven, but dated: calendar bookings misplaced, missed calls,
-staying late to rewrite orders. Marty was keen on upgrading — old site was down
-for several years — we sat down and talked through what he needed.
+His methods showed their age: calendar bookings misplaced, missed calls, staying
+late to rewrite orders. Marty was keen on upgrading — the old site was down for
+years — we sat down and talked through what he needed.
 
 ## The Requirements
 
-Expecting a sole-trader kilt maker to learn several new tools, after he's been
-working on paper for decades, is unrealistic. Tools were designed to feel
-familiar and intuitive.
+Expecting a sole-trader kilt maker to learn new tools after he's been working on
+paper for decades is unrealistic. Every tool looks and feels familiar and
+intuitive.
 
 I'd already built [Sicamon](https://sicamon.com) — a full Stripe CMS with
 digital cataloguing. Understandably, this was too much change. Not looking to
@@ -53,8 +53,8 @@ become an overnight online shop. Stick to what he's always done.
 Project runs on:
 
 - <Definition term="workers">Workers</Definition>
-- <Definition term="d1">D1</Definition>
-- <Definition term="kv">KV</Definition>
+- <Definition term="D1">[D1](https://developers.cloudflare.com/d1/)</Definition>
+- <Definition term="KV">[KV](https://developers.cloudflare.com/kv/)</Definition>
 - Turnstile
 - <Definition term="resend">Resend</Definition>
 - [GitHub Actions](https://github.com/features/actions)
@@ -68,7 +68,7 @@ online — that was the brief.
 
 Heritage dictated everything: sepia-toned overlays on every section, serif
 headings that match the 1920s shop sign, nothing on the page newer than the
-business itself. I was given a binder of original marketing adverts from the
+business itself. Marty handed me a binder of original marketing adverts from the
 1920s through the 1950s — hand-drawn illustrations, commissioned artwork, the
 shop's official visual history (took ages to scan). That artwork became the
 site's background.
@@ -77,7 +77,7 @@ site's background.
   src="/blog/davison-menswear/archive.jpg"
   alt="Original archival photo of Davison Menswear from the binder, showing the historic shopfront"
   orientation="horizontal"
-  caption="One of the original archive photos from the binder — the shopfront before Edinburgh's trams were pulled up"
+  caption="One of the original archive photos from the binder — the shopfront before Edinburgh pulled up its trams"
 />
 
 I scanned each original and composited them into the site background — actual
@@ -88,7 +88,7 @@ overlay so the adverts bleed through as you scroll.
   src="/blog/davison-menswear/website_background.jpg"
   alt="The site's background image composites archival photos of Davison Menswear from the 1920s-1950s"
   orientation="horizontal"
-  caption="Archival photos composited into the site background — the binder became the brand"
+  caption="Archival photos composited into the site background — the binder became the brand."
 />
 
 ## The Main Site
@@ -99,9 +99,8 @@ every layout consistent — utility classes enforce a design system, no magic
 numbers. Typography scales fluidly with CSS `clamp()` — no breakpoint jumps, no
 layout surprises.
 
-Mostly minimal. The tartan search is a nice-to-have novelty — searchable
-directory of clan and district patterns — should help with SEO, though not
-essential, but fun.
+The tartan search is a nice-to-have novelty — a searchable directory of clan and
+district patterns — should help with SEO, though not essential, but fun.
 
 <SingleImage
   src="/blog/davison-menswear/tartan.png"
@@ -110,8 +109,8 @@ essential, but fun.
   caption="Searchable directory of clan and district tartans — a fun bonus for visitors"
 />
 
-Primary user functionality is the booking system; run via Cloudflare Workers and
-existing Google Calendar. What happens when you click:
+Primary user functionality is the booking system, run via Cloudflare Workers and
+the existing Google Calendar. What happens when you click:
 
 <SingleImage
   src="/blog/davison-menswear/booking.png"
@@ -128,23 +127,23 @@ existing Google Calendar. What happens when you click:
 - **Closure check** — reads `[Closed]` calendar events
 - **Slot availability** — no double-booking
 - **Event creation** — writes to Google Calendar
-- **Cancel link** — signed <Definition term="jwt">JWT</Definition> in the event
+- **Cancel link** — signed <Definition term="JWT">JWT</Definition> in the event
 - **Notifications** — <Definition term="async">async</Definition> emails to both
   customer and site owner, never blocks
 
-Everything is secured with [Cloudflare](https://cloudflare.com). Someone else
-books the slot mid-form? You're told immediately.
+[Cloudflare](https://cloudflare.com) secures everything. Someone else books the
+slot mid-form? You're told before you finish reading.
 
-Closures are set by adding `[Closed]` directly to Google Calendar — Christmas,
+Set closures by adding `[Closed]` directly to Google Calendar — Christmas,
 holidays, any day off. The worker handles it automatically.
 
 <ImageSlideshow
   images={[
     {
       src: '/blog/davison-menswear/booking-confirmed.png',
-      alt: 'Booking confirmation screen showing the successfully booked appointment',
+      alt: 'Booking confirmation screen showing the confirmed appointment',
       caption:
-        'Booking confirmed — the customer sees this first, then both parties receive email alerts',
+        'Booking confirmed — the customer sees this first, then both parties receive email alerts.',
     },
     {
       src: '/blog/davison-menswear/booking-confirmation-email.png',
@@ -155,7 +154,7 @@ holidays, any day off. The worker handles it automatically.
     {
       src: '/blog/davison-menswear/owner-alert-email.png',
       alt: 'Owner alert email notifying of a new booking',
-      caption: 'Alert email — the site owner knows immediately',
+      caption: 'Alert email — the site owner knows right away',
     },
   ]}
 />
@@ -179,12 +178,12 @@ drops, it's a customer standing outside a locked shop.
   caption="Seven layers between a push and production"
 />
 
-There are seven layers between a push and production. **Static audits** catch
+Seven layers sit between a push and production. **Static audits** catch
 hardcoded secrets and broken contracts before a test even runs. **Worker tests**
-mock every external dependency so internal logic can be validated
-deterministically — no network, no credentials. **Live API tests** then prove
-the real integrations work (Google Calendar, Resend, Turnstile). **E2E and
-integration tests** drive the full booking flow and admin lifecycle headless.
+mock every external dependency so internal logic validates deterministically —
+no network, no credentials. **Live API tests** then prove the real integrations
+work (Google Calendar, Resend, Turnstile). **E2E and integration tests** drive
+the full booking flow and admin lifecycle headless.
 
 A **pre-deploy check** probes all four workers before anything ships. If
 something's degraded, the deploy stops. Once live, **scheduled monitoring**
@@ -201,10 +200,10 @@ its own credentials. [Google Calendar](https://calendar.google.com/) is the
 database, zero new infra, already in use. Reads `[Closed]` events, checks slot
 availability, writes new bookings, and generates cancel links using signed
 
-<Definition term="jwt">JWTs</Definition> in the event description — no database
+<Definition term="JWT">JWTs</Definition> in the event description — no database
 lookup needed. [Turnstile](https://www.cloudflare.com/products/turnstile/) over
 CAPTCHA on the booking form: free, invisible, no learning curve. Email fires
-asynchronously so the booking never blocks on a delivery failure.
+asynchronously, so the booking never blocks on a delivery failure.
 
 **Reviews Worker** — Pulls Google Reviews on a schedule into
 [KV](https://developers.cloudflare.com/kv/). Stays current without input — fresh
@@ -214,7 +213,7 @@ content, zero effort.
   src="/blog/davison-menswear/reviews.png"
   alt="Google Reviews displayed on the site"
   orientation="horizontal"
-  caption="Live Google Reviews pulled on a schedule — fresh content with zero effort"
+  caption="Live Google Reviews pulled on a schedule — fresh content with zero effort."
 />
 
 ---
@@ -233,6 +232,25 @@ slip, and on a sales pad — three times, one customer. Now it's a page.
   caption="Full admin dashboard — 139 tests verify the whole system"
 />
 
+Four statuses: In Progress, Ready, Delivered, Cancelled. Every transition logged
+immutably — who changed it, when, and whether the email went out. Group orders
+for wedding parties — groom, best man, ushers under one accordion. Measurements:
+kilt waist, seat, length, jacket chest, sleeve, back, height, and build notes.
+All optional. CSV export: current tax year, last year, or custom range. Clean
+totals at the bottom for the accountant.
+
+Emails fire on status changes via [Resend](https://resend.com/). The receipt
+includes bank details — stored as Worker secrets, never in the codebase. On
+creation, the customer gets payment instructions — no Stripe, that was a
+deliberate choice. When it's ready, a collection notice. Not a word typed.
+
+Quick Add for reconciling past orders. Archived orders auto-purge after 30 days.
+No payments on-platform — bank transfer, cash, or the till. Progress without
+overwhelm.
+
+Add Single Order is the entry point. Resend emails bank transfer details on
+creation and a collection notice when ready.
+
 <SingleImage
   src="/blog/davison-menswear/mobile-order.png"
   alt="Mobile admin page with the Add Single Order button"
@@ -240,32 +258,13 @@ slip, and on a sales pad — three times, one customer. Now it's a page.
   caption="Add Single Order — every order starts here"
 />
 
-Add Single Order is the entry point. Marty creates orders himself — Resend
-emails bank transfer details on creation and a collection notice when ready.
-
-Four statuses: In Progress, Ready, Delivered, Cancelled. Every transition logged
-immutably — who changed it, when, and whether the email went out. Group orders
-for wedding parties — groom, best man, ushers under one accordion. Measurements:
-kilt waist, seat, length, jacket chest, sleeve, back, height, build notes. All
-optional.
-
-Emails fire on status changes via [Resend](https://resend.com/). The receipt
-includes bank details — stored as Worker secrets, never in the codebase. On
-creation the customer gets payment instructions. When it's ready, a collection
-notice. Not a word typed. CSV export: current tax year, last year, or custom
-range. Clean totals at the bottom for the accountant.
-
-Quick Add for reconciling past orders. Archived orders auto-purge after 30 days.
-No payments on-platform — bank transfer, cash, the till. Progress without
-overwhelm.
-
 ## The Final Stitch
 
 The binder's back on the shelf, the marquee's still hanging, and
-qualitykilts.com finally works. Sicamon proved I could build complex. This
-proved I knew when not to.
+qualitykilts.com works. Sicamon proved I could build complex. This proved I knew
+when not to.
 
-I'm a message away if anything breaks.
+I'm a message away if anything needs updating.
 
 Thanks for reading — reach out at
 [mail@charliemacnamara.uk](mailto:mail@charliemacnamara.uk).

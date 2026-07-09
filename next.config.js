@@ -1,4 +1,7 @@
 const path = require('path')
+const createNextIntlPlugin = require('next-intl/plugin')
+
+const withNextIntl = createNextIntlPlugin()
 
 const withMDX = require('@next/mdx')({
   options: {
@@ -75,4 +78,4 @@ const nextConfig = {
   compress: true,
 }
 
-module.exports = withBundleAnalyzer(withMDX(nextConfig))
+module.exports = withBundleAnalyzer(withMDX(withNextIntl(nextConfig)))

@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
 
 import { Container } from '@/components/Container'
 import avatarImage from '@/images/portrait.jpg'
@@ -90,13 +91,15 @@ const MobileNavItem = memo(function MobileNavItem({ href, children }) {
 })
 
 const MobileNavigation = memo(function MobileNavigation(props) {
+  const t = useTranslations('nav')
+
   return (
     <Popover {...props}>
       <Popover.Button
         className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20"
-        aria-label="Open navigation menu"
+        aria-label={t('openMenu')}
       >
-        Menu
+        {t('menu')}
         <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
       </Popover.Button>
       <Transition.Root>
@@ -125,21 +128,20 @@ const MobileNavigation = memo(function MobileNavigation(props) {
             className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800"
           >
             <div className="flex flex-row-reverse items-center justify-between">
-              <Popover.Button
-                aria-label="Close navigation menu"
-                className="-m-1 p-1"
-              >
+              <Popover.Button aria-label={t('closeMenu')} className="-m-1 p-1">
                 <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
               </Popover.Button>
               <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                Site Navigation
+                {t('siteNavigation')}
               </h2>
             </div>
-            <nav className="mt-6" aria-label="Mobile navigation">
+            <nav className="mt-6" aria-label={t('mobileNav')}>
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/blog">Blog</MobileNavItem>
-                <MobileNavItem href="/portfolio">Portfolio</MobileNavItem>
+                <MobileNavItem href="/about">{t('about')}</MobileNavItem>
+                <MobileNavItem href="/blog">{t('blog')}</MobileNavItem>
+                <MobileNavItem href="/portfolio">
+                  {t('portfolio')}
+                </MobileNavItem>
               </ul>
             </nav>
           </Popover.Panel>
@@ -174,12 +176,14 @@ const MemoizedNavItem = memo(function NavItem({ href, children }) {
 })
 
 const MemoizedDesktopNavigation = memo(function DesktopNavigation(props) {
+  const t = useTranslations('nav')
+
   return (
-    <nav {...props} aria-label="Main navigation">
+    <nav {...props} aria-label={t('desktopNav')}>
       <ul className="flex rounded-full bg-zinc-50/90 px-3 text-sm font-medium text-zinc-600 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-100/50 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <MemoizedNavItem href="/about">About</MemoizedNavItem>
-        <MemoizedNavItem href="/blog">Blog</MemoizedNavItem>
-        <MemoizedNavItem href="/portfolio">Portfolio</MemoizedNavItem>
+        <MemoizedNavItem href="/about">{t('about')}</MemoizedNavItem>
+        <MemoizedNavItem href="/blog">{t('blog')}</MemoizedNavItem>
+        <MemoizedNavItem href="/portfolio">{t('portfolio')}</MemoizedNavItem>
       </ul>
     </nav>
   )
@@ -189,6 +193,7 @@ function ThemeToggle() {
   let { resolvedTheme, setTheme } = useTheme()
   let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
   let [mounted, setMounted] = useState(false)
+  let t = useTranslations('nav')
 
   useEffect(() => {
     setMounted(true)
@@ -197,7 +202,9 @@ function ThemeToggle() {
   return (
     <button
       type="button"
-      aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
+      aria-label={
+        mounted ? t('switchTheme', { theme: otherTheme }) : t('toggleTheme')
+      }
       className="group rounded-full bg-zinc-50/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-100/50 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
       onClick={() => setTheme(otherTheme)}
     >
@@ -230,16 +237,18 @@ const MemoizedAvatar = memo(function Avatar({
   className,
   ...props
 }) {
+  const t = useTranslations('nav')
+
   return (
     <Link
       href="/"
-      aria-label="Return to homepage"
+      aria-label={t('returnHome')}
       className={clsx(className, 'pointer-events-auto')}
       {...props}
     >
       <Image
         src={avatarImage}
-        alt="Charlie Macnamara - Technical Writer and Developer"
+        alt={t('avatarAlt')}
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
           'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',

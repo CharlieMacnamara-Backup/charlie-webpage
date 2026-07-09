@@ -1,6 +1,7 @@
 import glob from 'fast-glob'
 import fs from 'fs'
 import path from 'path'
+import { messages } from '@/data/locales'
 
 function importArticle(articleFilename) {
   try {
@@ -64,7 +65,8 @@ function importArticle(articleFilename) {
           title: articleMetadata.title || slug,
           description: articleMetadata.description || '',
           date: articleMetadata.date || new Date().toISOString().split('T')[0],
-          author: articleMetadata.author || 'Charlie Macnamara',
+          author:
+            articleMetadata.author || messages.getAllArticles.defaultAuthor,
         }
       } catch (e) {
         console.error(`Error parsing metadata for ${articleFilename}:`, e)

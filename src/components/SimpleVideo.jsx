@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
 
 /**
  * A simple, reliable video player component that properly handles loading states and errors
@@ -13,6 +14,7 @@ export const SimpleVideo = ({
   className = '',
   aspectRatio = '16/9',
 }) => {
+  const t = useTranslations('simpleVideo')
   const videoRef = useRef(null)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -71,7 +73,7 @@ export const SimpleVideo = ({
               clipRule="evenodd"
             ></path>
           </svg>
-          Unable to load video
+          {t('unableToLoad')}
         </div>
         <a
           href={src}
@@ -79,7 +81,7 @@ export const SimpleVideo = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          Open video in new tab
+          {t('openInNewTab')}
         </a>
       </div>
     )
@@ -129,11 +131,11 @@ export const SimpleVideo = ({
           style={{ display: 'block', aspectRatio }}
         >
           <source src={src} type="video/mp4" />
-          Your browser does not support the video tag.
+          {t('browserNotSupported')}
           <a href={src} className="text-teal-600 hover:text-teal-800">
-            Download the video
-          </a>{' '}
-          instead.
+            {t('download')}
+          </a>
+          {t('instead')}
         </video>
       </div>
       {caption && (

@@ -4,6 +4,11 @@
   "mcp": {
     "playwright": {
       "enabled": false
+    },
+    "prose-rich": {
+      "type": "local",
+      "command": ["prose-rich-mcp"],
+      "enabled": true
     }
   }
 }

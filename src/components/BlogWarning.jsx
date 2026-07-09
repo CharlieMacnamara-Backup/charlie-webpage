@@ -1,4 +1,5 @@
 import React from 'react'
+import { messages } from '@/data/locales'
 
 /**
  * A reusable warning component for blog posts that ensures proper HTML structure.
@@ -11,14 +12,14 @@ import React from 'react'
  */
 export function BlogWarning({ children, type = 'note' }) {
   let icon = '⚠️'
-  let title = 'Note'
+  let title = messages.blogWarning.note
 
   if (type === 'warning') {
     icon = '🚫'
-    title = 'Warning'
+    title = messages.blogWarning.warning
   } else if (type === 'wip') {
     icon = '🚧'
-    title = 'Work in Progress'
+    title = messages.blogWarning.workInProgress
   }
 
   return (

@@ -1,6 +1,7 @@
 'use client'
 
 import { Component } from 'react'
+import { messages } from '@/data/locales'
 
 export class ErrorBoundary extends Component {
   constructor(props) {
@@ -22,16 +23,17 @@ export class ErrorBoundary extends Component {
         <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-900">
           <div className="max-w-md p-8 rounded-2xl bg-white dark:bg-zinc-800 shadow-xl">
             <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
-              Something went wrong
+              {messages.errorBoundary.heading}
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 mb-6">
-              {this.state.error?.message || 'An unexpected error occurred'}
+              {this.state.error?.message ||
+                messages.errorBoundary.defaultMessage}
             </p>
             <button
               onClick={() => window.location.reload()}
               className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg transition-colors"
             >
-              Reload page
+              {messages.errorBoundary.reload}
             </button>
           </div>
         </div>

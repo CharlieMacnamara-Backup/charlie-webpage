@@ -5,6 +5,7 @@ import Image from 'next/image'
 import clsx from 'clsx'
 import { ImageModal } from './ImageModal'
 import { Container } from '@/components/Container'
+import { useTranslations } from 'next-intl'
 
 // Non-critical images loaded dynamically
 import image1 from '@/images/photos/image-1.jpg'
@@ -13,22 +14,10 @@ import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 
 const images = [
-  {
-    src: image1,
-    description: 'Red Arrows over Edinburgh Castle during the Tattoo.',
-  },
-  {
-    src: image2,
-    description: 'Frozen waterfall in the Highlands.',
-  },
-  {
-    src: image3,
-    description: 'Kayaking on Loch Lomond.',
-  },
-  {
-    src: image4,
-    description: 'Fresh sourdough cooling on a rack.',
-  },
+  { src: image1 },
+  { src: image2 },
+  { src: image3 },
+  { src: image4 },
 ]
 
 // Reduced rotation for better mobile experience
@@ -36,6 +25,8 @@ const rotations = ['rotate-2', '-rotate-2', 'rotate-2', '-rotate-2']
 
 export const Photos = memo(function Photos() {
   const [selectedImage, setSelectedImage] = useState(null)
+  const t = useTranslations('photos')
+  const captions = t.raw('captions')
 
   return (
     <>
@@ -64,19 +55,27 @@ export const Photos = memo(function Photos() {
                       rotations[imageIndex % rotations.length],
                       'transform transition duration-300 ease-in-out hover:-translate-y-4 hover:shadow-xl',
                     )}
-                    onClick={() => setSelectedImage(image)}
+                    onClick={() =>
+                      setSelectedImage({
+                        ...image,
+                        description: captions[imageIndex],
+                      })
+                    }
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
-                        setSelectedImage(image)
+                        setSelectedImage({
+                          ...image,
+                          description: captions[imageIndex],
+                        })
                       }
                     }}
-                    aria-label="Click to view larger image"
+                    aria-label={t('clickToView')}
                   >
                     <Image
                       src={image.src}
-                      alt=""
+                      alt={captions[imageIndex]}
                       sizes="(min-width: 640px) 18rem, 16rem"
                       className="absolute inset-0 h-full w-full object-cover transition duration-300 ease-in-out hover:scale-110"
                       style={{ transform: 'translate3d(0, 0, 0)' }}

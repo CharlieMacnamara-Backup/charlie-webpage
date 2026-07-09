@@ -1,9 +1,11 @@
+import { messages } from '@/data/locales'
+
 const BASE_URL = 'https://charliemacnamara.com'
 
 export const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Charlie Macnamara',
+  name: messages.schema.personName,
   alternateName: [
     'Charlie McNamara',
     'charlie macnamara',
@@ -12,9 +14,8 @@ export const personSchema = {
     'Charliemcnamara',
   ],
   url: BASE_URL,
-  jobTitle: 'Technical Writer',
-  description:
-    'Technical writer making systems and concepts clear and accessible.',
+  jobTitle: messages.schema.jobTitle,
+  description: messages.schema.personDescription,
   sameAs: [
     'https://github.com/CharlieMacnamara',
     'https://www.linkedin.com/in/charliemacnamara/',
@@ -30,17 +31,15 @@ export const personSchema = {
 export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Charlie Macnamara',
+  name: messages.schema.websiteName,
   url: BASE_URL,
-  description:
-    'Technical writer making systems and concepts clear and accessible.',
+  description: messages.schema.websiteDescription,
 }
 
 export const blogSchema = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  name: 'Charlie Macnamara - Blog',
+  name: messages.schema.blogName,
   url: `${BASE_URL}/blog`,
-  description:
-    'Articles about technical writing, documentation, and software development.',
+  description: messages.schema.blogDescription,
 }

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { resolveBlogImagePath } from '@/lib/image-utils'
 
 export function SingleImage({
@@ -18,6 +19,7 @@ export function SingleImage({
   objectFit = 'contain', // Allow customizing object-fit (contain or cover)
   aspectRatio = 'auto', // Allow custom aspect ratio or 'auto' to use natural image ratio
 }) {
+  const t = useTranslations('blogImages')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
   const [naturalSize, setNaturalSize] = useState(null)
@@ -74,7 +76,7 @@ export function SingleImage({
           </div>
           <div className="ml-3">
             <h3 className="text-sm font-medium text-amber-800 dark:text-amber-600">
-              Failed to load image
+              {t('failedToLoad')}
             </h3>
             <div className="mt-1 text-sm text-amber-700 dark:text-amber-500">
               <p>{alt}</p>

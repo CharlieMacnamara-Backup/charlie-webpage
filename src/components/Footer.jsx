@@ -1,7 +1,10 @@
+'use client'
+
 import { memo } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
+import { useTranslations } from 'next-intl'
 
 const MailIcon = memo(function MailIcon(props) {
   return (
@@ -14,33 +17,10 @@ const MailIcon = memo(function MailIcon(props) {
   )
 })
 
-const navigation = {
-  social: [
-    {
-      name: 'GitHub',
-      href: 'https://github.com/CharlieMacnamara',
-      icon: GitHubIcon,
-    },
-    {
-      name: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/charliemacnamara/',
-      icon: LinkedInIcon,
-    },
-    {
-      name: 'Email',
-      href: 'mailto:mail@charliemacnamara.uk',
-      icon: MailIcon,
-    },
-  ],
-  tech: [
-    { name: 'Next.js', href: 'https://nextjs.org' },
-    { name: 'React', href: 'https://react.dev' },
-    { name: 'TailwindCSS', href: 'https://tailwindcss.com' },
-    { name: 'AWS', href: 'https://aws.amazon.com' },
-  ],
-}
-
 export const Footer = memo(function Footer() {
+  const t = useTranslations('footer')
+  const year = new Date().getFullYear()
+
   return (
     <footer className="mt-24 w-full">
       <div className="w-full bg-white dark:bg-zinc-900">
@@ -50,40 +30,61 @@ export const Footer = memo(function Footer() {
               <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
                 <div className="flex flex-col items-center gap-6 sm:items-start">
                   <div className="flex gap-6">
-                    {navigation.social.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="group relative inline-block"
-                        aria-label={item.name}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <item.icon className="h-6 w-6 fill-zinc-500 transition-colors duration-150 ease-in-out group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
-                      </Link>
-                    ))}
+                    {['github', 'linkedin', 'email'].map((key) => {
+                      const hrefs = {
+                        github: 'https://github.com/CharlieMacnamara',
+                        linkedin:
+                          'https://www.linkedin.com/in/charliemacnamara/',
+                        email: 'mailto:mail@charliemacnamara.uk',
+                      }
+                      const icons = {
+                        github: GitHubIcon,
+                        linkedin: LinkedInIcon,
+                        email: MailIcon,
+                      }
+                      const Icon = icons[key]
+                      return (
+                        <Link
+                          key={key}
+                          href={hrefs[key]}
+                          className="group relative inline-block"
+                          aria-label={t(key)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Icon className="h-6 w-6 fill-zinc-500 transition-colors duration-150 ease-in-out group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+                        </Link>
+                      )
+                    })}
                   </div>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                    &copy; {new Date().getFullYear()} Charlie Macnamara. All
-                    rights reserved.
+                    {t('copyright', { year })}
                   </p>
                 </div>
                 <div className="flex flex-wrap justify-center sm:justify-end">
                   <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:justify-end">
                     <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                      Built on:{' '}
+                      {t('builtOn')}{' '}
                     </span>
-                    {navigation.tech.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="relative text-sm font-medium text-zinc-600 transition-colors duration-150 ease-in-out hover:text-teal-500 dark:text-zinc-400 dark:hover:text-teal-400"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                    {t.raw('tech').map((name, i) => {
+                      const hrefs = [
+                        'https://nextjs.org',
+                        'https://react.dev',
+                        'https://tailwindcss.com',
+                        'https://aws.amazon.com',
+                      ]
+                      return (
+                        <Link
+                          key={name}
+                          href={hrefs[i]}
+                          className="relative text-sm font-medium text-zinc-600 transition-colors duration-150 ease-in-out hover:text-teal-500 dark:text-zinc-400 dark:hover:text-teal-400"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {name}
+                        </Link>
+                      )
+                    })}
                   </nav>
                 </div>
               </div>

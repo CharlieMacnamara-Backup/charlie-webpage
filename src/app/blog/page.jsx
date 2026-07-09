@@ -1,14 +1,17 @@
-import { generateMetadata } from '@/components/SEO'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { Card } from '@/components/Card'
 import { formatDate } from '@/lib/formatDate'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { ClientArticles } from './ClientArticles'
+import { getTranslations } from 'next-intl/server'
 
-export const metadata = {
-  title: 'Non-work Blog',
-  description:
-    'Thoughts beyond my professional work. Dives into movies, tech, and personal projects.',
+export async function generateMetadata() {
+  const t = await getTranslations('blog')
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  }
 }
 
 // Force static generation

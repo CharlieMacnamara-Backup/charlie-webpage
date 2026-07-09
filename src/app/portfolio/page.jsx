@@ -1,7 +1,8 @@
 import { Card } from '@/components/Card'
 import { Section } from '@/components/Section'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import { generateMetadata } from '@/components/SEO'
+import { generateMetadata as seoMetadata } from '@/components/SEO'
+import { getTranslations } from 'next-intl/server'
 
 function PortfolioSection({ children, ...props }) {
   return (
@@ -13,7 +14,7 @@ function PortfolioSection({ children, ...props }) {
   )
 }
 
-function ProjectCard({ title, description, event, cta, href }) {
+function ProjectCard({ title, description, cta, href }) {
   return (
     <Card as="article" className="flex h-full flex-col justify-between">
       <div>
@@ -27,216 +28,142 @@ function ProjectCard({ title, description, event, cta, href }) {
   )
 }
 
-function ActiveSites() {
+function ActiveSites({ data }) {
   return (
     <div className="rounded-2xl bg-zinc-100 p-6 dark:bg-zinc-800/50">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <span>Websites I Maintain</span>
+        <span>{data.heading}</span>
       </h2>
       <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
-        Alongside technical writing, I also build and actively maintain
-        full-stack web applications (like this one).
+        {data.description}
       </p>
       <ul className="mt-4 space-y-4">
-        <li className="text-sm">
-          <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-            <a
-              href="https://sicamon.com/"
-              className="underline underline-offset-2"
-            >
-              Sicamon
-            </a>
-          </span>
-          <p className="mt-1 text-zinc-600 dark:text-zinc-400">
-            Stripe as CMS — inventory and pricing managed through the Stripe
-            dashboard. Cloudflare Workers propagate changes automatically and
-            safely.
-          </p>
-        </li>
-        <li className="text-sm">
-          <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-            <a
-              href="https://qualitykilts.com/"
-              className="underline underline-offset-2"
-            >
-              QualityKilts.com
-            </a>
-          </span>
-          <p className="mt-1 text-zinc-600 dark:text-zinc-400">
-            4 Cloudflare Workers (frontend, calendar, reviews, admin dashboard){' '}
-            <a
-              href="/blog/davison-menswear"
-              className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-            >
-              read the full story
-            </a>
-            .
-          </p>
-        </li>
+        {data.sites.map((site, i) => (
+          <li key={i} className="text-sm">
+            <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+              <a
+                href={
+                  i === 0 ? 'https://sicamon.com/' : 'https://qualitykilts.com/'
+                }
+                className="underline underline-offset-2"
+              >
+                {site.name}
+              </a>
+            </span>
+            <p className="mt-1 text-zinc-600 dark:text-zinc-400">
+              {site.description}
+              {site.readMore && (
+                <>
+                  {' '}
+                  <a
+                    href="/blog/davison-menswear"
+                    className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+                  >
+                    {site.readMore}
+                  </a>
+                  .
+                </>
+              )}
+            </p>
+          </li>
+        ))}
       </ul>
     </div>
   )
 }
 
-export const metadata = generateMetadata({
-  title: 'Portfolio',
-  description: 'Selected Technical Writing.',
-  path: '/portfolio',
-})
+export async function generateMetadata() {
+  const t = await getTranslations('portfolio')
 
-export default function Portfolio() {
+  return seoMetadata({
+    title: t('title'),
+    description: t('description'),
+    path: '/portfolio',
+  })
+}
+
+export default async function Portfolio() {
+  const t = await getTranslations('portfolio')
+
   return (
     <SimpleLayout
-      title="Selected Works"
+      title={t('pageTitle')}
       intro={
         <>
-          Technical Writers wear many hats. Once I was tasked with designing
-          Shopify mugs...
-          <br />
-          <br />
-          Here&apos;s some varied work. For more examples,{' '}
-          <a
-            href="mailto:mail@charliemacnamara.uk"
-            className="text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-          >
-            drop me a line
-          </a>
-          .
+          {t('intro')
+            .split('\n\n')
+            .map((para, i) => (
+              <p key={i} className={i > 0 ? 'mt-4' : ''}>
+                {para.includes('drop me a line')
+                  ? para.split('drop me a line').map((part, j) => (
+                      <span key={j}>
+                        {j > 0 && (
+                          <a
+                            href="mailto:mail@charliemacnamara.uk"
+                            className="text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+                          >
+                            {t('introLinkText')}
+                          </a>
+                        )}
+                        {part}
+                      </span>
+                    ))
+                  : para}
+              </p>
+            ))}
         </>
       }
     >
       <div className="space-y-20">
-        <ActiveSites />
+        <ActiveSites data={t.raw('activeSites')} />
 
-        <PortfolioSection title="Blog Posts">
-          <ProjectCard
-            href="https://transloadit.com/blog/2022/06/image-facedetect-cdn-support/"
-            title="Implementing AI Face Detection in Smart CDN"
-            description="Guide on integrating AI face detection using CDN infrastructure."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://configcat.com/blog/2020/07/08/introduction-to-configcat-api/"
-            title="Deep Dive: ConfigCat Public Management API"
-            description="Public Management API Demo."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://www.honeybadger.io/blog/dockerize-django-preact-postgres/"
-            title="How to dockerize a Django, Preact, and PostgreSQL Application"
-            description="Comprehensive Dockerization Guide."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://wisej.com/blog/system-drawing-managed-beyond-libgdiplus/"
-            title="Enhanced Graphics in Wisej.NET: Beyond LibGDIPlus"
-            description="Introducing consistent cross-platform graphics for Windows apps."
-            cta="View"
-          />
-        </PortfolioSection>
-
-        <PortfolioSection title="Documentation">
-          <ProjectCard
-            href="https://evoraglobal.github.io/sieraapi-docs/#consumption-get-consumption-summary-of-a-meter/"
-            title="SIERA API Reference: Consumption Metrics"
-            description="ESG API documentation."
-            cta="View"
-          />
-
-          <ProjectCard
-            href="https://docs.wisej.com/docs/releases/whats-new-in-3.1"
-            title="What's new in Wisej.NET 3.1"
-            description="Version release documentation."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://transloadit.com/docs/transcoding/document-processing/document-convert/"
-            title="Document Convert Specification"
-            description="Convert documents into different formats; parameters, usage, and examples."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://transloadit.com/docs/robots/image-facedetect/"
-            title="Image Face Detection Specification"
-            description="Detect faces in images; parameters, usage, and examples."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://transloadit.com/docs/faq/reserved-capacity/"
-            title="Transloadit Plans: Priority Job Slots"
-            description="Reserved capacity and job slot claims explained."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://transloadit.com/docs/robots/digitalocean-import/"
-            title="DigitalOcean Import Specification"
-            description="Import files from DigitalOcean; parameters, usage, and examples."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://transloadit.com/docs/topics/template-credentials/"
-            title="Template Credentials"
-            description="Managing credentials in Templates securely."
-            cta="View"
-          />
-        </PortfolioSection>
-
-        <PortfolioSection title="Case Studies">
-          <ProjectCard
-            href="https://wisej.com/case-studies/sonepar/"
-            title="Sonepar: Wisej.NET-based Pricing Solution"
-            description="High-scale pricing conditions solution integrated with SAP."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://wisej.com/case-studies/fiuka/"
-            title="FIUKA: Streamlining Metal Processing"
-            description="Manufacturing processes modernized with Wisej.NET."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://wisej.com/case-studies/overjoyed/"
-            title="Overjoyed: Accessibility Gaming App"
-            description="Input solutions using mouse or eye gaze with Wisej.NET."
-            cta="View"
-          />
-        </PortfolioSection>
-
-        <PortfolioSection title="ESG Technical Content">
-          <ProjectCard
-            href="https://sieraglobal.zendesk.com/hc/en-gb/articles/11107134286877-Gap-Filling-Methodology/"
-            title="Data Gap Analysis Methodology"
-            description="Guide on identifying and addressing environmental metric gaps."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://sieraglobal.zendesk.com/hc/en-gb/articles/14269676332317-Net-Zero-Carbon-Guide"
-            title="Net Zero Carbon Guide"
-            description="Overview of SIERA's Net Zero Carbon dashboards, pathways, and modelling."
-            cta="View"
-          />
-          <ProjectCard
-            href="https://sieraglobal.zendesk.com/hc/en-gb/articles/12938753435677-Unit-Conversion"
-            title="Unit Conversion Guide"
-            description="Product overview - conversion methodologies."
-            cta="View"
-          />
-        </PortfolioSection>
-
-        <PortfolioSection title="Technical Showcases">
-          <ProjectCard
-            href="https://www.youtube.com/watch?v=yj36Ki0V2MI&t=207s/"
-            title="Wisej.NET Visual Studio Integration Guide"
-            description="Youtube tutorial on using Wisej.NET with Visual Studio."
-            cta="Watch"
-          />
-          <ProjectCard
-            href="https://blog.roboflow.com/ffmpeg-computer-vision//"
-            title="Computer Vision with FFmpeg"
-            description="Integrating computer vision with FFmpeg video processing."
-            cta="View"
-          />
-        </PortfolioSection>
+        {t.raw('sections').map((section) => (
+          <PortfolioSection key={section.title} title={section.title}>
+            {section.projects.map((project, i) => (
+              <ProjectCard
+                key={i}
+                href={
+                  section.title === 'Blog Posts'
+                    ? [
+                        'https://transloadit.com/blog/2022/06/image-facedetect-cdn-support/',
+                        'https://configcat.com/blog/2020/07/08/introduction-to-configcat-api/',
+                        'https://www.honeybadger.io/blog/dockerize-django-preact-postgres/',
+                        'https://wisej.com/blog/system-drawing-managed-beyond-libgdiplus/',
+                      ][i]
+                    : section.title === 'Documentation'
+                      ? [
+                          'https://evoraglobal.github.io/sieraapi-docs/#consumption-get-consumption-summary-of-a-meter/',
+                          'https://docs.wisej.com/docs/releases/whats-new-in-3.1',
+                          'https://transloadit.com/docs/transcoding/document-processing/document-convert/',
+                          'https://transloadit.com/docs/robots/image-facedetect/',
+                          'https://transloadit.com/docs/faq/reserved-capacity/',
+                          'https://transloadit.com/docs/robots/digitalocean-import/',
+                          'https://transloadit.com/docs/topics/template-credentials/',
+                        ][i]
+                      : section.title === 'Case Studies'
+                        ? [
+                            'https://wisej.com/case-studies/sonepar/',
+                            'https://wisej.com/case-studies/fiuka/',
+                            'https://wisej.com/case-studies/overjoyed/',
+                          ][i]
+                        : section.title === 'ESG Technical Content'
+                          ? [
+                              'https://sieraglobal.zendesk.com/hc/en-gb/articles/11107134286877-Gap-Filling-Methodology/',
+                              'https://sieraglobal.zendesk.com/hc/en-gb/articles/14269676332317-Net-Zero-Carbon-Guide',
+                              'https://sieraglobal.zendesk.com/hc/en-gb/articles/12938753435677-Unit-Conversion',
+                            ][i]
+                          : [
+                              'https://www.youtube.com/watch?v=yj36Ki0V2MI&t=207s/',
+                              'https://blog.roboflow.com/ffmpeg-computer-vision//',
+                            ][i]
+                }
+                title={project.title}
+                description={project.description}
+                cta={project.cta}
+              />
+            ))}
+          </PortfolioSection>
+        ))}
       </div>
     </SimpleLayout>
   )

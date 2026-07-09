@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
+import { messages } from '@/data/locales'
 
 const ChevronRightIcon = memo(function ChevronRightIcon(props) {
   return (
@@ -63,7 +64,13 @@ Card.Title = memo(function CardTitle({ as: Component = 'h2', href, children }) {
   return (
     <Component className="text-lg font-semibold tracking-tight text-zinc-900 transition-colors group-hover:text-teal-600 dark:text-zinc-100 dark:group-hover:text-teal-400">
       {href ? (
-        <Card.Link href={href} aria-label={`Read more about ${children}`}>
+        <Card.Link
+          href={href}
+          aria-label={messages.card.readMoreAbout.replace(
+            '{title}',
+            String(children),
+          )}
+        >
           {children}
         </Card.Link>
       ) : (
@@ -84,7 +91,7 @@ Card.Description = memo(function CardDescription({ children }) {
 Card.Cta = memo(function CardCta({ children }) {
   return (
     <div className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-600 transition-colors group-hover:text-teal-700 dark:text-teal-400 dark:group-hover:text-teal-300">
-      <span className="sr-only">Click to </span>
+      <span className="sr-only">{messages.card.clickTo}</span>
       {children}
       <ChevronRightIcon
         className="ml-1 h-4 w-4 stroke-current transition-transform group-hover:translate-x-1"

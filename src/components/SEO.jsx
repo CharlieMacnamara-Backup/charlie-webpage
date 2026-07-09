@@ -1,28 +1,14 @@
+import { messages } from '@/data/locales'
+
 const defaultMetadata = {
-  title: 'Charlie Macnamara',
-  description:
-    'Charlie Macnamara — Technical writer making complex systems and concepts accessible through clear documentation.',
-  siteUrl: 'https://charliemacnamara.com',
-  siteName: 'Charlie Macnamara',
-  locale: 'en_GB',
+  title: messages.seo.defaultTitle,
+  description: messages.seo.defaultDescription,
+  siteUrl: messages.seo.siteUrl,
+  siteName: messages.seo.siteName,
+  locale: messages.seo.locale,
   type: 'website',
-  twitterHandle: '@charliemacnamara',
-  keywords: [
-    'Charlie Macnamara',
-    'Charlie McNamara',
-    'charlie macnamara',
-    'charlie mcnamara',
-    'Charliemacnamara',
-    'Charliemcnamara',
-    'Technical Writing',
-    'Technical Documentation',
-    'Developer Experience',
-    'Documentation',
-    'Web Development',
-    'Technical Content',
-    'Developer Tools',
-    'System Documentation',
-  ],
+  twitterHandle: messages.seo.twitterHandle,
+  keywords: messages.seo.keywords,
 }
 
 export function generateMetadata({
@@ -61,7 +47,7 @@ export function generateMetadata({
           url: image.url,
           width: image.width,
           height: image.height,
-          alt: image.alt || 'Article featured image',
+          alt: image.alt || messages.seo.articleImageAlt,
         })),
       }),
     },
@@ -74,7 +60,7 @@ export function generateMetadata({
       ...(images.length > 0 && {
         images: images.map((image) => image.url),
         image: {
-          alt: images[0]?.alt || 'Article featured image',
+          alt: images[0]?.alt || messages.seo.articleImageAlt,
         },
       }),
     },

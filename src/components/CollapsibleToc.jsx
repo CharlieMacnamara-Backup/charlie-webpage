@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
 
 function slugify(text) {
   return text
@@ -12,10 +13,9 @@ function slugify(text) {
     .replace(/(^-|-$)/g, '')
 }
 
-export default function TableOfContents({
-  title = 'On this page',
-  className = '',
-}) {
+export default function TableOfContents({ title, className = '' }) {
+  const t = useTranslations('collapsibleToc')
+  const displayTitle = title || t('defaultTitle')
   const [sections, setSections] = useState([])
   const [activeId, setActiveId] = useState(null)
   const [mounted, setMounted] = useState(false)
@@ -120,7 +120,7 @@ export default function TableOfContents({
           )}
         >
           <Disclosure.Button className="flex w-full items-center justify-between px-3 py-2.5 text-left text-sm font-medium text-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500 dark:text-zinc-300">
-            <span>{title}</span>
+            <span>{displayTitle}</span>
             <ChevronDownIcon
               className={clsx(
                 'h-4 w-4 text-zinc-400 transition-transform duration-200',

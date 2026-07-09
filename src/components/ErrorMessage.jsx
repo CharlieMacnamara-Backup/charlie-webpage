@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { Button } from '@/components/Button'
+import { messages } from '@/data/locales'
 
 const WarningIcon = memo(function WarningIcon() {
   return (
@@ -42,8 +43,8 @@ const RetryIcon = memo(function RetryIcon() {
 })
 
 export const ErrorMessage = memo(function ErrorMessage({
-  title = 'Error',
-  message = 'Please try again or refresh the page.',
+  title = messages.errorMessage.title,
+  message = messages.errorMessage.message,
   retry,
   className = '',
 }) {
@@ -67,10 +68,10 @@ export const ErrorMessage = memo(function ErrorMessage({
               variant="secondary"
               onClick={retry}
               className="inline-flex items-center"
-              aria-label="Retry the failed operation"
+              aria-label={messages.errorMessage.retryAriaLabel}
             >
               <RetryIcon />
-              <span>Retry Operation</span>
+              <span>{messages.errorMessage.retryText}</span>
             </Button>
           </div>
         )}

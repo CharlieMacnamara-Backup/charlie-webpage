@@ -43,3 +43,6 @@ src/app/skillio/
 .wrangler/
 worker-configuration.d.ts
 *.tsbuildinfo
+
+# Project instructions (AI context, not source)
+AGENTS.md

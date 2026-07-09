@@ -1,13 +1,16 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 export function StaticPlayer({ mediaUrl, mediaType }) {
+  const t = useTranslations('staticPlayer')
   const isVideo = mediaType === 'video'
   const isAudio = mediaType === 'audio'
   const mediaLabel = isVideo
-    ? 'Video player'
+    ? t('videoLabel')
     : isAudio
-      ? 'Audio player'
-      : 'Media player'
+      ? t('audioLabel')
+      : t('mediaLabel')
 
   return (
     <div
@@ -24,7 +27,7 @@ export function StaticPlayer({ mediaUrl, mediaType }) {
           aria-label={mediaLabel}
           poster={mediaUrl.replace(/\.[^/.]+$/, '.jpg')}
         >
-          Your browser does not support the video tag.
+          {t('videoFallback')}
         </video>
       ) : (
         <audio
@@ -34,7 +37,7 @@ export function StaticPlayer({ mediaUrl, mediaType }) {
           className="w-full"
           aria-label={mediaLabel}
         >
-          Your browser does not support the audio tag.
+          {t('audioFallback')}
         </audio>
       )}
     </div>

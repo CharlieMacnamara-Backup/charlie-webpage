@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { Container } from '@/components/Container'
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 import portraitImage from '@/images/portrait.jpg'
+import { getTranslations } from 'next-intl/server'
 
 const SocialLink = memo(function SocialLink({
   className,
@@ -37,20 +38,23 @@ const MailIcon = memo(function MailIcon(props) {
   )
 })
 
-export const metadata = {
-  title: 'About',
-  description:
-    'Technical writer in Edinburgh. Clear, usable docs for complex systems.',
+export async function generateMetadata() {
+  const t = await getTranslations('about')
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  }
 }
 
-const AboutContent = memo(function AboutContent() {
+const AboutContent = memo(function AboutContent({ t }) {
   return (
     <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
       <div className="lg:pl-20">
         <div className="max-w-xs px-2.5 lg:max-w-none">
           <Image
             src={portraitImage}
-            alt="Professional headshot of Charlie Macnamara, technical writer and developer"
+            alt={t('alt')}
             sizes="(min-width: 1024px) 32rem, 20rem"
             className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
             priority
@@ -59,23 +63,12 @@ const AboutContent = memo(function AboutContent() {
       </div>
       <div className="lg:order-first lg:row-span-2">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-          Charlie Macnamara — technical writer in Edinburgh.
+          {t('heading')}
         </h1>
         <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-          <p>Clear, usable docs for complex systems.</p>
-          <p>
-            With product and engineering, I ship docs that reduce tickets and
-            speed onboarding.
-          </p>
-          <p>
-            As a dyslexic writer—irony noted—poor docs have blocked me more than
-            once. Years of releases, migrations, and API changes taught me where
-            users stumble—and how to fix it.
-          </p>
-          <p>
-            Off hours, I play guitar (mainly black metal and other metal
-            genres... with jazz too) and develop Flutter apps end to end.
-          </p>
+          {t.raw('paragraphs').map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
         </div>
       </div>
       <div className="lg:pl-20">
@@ -85,21 +78,21 @@ const AboutContent = memo(function AboutContent() {
             icon={GitHubIcon}
             className="mt-4"
           >
-            Follow on GitHub
+            {t('followGitHub')}
           </SocialLink>
           <SocialLink
             href="https://www.linkedin.com/in/charliemacnamara/"
             icon={LinkedInIcon}
             className="mt-4"
           >
-            Follow on LinkedIn
+            {t('followLinkedIn')}
           </SocialLink>
           <SocialLink
             href="mailto:mail@charliemacnamara.uk"
             icon={MailIcon}
             className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
           >
-            mail@charliemacnamara.uk
+            {t('email')}
           </SocialLink>
         </ul>
       </div>
@@ -107,10 +100,12 @@ const AboutContent = memo(function AboutContent() {
   )
 })
 
-export default function About() {
+export default async function About() {
+  const t = await getTranslations('about')
+
   return (
     <Container className="mt-16 sm:mt-32">
-      <AboutContent />
+      <AboutContent t={t} />
     </Container>
   )
 }

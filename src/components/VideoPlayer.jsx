@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 
 export function VideoPlayer({ src, poster, caption }) {
+  const t = useTranslations('videoPlayer')
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export function VideoPlayer({ src, poster, caption }) {
         >
           <source src={src} type="video/mp4" />
           <p className="p-4 text-center text-gray-700 dark:text-gray-300">
-            Your browser doesn&apos;t support HTML5 video.
+            {t('fallback')}
           </p>
         </video>
       </div>

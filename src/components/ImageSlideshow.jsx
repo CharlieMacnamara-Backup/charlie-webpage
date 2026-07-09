@@ -2,9 +2,11 @@
 
 import { useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { resolveBlogImagePath } from '@/lib/image-utils'
 
 export function ImageSlideshow({ images, blogSlug = null }) {
+  const t = useTranslations('imageSlideshow')
   const scrollRef = useRef(null)
   const slideRefs = useRef([])
   const [current, setCurrent] = useState(0)
@@ -58,7 +60,7 @@ export function ImageSlideshow({ images, blogSlug = null }) {
           onClick={() => scrollTo(current - 1)}
           disabled={current === 0}
           className="flex h-12 w-12 min-w-[48px] items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-600 shadow-xs transition active:scale-95 hover:border-zinc-400 hover:text-zinc-800 hover:shadow-sm disabled:opacity-30 disabled:pointer-events-none dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-500 dark:hover:text-zinc-200"
-          aria-label="Previous slide"
+          aria-label={t('previous')}
         >
           <svg
             className="h-6 w-6"
@@ -81,7 +83,7 @@ export function ImageSlideshow({ images, blogSlug = null }) {
                   ? 'h-3 w-8 bg-zinc-700 dark:bg-zinc-300'
                   : 'h-3 w-3 bg-zinc-300 hover:bg-zinc-400 dark:bg-zinc-600 dark:hover:bg-zinc-500'
               }`}
-              aria-label={`Go to slide ${i + 1}`}
+              aria-label={t('goToSlide', { number: i + 1 })}
             />
           ))}
         </div>
@@ -90,7 +92,7 @@ export function ImageSlideshow({ images, blogSlug = null }) {
           onClick={() => scrollTo(current + 1)}
           disabled={current === images.length - 1}
           className="flex h-12 w-12 min-w-[48px] items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-600 shadow-xs transition active:scale-95 hover:border-zinc-400 hover:text-zinc-800 hover:shadow-sm disabled:opacity-30 disabled:pointer-events-none dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-500 dark:hover:text-zinc-200"
-          aria-label="Next slide"
+          aria-label={t('next')}
         >
           <svg
             className="h-6 w-6"
