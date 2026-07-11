@@ -14,8 +14,9 @@ export default function Diagram({ definition, caption }) {
         surface: 'var(--diagram-surface)',
         border: 'var(--diagram-border)',
         font: "'Trebuchet MS', sans-serif",
-        padding: 32,
-        layerSpacing: 20,
+        padding: 48,
+        nodeSpacing: 32,
+        layerSpacing: 48,
         thoroughness: 7,
         transparent: true,
       })
@@ -61,7 +62,7 @@ export default function Diagram({ definition, caption }) {
 
   return (
     <figure className="my-8">
-      <div className="flex justify-center overflow-x-auto overflow-y-visible rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 shadow-xs p-4">
+      <div className="flex justify-center overflow-x-auto overflow-y-visible rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 shadow-xs p-6">
         <div dangerouslySetInnerHTML={{ __html: svg }} />
       </div>
       {caption && (
