@@ -114,6 +114,26 @@
       border-color: color-mix(in srgb, var(--color-zinc-700) 40%, transparent);
     }
   }
+
+  :root {
+    --diagram-fg: var(--color-zinc-600);
+    --diagram-accent: var(--color-teal-500);
+    --diagram-muted: var(--color-zinc-400);
+    --diagram-surface: var(--color-zinc-100);
+    --diagram-border: var(--color-zinc-200);
+  }
+
+  .dark {
+    --diagram-fg: var(--color-zinc-400);
+    --diagram-accent: var(--color-teal-400);
+    --diagram-muted: var(--color-zinc-500);
+    --diagram-surface: var(--color-zinc-800);
+    --diagram-border: color-mix(
+      in srgb,
+      var(--color-zinc-700) 40%,
+      transparent
+    );
+  }
 }
 
 @layer components {

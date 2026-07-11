@@ -34,9 +34,24 @@ export const glossary = {
     definition:
       'A task that runs in the background without slowing things down — the booking goes through while the email sends itself.',
   },
-  deterministic: {
-    term: 'Deterministic',
+  playwright: {
+    term: 'Playwright',
     definition:
-      'Every operation produces the same result given the same starting conditions — no surprises.',
+      'End-to-end testing framework that drives real browsers headlessly. [docs](https://playwright.dev/)',
+  },
+  lighthouse: {
+    term: 'Lighthouse',
+    definition:
+      'Automated tool for auditing performance, accessibility, and SEO. [docs](https://developer.chrome.com/docs/lighthouse/)',
+  },
+  vitest: {
+    term: 'Vitest',
+    definition:
+      'Unit test framework for Vite projects — runs tests natively in Node.js. [docs](https://vitest.dev/)',
+  },
+  stripe: {
+    term: 'Stripe',
+    definition:
+      'Online payment processing platform. [docs](https://stripe.com/docs)',
   },
 }

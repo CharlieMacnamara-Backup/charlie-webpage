@@ -42,13 +42,16 @@ export function ImageSlideshow({ images, blogSlug = null }) {
             }}
             className="w-full shrink-0 snap-start flex justify-center"
           >
-            <div className="overflow-hidden rounded-xl shadow-xs bg-zinc-100 dark:bg-zinc-800 mx-3 w-full max-w-[min(90vw,800px)]">
+            <div
+              className="w-full max-w-[min(90vw,800px)] rounded-xl shadow-xs bg-zinc-100 dark:bg-zinc-800 mx-auto flex items-center justify-center"
+              style={{ aspectRatio: '4 / 3' }}
+            >
               <Image
                 src={resolveBlogImagePath(image.src, blogSlug)}
                 alt={image.alt}
                 width={800}
                 height={600}
-                className="w-full h-auto object-contain max-h-[65vh]"
+                className="w-full h-full object-contain rounded-xl"
               />
             </div>
           </div>

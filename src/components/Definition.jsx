@@ -1,20 +1,36 @@
 'use client'
 
+import { useState, useCallback } from 'react'
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { cn } from '@/lib/utils'
 import { glossary } from '../data/glossary.js'
 
 export function Definition({ term, children, className }) {
   const entry = glossary[term]
+  const [open, setOpen] = useState(false)
+
   if (!entry) return children
+
+  const handlePointerDown = useCallback((e) => {
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      e.preventDefault()
+      setOpen((prev) => !prev)
+    }
+  }, [])
+
+  const handlePointerDownOutside = useCallback(() => {
+    setOpen(false)
+  }, [])
 
   return (
     <TooltipPrimitive.Provider delayDuration={0} skipDelayDuration={0}>
-      <TooltipPrimitive.Root>
+      <TooltipPrimitive.Root open={open} onOpenChange={setOpen}>
         <TooltipPrimitive.Trigger asChild>
           <span
+            tabIndex={0}
+            onPointerDown={handlePointerDown}
             className={cn(
-              'cursor-help border-b border-dotted border-zinc-300 hover:border-zinc-400 dark:border-zinc-600 dark:hover:border-zinc-400 transition-colors',
+              'cursor-pointer border-b-2 border-dotted border-teal-500/50 hover:border-teal-500 dark:border-teal-400/40 dark:hover:border-teal-400 text-teal-700 dark:text-teal-300 transition-colors',
               className,
             )}
           >
@@ -26,6 +42,7 @@ export function Definition({ term, children, className }) {
             side="top"
             align="center"
             sideOffset={6}
+            onPointerDownOutside={handlePointerDownOutside}
             className="z-50 max-w-xs rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm shadow-md dark:border-zinc-700 dark:bg-zinc-900"
           >
             <span className="font-medium text-zinc-700 dark:text-zinc-200">

@@ -18,9 +18,7 @@
     "clean": "rm -rf .next .cache",
     "check:grammar": "find src/app/blog -name page.mdx ! -path '*_template*' -exec sh -c 'echo \"=== $1 ===\" && ~/.cargo/bin/harper-cli lint -d uk -u ~/.config/harper-ls/dictionary.txt --ignore UnclosedQuotes,SentenceCapitalization,Spaces,OrthographicConsistency,Dashes,UseEllipsisCharacter,LongSentences,PronounVerbAgreement,SpellCheck,SplitWords,CompoundNouns --quiet --format compact < \"$1\"' _ {} \\;",
     "validate:mdx": "node scripts/validate-mdx.js",
-    "format:check": "prettier --check \"src/**/*.{js,jsx,mdx,css}\"",
-    "diagram": "d2",
-    "diagram:blog:davison": "node scripts/generate-blog-diagram.mjs src/app/blog/davison-menswear/testing-pipeline.d2"
+    "format:check": "prettier --check \"src/**/*.{js,jsx,mdx,css}\""
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
@@ -33,6 +31,7 @@
     "@radix-ui/react-tooltip": "^1.2.12",
     "@tailwindcss/postcss": "^4.3.2",
     "@tailwindcss/typography": "^0.5.20",
+    "beautiful-mermaid": "^1.1.3",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
