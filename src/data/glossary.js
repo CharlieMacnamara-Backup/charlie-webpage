@@ -49,9 +49,9 @@ export const glossary = {
     definition:
       'Unit test framework for Vite projects — runs tests natively in Node.js. [docs](https://vitest.dev/)',
   },
-  stripe: {
-    term: 'Stripe',
+  CMS: {
+    term: 'CMS',
     definition:
-      'Online payment processing platform. [docs](https://stripe.com/docs)',
+      'Content management system — software for creating and managing digital content without writing code.',
   },
 }

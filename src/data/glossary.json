@@ -39,8 +39,9 @@
     "term": "Vitest",
     "definition": "Unit test framework for Vite projects — runs tests natively in Node.js. [docs](https://vitest.dev/)"
   },
-  "stripe": {
-    "term": "Stripe",
-    "definition": "Online payment processing platform. [docs](https://stripe.com/docs)"
+  "CMS": {
+    "term": "CMS",
+    "definition": "Content management system — software for creating and managing digital content without writing code."
   }
+
 }
