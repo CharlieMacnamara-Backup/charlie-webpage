@@ -9,7 +9,7 @@ export const article = {
   date: '2026–03',
   title: 'Four Cloudflare Workers and a Kilt',
   description:
-    'A 1927 Edinburgh kilt shop. Paper diary, missed calls, no website. Now: automated booking on Cloudflare Workers — and not a single new tool for the owner to learn.',
+    'A 1927 Edinburgh kilt shop traded paper for Cloudflare Workers.',
   slug: 'davison-menswear',
 }
 
@@ -68,9 +68,7 @@ cover traffic. Each worker deploys independently; minimising risks.
 The project splits into two main pages: public booking and a private dashboard
 for orders. Heritage design for continuity. [Tailwind](https://tailwindcss.com/)
 enforces a consistent design system — utility classes, no magic numbers.
-Typography scales fluidly
-
-- no breakpoint jumps, layout surprises.
+Typography scales fluidly.
 
 Marty handed me a binder of original marketing adverts from the 1920s through
 the 1950s — hand-drawn illustrations, commissioned artwork (took ages to scan).
@@ -131,8 +129,6 @@ district patterns — should help with SEO, though not essential, but fun.
   orientation="horizontal"
   caption="Searchable directory of clan and district tartans — a fun bonus for visitors"
 />
-
-Customer functionality largely comes from booking.
 
 Clicking "Book" triggers:
 
