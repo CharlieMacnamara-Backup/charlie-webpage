@@ -17,7 +17,7 @@ export const glossary = {
   turnstile: {
     term: 'Turnstile',
     definition:
-      "Cloudflare's invisible bot detection. No CAPTCHA, no user friction — runs silently on form submit. [docs](https://developers.cloudflare.com/turnstile/)",
+      "Cloudflare's invisible bot detection. No CAPTCHA, no user friction — runs on submit. [docs](https://developers.cloudflare.com/turnstile/)",
   },
   resend: {
     term: 'Resend',

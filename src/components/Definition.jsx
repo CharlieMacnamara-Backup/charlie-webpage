@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
-import { cn } from '@/lib/utils'
+import { cn, renderMarkdownLinks } from '@/lib/utils'
 import { glossary } from '../data/glossary.js'
 
 export function Definition({ term, children, className }) {
@@ -48,9 +48,12 @@ export function Definition({ term, children, className }) {
             <span className="font-medium text-zinc-700 dark:text-zinc-200">
               {entry.term}
             </span>
-            <span className="mt-1 block leading-relaxed text-zinc-500 dark:text-zinc-400">
-              {entry.definition}
-            </span>
+            <span
+              className="mt-1 block leading-relaxed text-zinc-500 dark:text-zinc-400"
+              dangerouslySetInnerHTML={{
+                __html: renderMarkdownLinks(entry.definition),
+              }}
+            />
             <TooltipPrimitive.Arrow className="fill-white dark:fill-zinc-900" />
           </TooltipPrimitive.Content>
         </TooltipPrimitive.Portal>
