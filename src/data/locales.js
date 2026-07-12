@@ -13,7 +13,7 @@ export const messages = {
   },
   home: {
     heading: 'Technical Writer, Web Enthusiast, Amateur Baker',
-    tagline: "I'm Charlie — welcome to my work site.",
+    tagline: '',
     githubAriaLabel: 'Follow on GitHub',
     linkedinAriaLabel: 'Follow on LinkedIn',
     experience: 'Experience',
