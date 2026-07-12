@@ -54,7 +54,12 @@ export async function generateMetadata() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className="h-full antialiased"
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+    >
       <head>
         <script
           type="application/ld+json"

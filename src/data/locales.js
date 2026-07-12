@@ -13,8 +13,7 @@ export const messages = {
   },
   home: {
     heading: 'Technical Writer, Web Enthusiast, Amateur Baker',
-    tagline:
-      "I'm Charlie — welcome to my work site.",
+    tagline: "I'm Charlie — welcome to my work site.",
     githubAriaLabel: 'Follow on GitHub',
     linkedinAriaLabel: 'Follow on LinkedIn',
     experience: 'Experience',
@@ -44,8 +43,7 @@ export const messages = {
   },
   about: {
     title: 'About',
-    description:
-      'Technical writer in Edinburgh. Clear, usable docs.',
+    description: 'Technical writer in Edinburgh. Clear, usable docs.',
     heading: 'Charlie Macnamara — Edinburgh, Scotland.',
     paragraphs: [
       'I write docs for complex systems — APIs, migrations, developer tools — that actually get read.',
@@ -62,8 +60,7 @@ export const messages = {
     title: 'Portfolio',
     description: 'Selected Technical Writing.',
     pageTitle: 'Selected Works',
-    intro:
-      "Here's some varied work. For more examples, drop me a line.",
+    intro: "Here's some varied work. For more examples, drop me a line.",
     introLinkText: 'drop me a line',
     activeSites: {
       heading: 'Websites I Maintain',
@@ -230,8 +227,7 @@ export const messages = {
     description:
       'Thoughts beyond my professional work. Dives into movies, tech, and personal projects.',
     pageTitle: 'Beyond Work',
-    pageIntro:
-      'Movies, tech, personal projects.',
+    pageIntro: 'Movies, tech, personal projects.',
     readArticle: 'Read article',
     loading: 'Loading articles...',
     loadingMore: 'Loading more articles...',

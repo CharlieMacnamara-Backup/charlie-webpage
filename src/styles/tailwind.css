@@ -7,8 +7,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-family-sans: "Geist Variable", sans-serif;
-  --font-family-display: "Geist Variable", sans-serif;
+  --font-family-sans: 'Geist Variable', sans-serif;
+  --font-family-display: 'Geist Variable', sans-serif;
 
   --container-2xl: 40rem;
   --radius-5xl: 2.5rem;
@@ -26,26 +26,50 @@
   --animate-spin-reverse-slower: spin-reverse 6s linear infinite;
 
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   @keyframes fade-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
   @keyframes slide-up {
-    from { opacity: 0; transform: translateY(1rem); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   @keyframes fade-in-scale {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   @keyframes marquee {
-    100% { transform: translateY(-50%); }
+    100% {
+      transform: translateY(-50%);
+    }
   }
   @keyframes spin-reverse {
-    to { transform: rotate(-360deg); }
+    to {
+      transform: rotate(-360deg);
+    }
   }
 }
 
@@ -146,29 +170,77 @@
     z-index: -1;
     pointer-events: none;
     background-image:
-      radial-gradient(ellipse 160% 55% at 20% -5%, color-mix(in srgb, var(--color-zinc-400) 50%, transparent) 0%, transparent 65%),
-      radial-gradient(ellipse 100% 60% at 100% 35%, color-mix(in srgb, var(--color-neutral-400) 40%, transparent) 0%, transparent 65%),
-      radial-gradient(ellipse 120% 40% at 40% 100%, color-mix(in srgb, var(--color-stone-400) 35%, transparent) 0%, transparent 65%);
+      radial-gradient(
+        ellipse 160% 55% at 20% -5%,
+        color-mix(in srgb, var(--color-zinc-400) 50%, transparent) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 100% 60% at 100% 35%,
+        color-mix(in srgb, var(--color-neutral-400) 40%, transparent) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 120% 40% at 40% 100%,
+        color-mix(in srgb, var(--color-stone-400) 35%, transparent) 0%,
+        transparent 65%
+      );
 
     @media (min-width: 768px) {
       background-image:
-        radial-gradient(ellipse 75% 60% at 0% 0%, color-mix(in srgb, var(--color-zinc-400) 55%, transparent) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 75% at 100% 15%, color-mix(in srgb, var(--color-neutral-400) 45%, transparent) 0%, transparent 65%),
-        radial-gradient(ellipse 60% 50% at 50% 100%, color-mix(in srgb, var(--color-stone-400) 40%, transparent) 0%, transparent 65%);
+        radial-gradient(
+          ellipse 75% 60% at 0% 0%,
+          color-mix(in srgb, var(--color-zinc-400) 55%, transparent) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 50% 75% at 100% 15%,
+          color-mix(in srgb, var(--color-neutral-400) 45%, transparent) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 60% 50% at 50% 100%,
+          color-mix(in srgb, var(--color-stone-400) 40%, transparent) 0%,
+          transparent 65%
+        );
     }
   }
 
   .dark body::before {
     background-image:
-      radial-gradient(ellipse 160% 55% at 20% -5%, color-mix(in srgb, var(--color-zinc-300) 55%, transparent) 0%, transparent 65%),
-      radial-gradient(ellipse 100% 60% at 100% 35%, color-mix(in srgb, var(--color-neutral-300) 45%, transparent) 0%, transparent 65%),
-      radial-gradient(ellipse 120% 40% at 40% 100%, color-mix(in srgb, var(--color-stone-300) 40%, transparent) 0%, transparent 65%);
+      radial-gradient(
+        ellipse 160% 55% at 20% -5%,
+        color-mix(in srgb, var(--color-zinc-300) 55%, transparent) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 100% 60% at 100% 35%,
+        color-mix(in srgb, var(--color-neutral-300) 45%, transparent) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 120% 40% at 40% 100%,
+        color-mix(in srgb, var(--color-stone-300) 40%, transparent) 0%,
+        transparent 65%
+      );
 
     @media (min-width: 768px) {
       background-image:
-        radial-gradient(ellipse 75% 60% at 0% 0%, color-mix(in srgb, var(--color-zinc-300) 60%, transparent) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 75% at 100% 15%, color-mix(in srgb, var(--color-neutral-300) 50%, transparent) 0%, transparent 65%),
-        radial-gradient(ellipse 60% 50% at 50% 100%, color-mix(in srgb, var(--color-stone-300) 45%, transparent) 0%, transparent 65%);
+        radial-gradient(
+          ellipse 75% 60% at 0% 0%,
+          color-mix(in srgb, var(--color-zinc-300) 60%, transparent) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 50% 75% at 100% 15%,
+          color-mix(in srgb, var(--color-neutral-300) 50%, transparent) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 60% 50% at 50% 100%,
+          color-mix(in srgb, var(--color-stone-300) 45%, transparent) 0%,
+          transparent 65%
+        );
     }
   }
 }

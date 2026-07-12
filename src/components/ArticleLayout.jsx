@@ -29,7 +29,8 @@ function ReadingProgress() {
   useEffect(() => {
     function handleScroll() {
       const scrollTop = window.scrollY
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight
       setProgress(docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0)
     }
 
@@ -60,27 +61,80 @@ function ArticleMeta({ article }) {
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400">
       {article.author && (
         <span className="inline-flex items-center gap-1.5">
-          <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <circle cx="8" cy="5" r="3" stroke="currentColor" strokeWidth="1.5" />
-            <path d="M2 14c0-3.5 2.5-6 6-6s6 2.5 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <svg
+            className="h-4 w-4"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle
+              cx="8"
+              cy="5"
+              r="3"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M2 14c0-3.5 2.5-6 6-6s6 2.5 6 6"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
           </svg>
           {article.author}
         </span>
       )}
       {article.date && (
-        <time dateTime={article.date} className="inline-flex items-center gap-1.5">
-          <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-            <path d="M2 6.5h12M5.5 1v2.5M10.5 1v2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <time
+          dateTime={article.date}
+          className="inline-flex items-center gap-1.5"
+        >
+          <svg
+            className="h-4 w-4"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <rect
+              x="2"
+              y="3"
+              width="12"
+              height="11"
+              rx="1.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M2 6.5h12M5.5 1v2.5M10.5 1v2.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
           </svg>
           {formatDate(article.date)}
         </time>
       )}
       {article.readingTime && (
         <span className="inline-flex items-center gap-1.5">
-          <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
-            <path d="M8 4.5V8l2.5 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <svg
+            className="h-4 w-4"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle
+              cx="8"
+              cy="8"
+              r="6"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M8 4.5V8l2.5 1.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
           </svg>
           {article.readingTime}
         </span>

@@ -33,7 +33,11 @@ const MemoizedThemeProvider = memo(function MemoizedThemeProvider({
   children,
 }) {
   return (
-    <NextIntlClientProvider locale="en" messages={messages} timeZone="Europe/London">
+    <NextIntlClientProvider
+      locale="en"
+      messages={messages}
+      timeZone="Europe/London"
+    >
       <ThemeProvider
         attribute="class"
         defaultTheme="light"
