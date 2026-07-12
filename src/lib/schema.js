@@ -40,6 +40,13 @@ export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: messages.schema.websiteName,
+  alternateName: [
+    'Charlie McNamara',
+    'charlie macnamara',
+    'charlie mcnamara',
+    'Charliemacnamara',
+    'Charliemcnamara',
+  ],
   url: BASE_URL,
   description: messages.schema.websiteDescription,
 }

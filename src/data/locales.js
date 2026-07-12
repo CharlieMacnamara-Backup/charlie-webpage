@@ -2,7 +2,7 @@ export const messages = {
   layout: {
     title: {
       template: '%s | Charlie Macnamara',
-      default: 'Charlie Macnamara - Technical Writer',
+      default: 'Charlie Macnamara (also McNamara) - Technical Writer',
     },
     description:
       'Charlie Macnamara (also Charlie McNamara) — Technical writer making systems and concepts clear and accessible.',

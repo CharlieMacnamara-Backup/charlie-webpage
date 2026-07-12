@@ -11,6 +11,11 @@ export default {
         }),
       )
 
+      if (url.hostname === 'www.charliemacnamara.uk') {
+        url.hostname = 'charliemacnamara.uk'
+        return Response.redirect(url.toString(), 301)
+      }
+
       if (url.pathname === '/') {
         return new Response('', {
           status: 302,
