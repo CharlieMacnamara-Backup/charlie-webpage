@@ -41,21 +41,21 @@ Marty, a generational talent, runs the shop. He hand-sews kilts from memory,
 working alone in a showroom that's barely changed since his Father's Day.
 
 His methods, while proven, showed age: calendar bookings misplaced, missed
-calls, staying late to rewrite orders. He was keen on upgrading — the old site
+calls, staying late to rewrite orders. He was keen on upgrading; the old site
 was down for years.
 
 ## Requirements
 
 Expecting a kilt maker to learn new tools after he's been working on paper for
-decades is unrealistic. Every tool feels familiar.
+decades is unrealistic.
 
 I'd already built [Sicamon](https://sicamon.com) — a
 [Stripe](https://stripe.com/) <Definition term="CMS">CMS</Definition> with
 digital cataloguing. Understandably, this was too much change. Not looking to
-become an overnight online shop.
+become an overnight online shop. Every tool feels familiar.
 
-The stack costs nothing to run — Workers scale between bookings and free tiers
-cover traffic. Each worker deploys independently, minimising risk.
+The stack costs nothing — Workers scale between bookings and free tiers cover
+traffic. Each worker deploys independently, minimising risk.
 
 Runs on:
 
@@ -71,14 +71,13 @@ Runs on:
 
 ## Design
 
-The project splits into two main pages: public booking and a private dashboard
-for orders. Heritage design for continuity. [Tailwind](https://tailwindcss.com/)
-enforces a consistent design system — utility classes, no magic numbers.
-Typography scales fluidly.
+The project splits into two main pages: public business and a private orders
+dashboard. [Tailwind](https://tailwindcss.com/) enforces a consistent design
+system — utility classes, no magic numbers. Fluid typography.
 
-Marty handed me a binder of original marketing adverts from the 1920s through
-the 1950s — hand-drawn illustrations, commissioned artwork (took ages to scan).
-That became the site's background.
+We wanted heritage design notes. Marty handed me a binder of original marketing
+adverts from the 1920s through the 1950s — hand-drawn illustrations,
+commissioned artwork (took ages to scan).
 
 <SingleImage
   src="/blog/davison-menswear/archive.jpg"
@@ -87,8 +86,8 @@ That became the site's background.
   caption="One of the original archive photos from the binder — the shopfront before Edinburgh pulled up its trams"
 />
 
-I scanned and composited the archive. Every section uses a translucent white
-overlay so the adverts bleed through as you scroll.
+I scanned and composited the archive. Using a translucent white overlay, the
+adverts bleed through as you scroll.
 
 <SingleImage
   src="/blog/davison-menswear/website_background.jpg"
@@ -96,6 +95,8 @@ overlay so the adverts bleed through as you scroll.
   orientation="horizontal"
   caption="Archival photos composited into the site background — the binder became the brand."
 />
+
+## Workers
 
 **Admin Dashboard Worker** — Order management backed by
 [<Definition term="D1">D1</Definition>](https://developers.cloudflare.com/d1/).
