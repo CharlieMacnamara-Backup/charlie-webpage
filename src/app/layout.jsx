@@ -1,5 +1,6 @@
 import '@/lib/env-validator'
 import '@/styles/tailwind.css'
+import '@fontsource-variable/geist'
 import { Providers } from './providers'
 import { ClientLayout } from '@/components/ClientLayout'
 import { SkipToMain } from '@/components/SkipToMain'
@@ -53,7 +54,7 @@ export async function generateMetadata() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <script
           type="application/ld+json"
@@ -75,7 +76,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className="flex min-h-screen flex-col bg-zinc-50/80 dark:bg-black font-['Trebuchet_MS',_sans-serif]"
+        className="flex min-h-screen flex-col bg-zinc-50/80 dark:bg-black font-sans bg-fixed"
         suppressHydrationWarning
       >
         <Analytics />

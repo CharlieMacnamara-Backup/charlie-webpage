@@ -187,8 +187,8 @@ export default async function Home() {
                 srCompany: t('srCompany'),
                 srRole: t('srRole'),
                 srDate: t('srDate'),
-                dateAriaLabel: t('dateAriaLabel'),
-                companyLogoAlt: t('companyLogoAlt'),
+                dateAriaLabel: t.raw('dateAriaLabel'),
+                companyLogoAlt: t.raw('companyLogoAlt'),
               }}
               entries={t.raw('resume').map((entry, i) => ({
                 ...entry,

@@ -14,7 +14,7 @@ export const messages = {
   home: {
     heading: 'Technical Writer, Web Enthusiast, Amateur Baker',
     tagline:
-      "I'm Charlie Macnamara — a technical writer who makes concepts clear and engaging.",
+      "I'm Charlie — welcome to my work site.",
     githubAriaLabel: 'Follow on GitHub',
     linkedinAriaLabel: 'Follow on LinkedIn',
     experience: 'Experience',
@@ -45,13 +45,12 @@ export const messages = {
   about: {
     title: 'About',
     description:
-      'Technical writer in Edinburgh. Clear, usable docs for complex systems.',
-    heading: 'Charlie Macnamara — technical writer in Edinburgh.',
+      'Technical writer in Edinburgh. Clear, usable docs.',
+    heading: 'Charlie Macnamara — Edinburgh, Scotland.',
     paragraphs: [
-      'Clear, usable docs for complex systems.',
-      'With product and engineering, I ship docs that reduce tickets and speed onboarding.',
-      'Years of releases, migrations, and API changes taught me where users stumble—and how to fix it.',
-      'Off hours, I play guitar (mainly black metal and other metal genres... with jazz too) and develop Flutter apps end to end.',
+      'I write docs for complex systems — APIs, migrations, developer tools — that actually get read.',
+      'Years of releases, migrations, and API changes taught me where users stumble — and how to fix it.',
+      'Off hours: guitar (black metal to jazz) and building Flutter apps.',
     ],
     followGitHub: 'Follow on GitHub',
     followLinkedIn: 'Follow on LinkedIn',
@@ -64,12 +63,12 @@ export const messages = {
     description: 'Selected Technical Writing.',
     pageTitle: 'Selected Works',
     intro:
-      "Technical Writers wear varied hats. Once I designed Shopify mugs...\n\nHere's some varied work. For more examples, drop me a line.",
+      "Here's some varied work. For more examples, drop me a line.",
     introLinkText: 'drop me a line',
     activeSites: {
       heading: 'Websites I Maintain',
       description:
-        'Alongside technical writing, I also build and actively maintain full-stack web applications (like this one).',
+        'Alongside Technical Writing, I also build and actively maintain full-stack web applications (like this one).',
       sites: [
         {
           name: 'Sicamon',
@@ -230,9 +229,9 @@ export const messages = {
     title: 'Non-work Blog',
     description:
       'Thoughts beyond my professional work. Dives into movies, tech, and personal projects.',
-    pageTitle: 'Non-work Writing',
+    pageTitle: 'Beyond Work',
     pageIntro:
-      'Thoughts beyond work: movies, tech, personal projects. That sort.',
+      'Movies, tech, personal projects. Whatever sticks.',
     readArticle: 'Read article',
     loading: 'Loading articles...',
     loadingMore: 'Loading more articles...',

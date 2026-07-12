@@ -11,12 +11,12 @@ const Header = memo(function Header({ title, intro }) {
         {title}
       </h1>
       {intro && (
-        <p
+        <div
           className="mt-6 text-base text-zinc-600 dark:text-zinc-400"
           id="page-intro"
         >
           {intro}
-        </p>
+        </div>
       )}
     </header>
   )

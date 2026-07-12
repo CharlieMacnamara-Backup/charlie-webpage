@@ -33,10 +33,9 @@ export const Card = memo(function Card({
         className,
         'group relative flex flex-col items-start',
         'rounded-2xl p-6',
-        'bg-white ring-2 ring-zinc-200/50 transition-all duration-200',
-        'hover:bg-zinc-50 hover:ring-zinc-300/70 hover:shadow-lg',
-        'dark:bg-zinc-800/40 dark:ring-zinc-700/40',
-        'dark:hover:bg-zinc-800/60 dark:hover:ring-zinc-700',
+        'bg-white ring-2 ring-zinc-200/50 transition-shadow duration-200',
+        'motion-safe:hover:shadow-lg hover:ring-zinc-300/70',
+        'dark:bg-zinc-800/40 dark:ring-zinc-700/40 dark:hover:ring-zinc-700',
       )}
       role={Component === 'article' ? 'article' : undefined}
     >
@@ -82,7 +81,7 @@ Card.Title = memo(function CardTitle({ as: Component = 'h2', href, children }) {
 
 Card.Description = memo(function CardDescription({ children }) {
   return (
-    <p className="relative z-10 mt-3 text-sm text-zinc-700 transition-colors group-hover:text-zinc-800 dark:text-zinc-400 dark:group-hover:text-zinc-300">
+    <p className="relative z-10 mt-3 text-sm leading-relaxed text-zinc-700 transition-colors group-hover:text-zinc-800 dark:text-zinc-400 dark:group-hover:text-zinc-300">
       {children}
     </p>
   )
@@ -94,7 +93,7 @@ Card.Cta = memo(function CardCta({ children }) {
       <span className="sr-only">{messages.card.clickTo}</span>
       {children}
       <ChevronRightIcon
-        className="ml-1 h-4 w-4 stroke-current transition-transform group-hover:translate-x-1"
+        className="ml-1 h-4 w-4 stroke-current transition-transform motion-safe:group-hover:translate-x-1"
         aria-hidden="true"
       />
     </div>

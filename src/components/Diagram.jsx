@@ -13,7 +13,7 @@ export default function Diagram({ definition, caption }) {
         muted: 'var(--diagram-muted)',
         surface: 'var(--diagram-surface)',
         border: 'var(--diagram-border)',
-        font: "'Trebuchet MS', sans-serif",
+        font: "'Geist Variable', sans-serif",
         padding: 48,
         nodeSpacing: 32,
         layerSpacing: 48,

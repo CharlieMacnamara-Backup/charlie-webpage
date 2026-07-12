@@ -3,6 +3,23 @@ import fs from 'fs'
 import path from 'path'
 import { messages } from '@/data/locales'
 
+function stripMdx(content) {
+  return content
+    .replace(/^import\s.*$/gm, '')
+    .replace(/^export\s.*$/gm, '')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/[#*`_~\[\]()!>-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function estimateReadingTime(content) {
+  const wordCount = stripMdx(content).split(/\s+/).length
+  const minutes = Math.max(1, Math.round(wordCount / 200))
+  return `${minutes} min read`
+}
+
 function importArticle(articleFilename) {
   try {
     const fullPath = path.join(
@@ -13,30 +30,28 @@ function importArticle(articleFilename) {
       articleFilename,
     )
 
-    // Check if file exists
     if (!fs.existsSync(fullPath)) {
       console.error(`File not found: ${fullPath}`)
       return null
     }
 
     const fileContents = fs.readFileSync(fullPath, 'utf8')
+    const readingTime = estimateReadingTime(fileContents)
 
-    // First check for article metadata
     const articleMatch = fileContents.match(
       /export const article = ({[\s\S]*?})/m,
     )
 
     if (articleMatch) {
       try {
-        // Convert the metadata string to a valid JavaScript object
         const metadata = articleMatch[1]
-        // Create a function that will evaluate the metadata string in a safe context
         const evalMetadata = new Function(`return ${metadata}`)
         const article = evalMetadata()
 
         return {
           slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),
           ...article,
+          readingTime,
         }
       } catch (e) {
         console.error(
@@ -46,18 +61,15 @@ function importArticle(articleFilename) {
       }
     }
 
-    // Fallback to metadata if article is not found
     const metadataMatch = fileContents.match(
       /export const metadata = ({[\s\S]*?})/m,
     )
     if (metadataMatch) {
       try {
-        // Convert the metadata string to a valid JavaScript object
         const metadata = metadataMatch[1]
         const evalMetadata = new Function(`return ${metadata}`)
         const articleMetadata = evalMetadata()
 
-        // Extract slug from filename
         const slug = articleFilename.replace(/(\/page)?\.mdx$/, '')
 
         return {
@@ -67,6 +79,7 @@ function importArticle(articleFilename) {
           date: articleMetadata.date || new Date().toISOString().split('T')[0],
           author:
             articleMetadata.author || messages.getAllArticles.defaultAuthor,
+          readingTime,
         }
       } catch (e) {
         console.error(`Error parsing metadata for ${articleFilename}:`, e)
