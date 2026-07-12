@@ -231,7 +231,7 @@ export const messages = {
       'Thoughts beyond my professional work. Dives into movies, tech, and personal projects.',
     pageTitle: 'Beyond Work',
     pageIntro:
-      'Movies, tech, personal projects. Whatever sticks.',
+      'Movies, tech, personal projects.',
     readArticle: 'Read article',
     loading: 'Loading articles...',
     loadingMore: 'Loading more articles...',
