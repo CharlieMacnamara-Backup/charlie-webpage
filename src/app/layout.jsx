@@ -46,7 +46,6 @@ export async function generateMetadata() {
       title: t('twitterTitle'),
       card: 'summary',
     },
-
   }
 }
 
