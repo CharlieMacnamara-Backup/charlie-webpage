@@ -32,7 +32,7 @@ export const Card = memo(function Card({
       className={clsx(
         className,
         'group relative flex flex-col items-start',
-        'rounded-2xl p-6',
+        'rounded-2xl p-5',
         'bg-white ring-2 ring-zinc-200/50 transition-shadow duration-200',
         'motion-safe:hover:shadow-lg hover:ring-zinc-300/70',
         'dark:bg-zinc-800/40 dark:ring-zinc-700/40 dark:hover:ring-zinc-700',
@@ -48,11 +48,11 @@ Card.Link = memo(function CardLink({ children, ...props }) {
   return (
     <>
       <div
-        className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50/70 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/70 sm:-inset-x-6 sm:rounded-2xl"
+        className="absolute -inset-x-4 -inset-y-5 z-0 scale-95 bg-zinc-50/70 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/70 sm:-inset-x-6 sm:rounded-2xl"
         aria-hidden="true"
       />
       <Link {...props}>
-        <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
+        <span className="absolute -inset-x-4 -inset-y-5 z-20 sm:-inset-x-6 sm:rounded-2xl" />
         <span className="relative z-10">{children}</span>
       </Link>
     </>
@@ -81,7 +81,7 @@ Card.Title = memo(function CardTitle({ as: Component = 'h2', href, children }) {
 
 Card.Description = memo(function CardDescription({ children }) {
   return (
-    <p className="relative z-10 mt-3 text-sm leading-relaxed text-zinc-700 transition-colors group-hover:text-zinc-800 dark:text-zinc-400 dark:group-hover:text-zinc-300">
+    <p className="relative z-10 mt-2 text-sm leading-relaxed text-zinc-700 transition-colors group-hover:text-zinc-800 dark:text-zinc-400 dark:group-hover:text-zinc-300">
       {children}
     </p>
   )
@@ -89,7 +89,7 @@ Card.Description = memo(function CardDescription({ children }) {
 
 Card.Cta = memo(function CardCta({ children }) {
   return (
-    <div className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-600 transition-colors group-hover:text-teal-700 dark:text-teal-400 dark:group-hover:text-teal-300">
+    <div className="relative z-10 mt-3 flex items-center text-sm font-medium text-teal-600 transition-colors group-hover:text-teal-700 dark:text-teal-400 dark:group-hover:text-teal-300">
       <span className="sr-only">{messages.card.clickTo}</span>
       {children}
       <ChevronRightIcon
@@ -111,7 +111,7 @@ Card.Eyebrow = memo(function CardEyebrow({
     <Component
       className={clsx(
         className,
-        'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
+        'relative z-10 order-first mb-2 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
         decorate && 'pl-3.5',
       )}
       {...props}

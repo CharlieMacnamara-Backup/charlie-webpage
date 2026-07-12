@@ -79,12 +79,12 @@ const Resume = memo(function Resume({ labels, entries }) {
   const resume = entries
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md dark:border-zinc-700/40 dark:bg-zinc-800/90">
+    <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-md dark:border-zinc-700/40 dark:bg-zinc-800/90">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
         <span className="ml-3">{labels.experience}</span>
       </h2>
-      <ol className="mt-6 space-y-4">
+      <ol className="mt-4 space-y-3">
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:bg-zinc-700 dark:ring-white/10">
@@ -128,7 +128,7 @@ const Resume = memo(function Resume({ labels, entries }) {
       <Button
         href="/charlie-macnamara-resume.pdf"
         download="charlie-macnamara-resume.pdf"
-        className="group mt-6 w-full"
+        className="group mt-4 w-full"
         aria-label={labels.downloadCvAriaLabel}
       >
         {labels.downloadCv}
@@ -144,15 +144,12 @@ export default async function Home() {
 
   return (
     <>
-      <Container className="mt-9">
+      <Container className="mt-6">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+          <h1 className="text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-4xl">
             {t('heading')}
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            {t('tagline')}
-          </p>
-          <div className="mt-6 flex gap-6">
+          <div className="mt-4 flex gap-6">
             <SocialLink
               href="https://github.com/CharlieMacnamara"
               aria-label={t('githubAriaLabel')}
@@ -167,9 +164,9 @@ export default async function Home() {
         </div>
       </Container>
       <Photos />
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
+      <Container className="mt-16 md:mt-20">
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-12 lg:max-w-none lg:grid-cols-2">
+          <div className="flex flex-col gap-10">
             {articles.map((article) => (
               <Article
                 key={article.slug}
@@ -178,7 +175,7 @@ export default async function Home() {
               />
             ))}
           </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
+          <div className="space-y-6 lg:pl-12 xl:pl-16">
             <Resume
               labels={{
                 experience: t('experience'),

@@ -30,16 +30,16 @@ export const Photos = memo(function Photos() {
 
   return (
     <>
-      <div className="mt-16 sm:mt-20">
-        <Container className="pb-4">
-          <div className="relative py-4">
+      <div className="mt-10 sm:mt-14">
+        <Container className="pb-2">
+          <div className="relative py-2">
             {/* Gradient shadows for scroll indication */}
             <div className="pointer-events-none absolute -inset-x-4 top-0 h-8 bg-linear-to-b from-zinc-50 dark:from-zinc-900" />
             <div className="pointer-events-none absolute -inset-x-4 bottom-0 h-8 bg-linear-to-t from-zinc-50 dark:from-zinc-900" />
 
             {/* Scrollable container */}
             <div
-              className="-mx-4 flex snap-x snap-mandatory items-center gap-4 overflow-x-auto overflow-y-visible px-4 pb-16 pt-8
+              className="-mx-4 flex snap-x snap-mandatory items-center gap-3 overflow-x-auto overflow-y-visible px-4 pb-10 pt-4
               scrollbar-thin scrollbar-track-transparent scrollbar-thumb-zinc-300 
               hover:scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700 
               dark:hover:scrollbar-thumb-zinc-600"
@@ -47,11 +47,11 @@ export const Photos = memo(function Photos() {
               {images.map((image, imageIndex) => (
                 <div
                   key={image.src.src}
-                  className="relative flex-none z-0 hover:z-10 pt-6 -mt-6"
+                  className="relative flex-none z-0 hover:z-10 pt-4 -mt-4"
                 >
                   <div
                     className={clsx(
-                      'relative h-72 w-72 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800',
+                      'relative h-60 w-60 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800',
                       rotations[imageIndex % rotations.length],
                       'transform transition duration-300 ease-in-out hover:-translate-y-4 hover:shadow-xl',
                     )}
