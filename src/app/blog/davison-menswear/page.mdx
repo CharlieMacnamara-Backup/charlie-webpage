@@ -9,7 +9,7 @@ export const article = {
   author: 'Charlie Macnamara',
   date: '2026-07-10',
   title: 'Four Cloudflare Workers and a Kilt Shop',
-  description: 'How a 1927 Edinburgh business went programmatic.',
+  description: 'How a historic Edinburgh business went programmatic.',
   slug: 'davison-menswear',
 }
 
@@ -23,26 +23,23 @@ export default (props) => (
 June 2026, my sister got married — congrats,
 [Floyd](https://www.instagram.com/art_by_floyd) — so I needed a kilt.
 [Davison Menswear & Kilt Hire](https://share.google/ZcQxtx2Q14Uij0uXS) happened
-to be close by. The shop's easy to spot: hand-painted marquee with logo, Est.
-1927, and a **previously broken** [URL](https://qualitykilts.com/).
-
-Thought I'd introduce myself while I got my threads.
+to be close. The shop was easy to spot: hand-painted marquee, logo, Est. 1927,
+and a **previously broken** [URL](https://qualitykilts.com/).
 
 <SingleImage
   src="/blog/davison-menswear/screenshot-hero-viewport.png"
   alt="Davison Menswear hero section showing the full-page scroll layout with archival background"
   orientation="vertical"
-  caption="The full hero viewport — archival photos bleed through as you scroll"
 />
 
 <TableOfContents />
 
-Marty, a generational talent, runs the shop. He hand-sews kilts from memory,
-working alone in a showroom that's barely changed since his Father's Day.
+Marty, a generational talent, runs Davison's. He hand-sews kilts from memory,
+working alone in a showroom, barely changed since his father's day.
 
 His methods, while proven, showed age: calendar bookings misplaced, missed
-calls, staying late to rewrite orders. He was keen on upgrading; the old site
-was down for years.
+calls, staying late to rewrite orders. He was keen on upgrading; old site was
+down for years.
 
 ## Requirements
 
@@ -54,7 +51,7 @@ I'd already built [Sicamon](https://sicamon.com) — a
 digital cataloguing. Understandably, this was too much change. Not looking to
 become an overnight online shop. Every tool feels familiar.
 
-The stack costs nothing — Workers scale between bookings and free tiers cover
+The stack costs nothing. Workers scale between bookings and free tiers cover
 traffic. Each worker deploys independently, minimising risk.
 
 Runs on:
@@ -83,7 +80,7 @@ commissioned artwork (took ages to scan).
   src="/blog/davison-menswear/archive.jpg"
   alt="Original archival photo of Davison Menswear from the binder, showing the historic shopfront"
   orientation="horizontal"
-  caption="One of the original archive photos from the binder — the shopfront before Edinburgh pulled up its trams"
+  caption="Original archive binder"
 />
 
 I scanned and composited the archive. Using a translucent white overlay, the
@@ -93,7 +90,7 @@ adverts bleed through as you scroll.
   src="/blog/davison-menswear/website_background.jpg"
   alt="The site's background image composites archival photos of Davison Menswear from the 1920s-1950s"
   orientation="horizontal"
-  caption="Archival photos composited into the site background — the binder became the brand."
+  caption="Archival photos composited into the site background — binder became the brand."
 />
 
 ## Workers
