@@ -2,7 +2,7 @@ import { getAllArticles } from '@/lib/getAllArticles'
 
 export const dynamic = 'force-static'
 
-const BASE_URL = 'https://charliemacnamara.com'
+const BASE_URL = 'https://charliemacnamara.uk'
 
 export default async function sitemap() {
   const articles = await getAllArticles()
@@ -31,6 +31,12 @@ export default async function sitemap() {
       lastModified: new Date(),
       priority: 0.8,
       changeFrequency: 'monthly',
+    },
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: new Date(),
+      priority: 0.3,
+      changeFrequency: 'yearly',
     },
   ]
 

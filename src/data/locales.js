@@ -263,7 +263,7 @@ export const messages = {
     defaultTitle: 'Charlie Macnamara',
     defaultDescription:
       'Charlie Macnamara — Technical writer making complex systems and concepts accessible through clear documentation.',
-    siteUrl: 'https://charliemacnamara.com',
+    siteUrl: 'https://charliemacnamara.uk',
     siteName: 'Charlie Macnamara',
     locale: 'en_GB',
     twitterHandle: '@charliemacnamara',

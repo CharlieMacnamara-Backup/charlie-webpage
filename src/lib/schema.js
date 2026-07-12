@@ -1,6 +1,6 @@
 import { messages } from '@/data/locales'
 
-const BASE_URL = 'https://charliemacnamara.com'
+const BASE_URL = 'https://charliemacnamara.uk'
 
 export const personSchema = {
   '@context': 'https://schema.org',

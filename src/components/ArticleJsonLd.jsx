@@ -6,11 +6,11 @@ export function ArticleJsonLd({ article }) {
   if (article.slug) {
     schemas.push(
       breadcrumbSchema([
-        { name: 'Home', url: 'https://charliemacnamara.com' },
-        { name: 'Blog', url: 'https://charliemacnamara.com/blog' },
+        { name: 'Home', url: 'https://charliemacnamara.uk' },
+        { name: 'Blog', url: 'https://charliemacnamara.uk/blog' },
         {
           name: article.title,
-          url: `https://charliemacnamara.com/blog/${article.slug}`,
+          url: `https://charliemacnamara.uk/blog/${article.slug}`,
         },
       ]),
     )

@@ -17,7 +17,7 @@ export async function generateMetadata() {
       default: t('title.default'),
     },
     description: t('description'),
-    metadataBase: new URL('https://charliemacnamara.com'),
+    metadataBase: new URL('https://charliemacnamara.uk'),
     icons: {
       icon: '/favicon.ico',
       shortcut: '/favicon.ico',
@@ -26,7 +26,7 @@ export async function generateMetadata() {
     openGraph: {
       title: t('twitterTitle'),
       description: t('ogDescription'),
-      url: 'https://charliemacnamara.com',
+      url: 'https://charliemacnamara.uk',
       siteName: t('siteName'),
       locale: 'en_GB',
       type: 'website',
@@ -46,9 +46,7 @@ export async function generateMetadata() {
       title: t('twitterTitle'),
       card: 'summary',
     },
-    verification: {
-      google: 'YOUR_GOOGLE_VERIFICATION_CODE',
-    },
+
   }
 }
 

@@ -1,6 +1,6 @@
 export const dynamic = 'force-static'
 
-const BASE_URL = 'https://charliemacnamara.com'
+const BASE_URL = 'https://charliemacnamara.uk'
 
 export default function robots() {
   return {
