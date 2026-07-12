@@ -46,9 +46,8 @@ export const messages = {
     description: 'Technical writer in Edinburgh. Clear, usable docs.',
     heading: 'Charlie Macnamara — Edinburgh, Scotland.',
     paragraphs: [
-      'I write docs for complex systems — APIs, migrations, developer tools — that actually get read.',
+      'APIs, migrations, developer tools — things that actually get read.',
       'Years of releases, migrations, and API changes taught me where users stumble — and how to fix it.',
-      'Off hours: guitar (black metal to jazz) and building Flutter apps.',
     ],
     followGitHub: 'Follow on GitHub',
     followLinkedIn: 'Follow on LinkedIn',
