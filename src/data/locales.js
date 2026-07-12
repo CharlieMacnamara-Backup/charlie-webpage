@@ -254,6 +254,7 @@ export const messages = {
     linkedin: 'LinkedIn',
     email: 'Email',
     phone: '',
+    privacy: 'Privacy',
     copyright: '© {year} Charlie Macnamara. All rights reserved.',
     builtOn: 'Built on:',
     tech: ['Next.js', 'React', 'TailwindCSS', 'AWS'],

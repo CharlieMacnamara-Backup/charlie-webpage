@@ -1,0 +1,30 @@
+# Charlie Macnamara — Technical Writer
+
+> Technical writer and web developer based in Edinburgh, Scotland. I make complex systems and concepts clear and accessible through documentation.
+
+## About
+
+I write docs for complex systems — APIs, migrations, developer tools. Based in Edinburgh, Scotland.
+
+- Name: Charlie Macnamara (also known as Charlie McNamara)
+- Location: Edinburgh, Scotland
+- Profession: Technical Writer
+- Site: https://charliemacnamara.com
+
+## Key pages
+
+- https://charliemacnamara.com — Homepage
+- https://charliemacnamara.com/about — About page
+- https://charliemacnamara.com/blog — Blog listing
+- https://charliemacnamara.com/portfolio — Portfolio
+
+## Blog posts
+
+- Four Cloudflare Workers and a Kilt Shop: https://charliemacnamara.com/blog/davison-menswear
+- Unconventional Sourdough: https://charliemacnamara.com/blog/sourdough-journey
+- Markdown CV Generator: https://charliemacnamara.com/blog/markdown-cv
+
+## Social
+
+- GitHub: https://github.com/CharlieMacnamara
+- LinkedIn: https://www.linkedin.com/in/charliemacnamara/

@@ -1,4 +1,5 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
+import { ArticleJsonLd } from '@/components/ArticleJsonLd'
 import Image from 'next/image'
 import TableOfContents from '@/components/CollapsibleToc'
 
@@ -10,7 +11,12 @@ export const article = {
   slug: 'markdown-cv',
 }
 
-export default (props) => <ArticleLayout article={article} {...props} />
+export default (props) => (
+  <>
+    <ArticleJsonLd article={article} />
+    <ArticleLayout article={article} {...props} />
+  </>
+)
 
 After overhauling my site, I looked at my CV and thought, “This sucks.” Time to
 fix consistency.

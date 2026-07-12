@@ -44,10 +44,10 @@ export async function generateMetadata() {
     },
     twitter: {
       title: t('twitterTitle'),
-      card: 'summary_large_image',
+      card: 'summary',
     },
     verification: {
-      google: 'your-google-verification-code',
+      google: 'YOUR_GOOGLE_VERIFICATION_CODE',
     },
   }
 }

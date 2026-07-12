@@ -1,4 +1,5 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
+import { ArticleJsonLd } from '@/components/ArticleJsonLd'
 import { SingleImage, TwoColGrid, ThreeColGrid } from '@/components/BlogImages'
 import VideoPlayer from '@/components/VideoPlayer'
 import Image from 'next/image'
@@ -13,7 +14,12 @@ export const article = {
   slug: 'sourdough-journey',
 }
 
-export default (props) => <ArticleLayout article={article} {...props} />
+export default (props) => (
+  <>
+    <ArticleJsonLd article={article} />
+    <ArticleLayout article={article} {...props} />
+  </>
+)
 
 Traditional sourdough is needlessly fussy—feeding schedules, temperature rules,
 faff. I wanted better.

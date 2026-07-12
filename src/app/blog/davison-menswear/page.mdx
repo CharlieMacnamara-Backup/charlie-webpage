@@ -1,4 +1,5 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
+import { ArticleJsonLd } from '@/components/ArticleJsonLd'
 import { SingleImage } from '@/components/BlogImages'
 import { ImageSlideshow } from '@/components/ImageSlideshow'
 import TableOfContents from '@/components/CollapsibleToc'
@@ -8,11 +9,16 @@ export const article = {
   author: 'Charlie Macnamara',
   date: '2026-07-10',
   title: 'Four Cloudflare Workers and a Kilt Shop',
-  description: 'How a 1927 Edinburgh business went from paper to programmatic.',
+  description: 'How a 1927 Edinburgh business went programmatic.',
   slug: 'davison-menswear',
 }
 
-export default (props) => <ArticleLayout article={article} {...props} />
+export default (props) => (
+  <>
+    <ArticleJsonLd article={article} />
+    <ArticleLayout article={article} {...props} />
+  </>
+)
 
 June 2026, my sister got married — congrats,
 [Floyd](https://www.instagram.com/art_by_floyd) — so I needed a kilt.
