@@ -43,10 +43,9 @@ down for years.
 
 ## Requirements
 
-Expecting a kilt maker to learn new tools after he's been working on paper for
-decades is unrealistic.
+Unrealistic to expect a kilt maker to learn new tools after decades on paper.
 
-I'd already built [Sicamon](https://sicamon.com) — a
+I demoed [Sicamon](https://sicamon.com) — a
 [Stripe](https://stripe.com/) <Definition term="CMS">CMS</Definition> with
 digital cataloguing. Understandably, this was too much change. Not looking to
 become an overnight online shop. Every tool feels familiar.
@@ -72,7 +71,7 @@ The project splits into two main pages: public business and a private orders
 dashboard. [Tailwind](https://tailwindcss.com/) enforces a consistent design
 system — utility classes, no magic numbers. Fluid typography.
 
-We wanted heritage design notes. Marty handed me a binder of original marketing
+I wanted heritage design notes. Marty handed me a binder of original marketing
 adverts from 1920/1950: hand-drawn illustrations, commissioned artwork (took
 ages to scan).
 
@@ -83,7 +82,7 @@ ages to scan).
   caption="Original archive binder"
 />
 
-I scanned and composited the archive. Using a translucent white overlay, the
+Using a translucent white overlay, the
 adverts bleed through as you scroll.
 
 <SingleImage
@@ -122,8 +121,8 @@ globally distributed.
 The business site is a single page: header, map, services, tartan search,
 reviews, and bookings.
 
-Tartan search is a nice-to-have novelty; a searchable directory of clan and
-district patterns rendered from official tartan hex codes.
+Tartan register is a nice-to-have novelty; searchable directory of clan patterns
+rendered from official tartan hex codes.
 
 <SingleImage
   src="/blog/davison-menswear/tartan.png"
@@ -189,8 +188,7 @@ The rest of the page is more practical. Clicking "Book" triggers:
 
 Private notepad replacement page. Independent
 [Cloudflare Worker](https://workers.cloudflare.com/) backed by
-[D1](https://developers.cloudflare.com/d1/). The same order in the diary, on a
-slip, and on a sales pad. Now programmatic.
+[D1](https://developers.cloudflare.com/d1/).
 
 <SingleImage
   src="/blog/davison-menswear/screenshot-admin-full.png"
@@ -211,7 +209,8 @@ fires.
 
 **Quick Add** for reconciling past orders.
 
-**Add Single Order** typical entry point, with an option for group orders.
+**Add Single Order** — measurement references and a notify toggle, with an option
+for group orders.
 
 <SingleImage
   src="/blog/davison-menswear/mobile-order.png"
@@ -219,8 +218,6 @@ fires.
   orientation="vertical"
   caption="Add Single Order — every order starts here"
 />
-
-Email, measurements, and a notify toggle — everything from one form.
 
 ## Testing
 
