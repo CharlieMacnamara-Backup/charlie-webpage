@@ -23,7 +23,7 @@ export default (props) => (
 June 2026, my sister got married — congrats,
 [Floyd](https://www.instagram.com/art_by_floyd) — so I needed a kilt.
 [Davison Menswear & Kilt Hire](https://share.google/ZcQxtx2Q14Uij0uXS) happened
-to be close. The shop was easy to spot: hand-painted marquee, logo, Est. 1927,
+to be close. Shop was easy to spot: hand-painted marquee, logo, Est. 1927,
 and a **previously broken** [URL](https://qualitykilts.com/).
 
 <SingleImage
@@ -48,7 +48,7 @@ Unrealistic to expect a kilt maker to learn new tools after decades on paper.
 
 I demoed [Sicamon](https://sicamon.com) — a [Stripe](https://stripe.com/) <Definition term="CMS">CMS</Definition>. Understandably, this was too much change. Not looking to become an overnight online shop. Every tool feels familiar.
 
-The stack costs nothing. Workers scale between bookings and free tiers cover
+Stack costs nothing. Workers scale between bookings and free tiers cover
 traffic. Each worker deploys independently, minimising risk.
 
 Runs on:
@@ -65,7 +65,7 @@ Runs on:
 
 ## Design
 
-The project splits into two main pages: public business and a private orders
+Project splits into two main pages: public business and a private orders
 dashboard. [Tailwind](https://tailwindcss.com/) enforces a consistent design
 system — utility classes, no magic numbers. Fluid typography.
 
@@ -80,7 +80,7 @@ ages to scan).
   caption="Original archive binder"
 />
 
-Using a translucent white overlay, the adverts bleed through as you scroll.
+Using a translucent white overlay, adverts bleed through as you scroll.
 
 <SingleImage
   src="/blog/davison-menswear/website_background.jpg"
@@ -100,7 +100,7 @@ Calendar for slot management — availability checks, event creation, and closur
 detection.
 
 **Frontend Worker** — The shop window. Serves every page — hero, map, services,
-the tartan search widget, reviews, and the booking button. Static build,
+tartan search widget, reviews, and the booking button. Static build,
 globally distributed.
 
 **Reviews Worker** — Pulls Google Reviews on a schedule into
@@ -115,7 +115,7 @@ globally distributed.
 
 ## Main Site
 
-The business site is a single page: header, map, services, tartan search,
+Business site is a single page: header, map, services, tartan search,
 reviews, and bookings.
 
 Tartan register is a nice-to-have novelty; searchable directory of clan patterns
@@ -197,7 +197,7 @@ Private notepad replacement page. Independent
 **Four statuses**: In Progress, Ready, Delivered, Cancelled. Every transition
 logged immutably — who changed it, when, and whether the email went out.
 
-**Emails** fire on status changes via [Resend](https://resend.com/). The receipt
+**Emails** fire on status changes via [Resend](https://resend.com/). Receipt
 includes bank details — stored as Worker secrets, never in the codebase. On
 creation, the customer gets payment instructions. When ready, a collection email
 fires.
@@ -261,7 +261,7 @@ build, upload, promote.
 
 ## Final
 
-The binder's back, same marquee hangs, and
+Binder's back, same marquee hangs, and
 [qualitykilts.com](https://qualitykilts.com/) is live. Marty still works in his
 showroom — now without missed calls or double-bookings.
 
