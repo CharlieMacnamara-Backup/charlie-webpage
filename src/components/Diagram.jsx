@@ -61,7 +61,7 @@ export default function Diagram({ definition, caption }) {
   }
 
   return (
-    <figure className="my-8">
+    <figure className="not-prose my-8 w-full">
       <div className="flex justify-center overflow-x-auto overflow-y-visible rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 shadow-xs p-6">
         <div dangerouslySetInnerHTML={{ __html: svg }} />
       </div>

@@ -44,7 +44,7 @@ His methods, while proven, showed age: calendar bookings misplaced, missed
 calls, staying late to rewrite orders. He was keen on upgrading — the old site
 was down for years.
 
-## The Requirements
+## Requirements
 
 Expecting a kilt maker to learn new tools after he's been working on paper for
 decades is unrealistic. Every tool feels familiar.
@@ -54,9 +54,10 @@ I'd already built [Sicamon](https://sicamon.com) — a full
 digital cataloguing. Understandably, this was too much change. Not looking to
 become an overnight online shop.
 
-Best stick to what he's always done.
+The stack costs nothing to run — Workers scale between bookings and free tiers
+cover traffic. Each worker deploys independently, minimising risk.
 
-Project runs on:
+Runs on:
 
 - <Definition term="workers">Workers</Definition>
 - <Definition term="D1">[D1](https://developers.cloudflare.com/d1/)</Definition>
@@ -67,9 +68,6 @@ Project runs on:
 - [Tailwind](https://tailwindcss.com/)
 - [Google Calendar](https://developers.google.com/calendar/api/guides/overview)
 - [GitHub Actions](https://github.com/features/actions)
-
-The stack costs nothing to run — Workers scale between bookings and free tiers
-cover traffic. Each worker deploys independently, minimising risk.
 
 ## Design
 
@@ -99,8 +97,6 @@ overlay so the adverts bleed through as you scroll.
   caption="Archival photos composited into the site background — the binder became the brand."
 />
 
-### The Workers
-
 **Admin Dashboard Worker** — Order management backed by
 [<Definition term="D1">D1</Definition>](https://developers.cloudflare.com/d1/).
 Status tracking, CSV exports, automated emails.
@@ -123,7 +119,7 @@ globally distributed.
   caption="Reviews widget on the live site."
 />
 
-## The Main Site
+## Main Site
 
 The user site is primarily a single page: header, map, services, tartan search,
 reviews, and a "Book a Fitting" button.
@@ -147,7 +143,7 @@ Clicking "Book" triggers:
   caption="The booking form — Turnstile bot protection runs invisibly on submit"
 />
 
-### The Booking Pipeline
+### Booking Pipeline
 
 - **Bot detection** — <Definition term="turnstile">Turnstile</Definition>,
   invisible
@@ -191,9 +187,9 @@ Clicking "Book" triggers:
 
 ---
 
-## The Admin Dashboard
+## Admin Dashboard
 
-The private notepad replacement page. Independent
+Private notepad replacement page. Independent
 [Cloudflare Worker](https://workers.cloudflare.com/) backed by
 [D1](https://developers.cloudflare.com/d1/). The same order in the diary, on a
 slip, and on a sales pad. Now programmatic.
@@ -215,11 +211,9 @@ fires.
 
 **CSV export**: current tax year, last year, or custom range. Clean totals.
 
-**Quick Add** for reconciling past orders. Archived orders auto-purge after 30
-days. No payments on-platform — bank transfer, cash, or the till.
+**Quick Add** for reconciling past orders.
 
-**Add Single Order** is the typical entry point, with an option for group
-orders.
+**Add Single Order** typical entry point, with an option for group orders.
 
 <SingleImage
   src="/blog/davison-menswear/mobile-order.png"
@@ -238,11 +232,11 @@ locked shop.
 <Diagram
   definition={`
     flowchart TD
-      q["Static Analysis\\neslint · tsc · audit\\nsecrets · contracts"]
-      w["Worker Isolation\\nvitest + miniflare\\nmocked dependencies"]
-      b["Integration & E2E\\nplaywright · live api\\nbooking · admin · visual"]
-      d["Pre‑Deploy Gate\\nhealth probe\\nall 4 workers online"]
-      m["Post‑Deploy\\nlighthouse · 6h monitor\\n60‑second self‑heal"]
+      q["Static Analysis\\neslint · tsc · secrets\\ncontracts · dependency audit"]
+      w["Worker Tests\\nvitest + miniflare\\nisolated runtime · no network"]
+      b["Integration & E2E\\nPlaywright · live API\\nbooking · admin · review"]
+      d["Deploy Gate\\nhealth probes\\nall workers reachable"]
+      m["Post-Deploy\\nLighthouse · 6-hour monitor\\nauto-recovery on failure"]
 
       q ==> w ==> b ==> d ==> m
 
@@ -274,7 +268,7 @@ dashboard with D1 migrations, then the main site.
 Health probes verify endpoints mid‑pipeline. The site uses a safe rollout:
 build, upload, promote.
 
-## Final Stitch
+## Final
 
 The archive binder's back on the shelf, the same marquee's hanging, and
 [qualitykilts.com](https://qualitykilts.com/) is live. Marty still works in his
