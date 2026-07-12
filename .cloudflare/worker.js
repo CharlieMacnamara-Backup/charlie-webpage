@@ -11,8 +11,8 @@ export default {
         }),
       )
 
-      if (url.hostname === 'www.charliemacnamara.uk') {
-        url.hostname = 'charliemacnamara.uk'
+      if (url.host.startsWith('www.')) {
+        url.hostname = url.hostname.slice(4)
         return Response.redirect(url.toString(), 301)
       }
 
