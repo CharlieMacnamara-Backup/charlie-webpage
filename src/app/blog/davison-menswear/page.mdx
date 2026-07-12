@@ -100,7 +100,7 @@ Calendar for slot management — availability checks, event creation, and closur
 detection.
 
 **Frontend Worker** — The shop window. Serves every page — hero, map, services,
-tartan search widget, reviews, and the booking button. Static build,
+tartan search widget, reviews, and booking button. Static build,
 globally distributed.
 
 **Reviews Worker** — Pulls Google Reviews on a schedule into
@@ -128,7 +128,7 @@ rendered from official tartan hex codes.
   caption="Searchable directory of clan and district tartans — a fun bonus for visitors"
 />
 
-The rest of the page is more practical. Clicking "Book" triggers:
+Rest of page is more practical. Clicking "Book" triggers:
 
 <SingleImage
   src="/blog/davison-menswear/booking.png"
@@ -240,7 +240,7 @@ and broken contracts before a test even runs. **Worker tests**
 dependency.
 
 **Integration and E2E tests** prove real integrations work (Google Calendar,
-Resend, Turnstile) and drive the full booking flow and admin lifecycle.
+Resend, Turnstile) and drive full booking flow and admin lifecycle.
 
 **Pre-deploy checks** probe all workers before deployments. If something's
 degraded, the deploy stops. Once live, **post-deploy monitoring** probes every
@@ -256,7 +256,7 @@ audit rules, worker tests, and
 . If they pass, Workers deploy in sequence: calendar first, then reviews, admin
 dashboard with D1 migrations, then the main site.
 
-Health probes verify endpoints mid‑pipeline. The site uses a safe rollout:
+Health probes verify endpoints mid‑pipeline. Site uses a safe rollout:
 build, upload, promote.
 
 ## Final
