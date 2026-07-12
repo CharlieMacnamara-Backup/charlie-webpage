@@ -43,9 +43,7 @@ export default function PrivacyPage() {
           </a>
           .
         </p>
-        <p className="text-sm text-zinc-400">
-          Last updated: July 2026
-        </p>
+        <p className="text-sm text-zinc-400">Last updated: July 2026</p>
       </div>
     </div>
   )
