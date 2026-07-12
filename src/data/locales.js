@@ -47,7 +47,7 @@ export const messages = {
     heading: 'Charlie Macnamara — Edinburgh, Scotland.',
     paragraphs: [
       'APIs, migrations, developer tools — things that actually get read.',
-      'Years of releases, migrations, and API changes taught me where users stumble — and how to fix it.',
+      'Years of releases, migrations, and changes taught me where users stumble — and how to guide them.',
     ],
     followGitHub: 'Follow on GitHub',
     followLinkedIn: 'Follow on LinkedIn',
