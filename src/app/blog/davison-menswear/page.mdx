@@ -23,8 +23,8 @@ export default (props) => (
 June 2026, my sister got married — congrats,
 [Floyd](https://www.instagram.com/art_by_floyd) — so I needed a kilt.
 [Davison Menswear & Kilt Hire](https://share.google/ZcQxtx2Q14Uij0uXS) happened
-to be close. Shop was easy to spot: hand-painted marquee, logo, Est. 1927,
-and a **previously broken** [URL](https://qualitykilts.com/).
+to be close. Shop was easy to spot: hand-painted marquee, logo, Est. 1927, and a
+**broken** [URL](https://qualitykilts.com/).
 
 <SingleImage
   src="/blog/davison-menswear/screenshot-hero-viewport.png"
@@ -34,9 +34,9 @@ and a **previously broken** [URL](https://qualitykilts.com/).
 
 <TableOfContents />
 
-Spend any time in Bruntsfield and you'll spot Marty — kilted, dog at heel. Open the door, he knows your
-name, last fitting, _clan_. He works alone, sewing from memory in a
-showroom unchanged since his father's day.
+Spend any time in Bruntsfield and you'll spot Marty — kilted, dog at heel. Open
+the door, he knows your name, last fitting, _clan_. He works alone, sewing from
+memory in a showroom unchanged since his father's day.
 
 His methods, while proven, showed age: calendar bookings misplaced, missed
 calls, staying late to rewrite orders. He was keen on upgrading; old site was
@@ -46,7 +46,10 @@ down for years.
 
 Unrealistic to expect a kilt maker to learn new tools after decades on paper.
 
-I demoed [Sicamon](https://sicamon.com) — a [Stripe](https://stripe.com/) <Definition term="CMS">CMS</Definition>. Understandably, this was too much change. Not looking to become an overnight online shop. Every tool feels familiar.
+I demoed [Sicamon](https://sicamon.com) — a [Stripe](https://stripe.com/)
+<Definition term="CMS">CMS</Definition>. Understandably, this was too much
+change. Not looking to become an overnight online shop. Every tool feels
+familiar.
 
 Stack costs nothing. Workers scale between bookings and free tiers cover
 traffic. Each worker deploys independently, minimising risk.
@@ -100,8 +103,8 @@ Calendar for slot management — availability checks, event creation, and closur
 detection.
 
 **Frontend Worker** — The shop window. Serves every page — hero, map, services,
-tartan search widget, reviews, and booking button. Static build,
-globally distributed.
+tartan search widget, reviews, and booking button. Static build, globally
+distributed.
 
 **Reviews Worker** — Pulls Google Reviews on a schedule into
 [KV](https://developers.cloudflare.com/kv/). Fresh content, zero effort.
@@ -115,8 +118,8 @@ globally distributed.
 
 ## Main Site
 
-Business site is a single page: header, map, services, tartan search,
-reviews, and bookings.
+Business site is a single page: header, map, services, tartan search, reviews,
+and bookings.
 
 Tartan register is a nice-to-have novelty; searchable directory of clan patterns
 rendered from official tartan hex codes.
@@ -256,8 +259,8 @@ audit rules, worker tests, and
 . If they pass, Workers deploy in sequence: calendar first, then reviews, admin
 dashboard with D1 migrations, then the main site.
 
-Health probes verify endpoints mid‑pipeline. Site uses a safe rollout:
-build, upload, promote.
+Health probes verify endpoints mid‑pipeline. Site uses a safe rollout: build,
+upload, promote.
 
 ## Final
 
