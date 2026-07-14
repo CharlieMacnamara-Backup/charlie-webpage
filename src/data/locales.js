@@ -14,6 +14,9 @@ export const messages = {
   home: {
     heading: 'Technical Writer, Web Enthusiast, Amateur Baker',
     tagline: '',
+    blogTitle: 'Personal Blog',
+    blogSubtitle: 'Beyond work',
+    subtitle: 'Vanity/Portfolio site',
     githubAriaLabel: 'Follow on GitHub',
     linkedinAriaLabel: 'Follow on LinkedIn',
     experience: 'Experience',
@@ -290,6 +293,7 @@ export const messages = {
   },
   photos: {
     clickToView: 'Click to view larger image',
+    dotLabel: 'Go to image {number}',
     captions: [
       'Red Arrows over Edinburgh Castle during the Tattoo.',
       'Frozen waterfall in the Highlands.',
