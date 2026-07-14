@@ -34,8 +34,9 @@ to be close. Shop was easy to spot: hand-painted marquee, logo, Est. 1927, and a
 
 <TableOfContents />
 
-Spend time in Bruntsfield and you'll spot Marty: kilted, dog at heel. Generational talent. Working alone, he sews from memory in a showroom
-unchanged since his father's day.
+Spend time in Bruntsfield and you'll spot Marty: kilted, dog at heel.
+Generational talent. Working alone, he sews from memory in a showroom unchanged
+since his father's day.
 
 His methods, while proven, showed age: calendar bookings misplaced, missed
 calls, staying late to rewrite orders. He was keen on upgrading; old site was
@@ -45,13 +46,13 @@ down for years.
 
 Unrealistic to expect a kilt maker to learn new tools after decades on paper.
 
-Demoing [Sicamon](https://sicamon.com) — a Stripe CMS — understandably, was
-too much change. Not looking to become an overnight shop. Every tool had to feel familiar.
+Demoing [Sicamon](https://sicamon.com) — a Stripe CMS — understandably, was too
+much change. Not looking to become an overnight shop. Every tool had to feel
+familiar.
 
 ### Tech Stack
 
-Stack's free. Workers scale between bookings and free tiers cover
-traffic.
+Stack's free. Workers scale between bookings and free tiers cover traffic.
 
 Runs on:
 
@@ -86,7 +87,7 @@ ages to scan).
   src="/blog/davison-menswear/website_background.jpg"
   alt="The site's background image composites archival photos of Davison Menswear from the 1920s-1950s"
   orientation="horizontal"
-  caption="Archival photos composited into the site background — binder became the brand."
+  caption="Archival photos composited into site background — binder became brand."
 />
 
 ## Workers
@@ -110,7 +111,7 @@ distributed.
   src="/blog/davison-menswear/reviews.png"
   alt="Google Reviews displayed on the site"
   orientation="horizontal"
-  caption="Reviews widget on the live site."
+  caption="Reviews widget on live site."
 />
 
 ## Main Site
@@ -118,14 +119,14 @@ distributed.
 Business site is a single page: header, map, services, tartan search, reviews,
 and bookings.
 
-Tartan register is a nice-to-have novelty; searchable directory of clan patterns
-rendered from official tartan hex codes.
+Tartan register is nice-to-have; searchable clan directory rendered from
+official tartan hex codes.
 
 <SingleImage
   src="/blog/davison-menswear/tartan.png"
   alt="Tartan search directory showing clan and district patterns"
   orientation="horizontal"
-  caption="Searchable directory of clan and district tartans — a fun bonus for visitors"
+  caption="Searchable directory of clan and district tartans"
 />
 
 Rest of page is more practical. Clicking "Book" triggers:
@@ -134,7 +135,7 @@ Rest of page is more practical. Clicking "Book" triggers:
   src="/blog/davison-menswear/booking.png"
   alt="The booking form with date, time, and customer details fields"
   orientation="vertical"
-  caption="The booking form — Turnstile bot protection runs invisibly on submit"
+  caption="Booking form with Turnstile on submit"
 />
 
 ### Booking Pipeline
@@ -155,19 +156,17 @@ Rest of page is more practical. Clicking "Book" triggers:
       src: '/blog/davison-menswear/booking-confirmed.png',
       alt: 'Booking confirmation screen showing the confirmed appointment',
       caption:
-        'First, the customer sees the booking confirmed — the appointment locks in and emails go out.',
+        'Customer sees booking confirmed — appointment locks in, emails fire.',
     },
     {
       src: '/blog/davison-menswear/booking-confirmation-email.png',
       alt: 'Branded booking confirmation email sent to the customer',
-      caption:
-        'Next, the confirmation email lands in their inbox — booking details, a cancel link, no surprises.',
+      caption: 'Confirmation email: booking details, cancel link.',
     },
     {
       src: '/blog/davison-menswear/owner-alert-email.png',
       alt: 'Owner alert email notifying of a new booking',
-      caption:
-        'Meanwhile, Marty gets an alert — no need to check the diary, he knows the moment a booking lands.',
+      caption: "Marty's alerted — no checking diary.",
     },
   ]}
 />
@@ -176,14 +175,15 @@ Rest of page is more practical. Clicking "Book" triggers:
   src="/blog/davison-menswear/google-calendar.png"
   alt="Google Calendar showing a booked fitting appointment"
   orientation="horizontal"
-  caption="Google Calendar handles the booking slots — already in place before this project."
+  caption="Google Calendar handles booking slots — pre-existing."
 />
 
 ---
 
 ## Admin Dashboard
 
-Private notepad replacement, backed by [D1](https://developers.cloudflare.com/d1/).
+Private notepad replacement, backed by
+[D1](https://developers.cloudflare.com/d1/).
 
 <SingleImage
   src="/blog/davison-menswear/screenshot-admin-full.png"
@@ -216,7 +216,8 @@ option for group orders.
 
 ## Testing
 
-This runs a business. If a booking drops, that's a customer standing outside.
+Booking drop? That's a customer standing outside... **five** stages sit between
+production.
 
 <Diagram
   definition={`
@@ -229,13 +230,11 @@ This runs a business. If a booking drops, that's a customer standing outside.
 
       q ==> w ==> b ==> d ==> m
 
-`} caption="Five stages of quality assurance: from static analysis through to
-production monitoring" />
+`} caption="Five QA stages: static analysis through production monitoring" />
 
-Five stages sit between production. **Static audits** catch hardcoded secrets
-and broken contracts before a test even runs. **Worker tests**
-(<Definition term="vitest">Vitest</Definition> + Miniflare) mock every external
-dependency.
+**Static audits** catch hardcoded secrets and broken contracts before a test
+even runs. **Worker tests** (<Definition term="vitest">Vitest</Definition> +
+Miniflare) mock every external dependency.
 
 **Integration and E2E tests** prove real integrations work (Google Calendar,
 Resend, Turnstile) and drive full booking flow and admin lifecycle.
