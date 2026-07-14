@@ -11,11 +11,12 @@ import { images } from '@/data/photos'
 export const Photos = memo(function Photos() {
   const [selectedImage, setSelectedImage] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const trackRef = useRef(null)
   const slideRefs = useRef([])
   const t = useTranslations('photos')
   const captions = t.raw('captions')
-  const dotLabel = t('dotLabel')
+  const dotLabel = (num) => t('dotLabel', { number: num })
 
   useEffect(() => {
     const track = trackRef.current
@@ -36,6 +37,22 @@ export const Photos = memo(function Photos() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    if (isPaused) return
+    const id = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % images.length)
+    }, 6000)
+    return () => clearInterval(id)
+  }, [isPaused])
+
+  useEffect(() => {
+    slideRefs.current[activeIndex]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    })
+  }, [activeIndex])
+
   return (
     <>
       <div className="mt-10 sm:mt-14">
@@ -46,9 +63,11 @@ export const Photos = memo(function Photos() {
             className={clsx(
               '-mx-4 flex snap-x snap-mandatory snap-always gap-4 overflow-x-auto px-4 pb-10 pt-4',
               'scroll-pl-4 scroll-pr-4 -overscroll-x-contain',
-              'motion-safe:scroll-smooth',
+              'scroll-smooth',
               'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-zinc-300 hover:scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700 dark:hover:scrollbar-thumb-zinc-600'
             )}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
             {images.map((image, imageIndex) => (
               <div
@@ -107,6 +126,8 @@ export const Photos = memo(function Photos() {
                     block: 'nearest',
                     inline: 'center',
                   })
+                  setIsPaused(true)
+                  setTimeout(() => setIsPaused(false), 100)
                 }}
                 className={clsx(
                   'rounded-full transition-all duration-300 cursor-pointer',
@@ -114,7 +135,7 @@ export const Photos = memo(function Photos() {
                     ? 'bg-teal-500 size-3'
                     : 'bg-zinc-300 dark:bg-zinc-600 size-2.5 hover:bg-zinc-400 dark:hover:bg-zinc-500'
                 )}
-                aria-label={dotLabel.replace('{number}', String(i + 1))}
+                aria-label={dotLabel(i + 1)}
               />
             ))}
           </div>
