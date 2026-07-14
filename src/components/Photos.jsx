@@ -30,7 +30,7 @@ export const Photos = memo(function Photos() {
           }
         }
       },
-      { root: track, threshold: 0.6 }
+      { root: track, threshold: 0.6 },
     )
     const slides = slideRefs.current.filter(Boolean)
     slides.forEach((el) => observer.observe(el))
@@ -46,11 +46,18 @@ export const Photos = memo(function Photos() {
   }, [isPaused])
 
   useEffect(() => {
-    slideRefs.current[activeIndex]?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center',
-    })
+    const track = trackRef.current
+    const slide = slideRefs.current[activeIndex]
+    if (track && slide) {
+      const trackRect = track.getBoundingClientRect()
+      const slideRect = slide.getBoundingClientRect()
+      const scrollLeft =
+        track.scrollLeft +
+        slideRect.left -
+        trackRect.left -
+        (trackRect.width - slideRect.width) / 2
+      track.scrollTo({ left: scrollLeft, behavior: 'smooth' })
+    }
   }, [activeIndex])
 
   return (
@@ -64,7 +71,7 @@ export const Photos = memo(function Photos() {
               '-mx-4 flex snap-x snap-mandatory snap-always gap-4 overflow-x-auto px-4 pb-10 pt-4',
               'scroll-pl-4 scroll-pr-4 -overscroll-x-contain',
               'scroll-smooth',
-              'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-zinc-300 hover:scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700 dark:hover:scrollbar-thumb-zinc-600'
+              'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-zinc-300 hover:scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700 dark:hover:scrollbar-thumb-zinc-600',
             )}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
@@ -83,7 +90,7 @@ export const Photos = memo(function Photos() {
                     'shadow-md',
                     'transition duration-300 ease-out',
                     'hover:shadow-xl hover:scale-[1.02]',
-                    'cursor-pointer'
+                    'cursor-pointer',
                   )}
                   onClick={() =>
                     setSelectedImage({
@@ -121,11 +128,18 @@ export const Photos = memo(function Photos() {
               <button
                 key={i}
                 onClick={() => {
-                  slideRefs.current[i]?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest',
-                    inline: 'center',
-                  })
+                  const track = trackRef.current
+                  const slide = slideRefs.current[i]
+                  if (track && slide) {
+                    const trackRect = track.getBoundingClientRect()
+                    const slideRect = slide.getBoundingClientRect()
+                    const scrollLeft =
+                      track.scrollLeft +
+                      slideRect.left -
+                      trackRect.left -
+                      (trackRect.width - slideRect.width) / 2
+                    track.scrollTo({ left: scrollLeft, behavior: 'smooth' })
+                  }
                   setIsPaused(true)
                   setTimeout(() => setIsPaused(false), 100)
                 }}
@@ -133,7 +147,7 @@ export const Photos = memo(function Photos() {
                   'rounded-full transition-all duration-300 cursor-pointer',
                   i === activeIndex
                     ? 'bg-teal-500 size-3'
-                    : 'bg-zinc-300 dark:bg-zinc-600 size-2.5 hover:bg-zinc-400 dark:hover:bg-zinc-500'
+                    : 'bg-zinc-300 dark:bg-zinc-600 size-2.5 hover:bg-zinc-400 dark:hover:bg-zinc-500',
                 )}
                 aria-label={dotLabel(i + 1)}
               />

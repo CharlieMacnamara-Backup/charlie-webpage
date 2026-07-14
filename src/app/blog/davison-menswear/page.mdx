@@ -9,7 +9,7 @@ export const article = {
   author: 'Charlie Macnamara',
   date: '2026-07-10',
   title: 'Four Cloudflare Workers and a Kilt Shop',
-  description: 'How a historic Edinburgh business went programmatic.',
+  description: 'Historic Edinburgh business goes programmatic.',
   slug: 'davison-menswear',
 }
 
@@ -34,9 +34,8 @@ to be close. Shop was easy to spot: hand-painted marquee, logo, Est. 1927, and a
 
 <TableOfContents />
 
-Spend any time in Bruntsfield and you'll spot Marty — kilted, dog at heel. Open
-the door, he knows your name, last fitting, _clan_. He works alone, sewing from
-memory in a showroom unchanged since his father's day.
+Spend time in Bruntsfield and you'll spot Marty: kilted, dog at heel. Generational talent. Working alone, he sews from memory in a showroom
+unchanged since his father's day.
 
 His methods, while proven, showed age: calendar bookings misplaced, missed
 calls, staying late to rewrite orders. He was keen on upgrading; old site was
@@ -46,13 +45,13 @@ down for years.
 
 Unrealistic to expect a kilt maker to learn new tools after decades on paper.
 
-I demoed [Sicamon](https://sicamon.com) — a [Stripe](https://stripe.com/)
-<Definition term="CMS">CMS</Definition>. Understandably, this was too much
-change. Not looking to become an overnight online shop. Every tool feels
-familiar.
+Demoing [Sicamon](https://sicamon.com) — a Stripe CMS — understandably, was
+too much change. Not looking to become an overnight shop. Every tool had to feel familiar.
 
-Stack costs nothing. Workers scale between bookings and free tiers cover
-traffic. Each worker deploys independently, minimising risk.
+### Tech Stack
+
+Stack's free. Workers scale between bookings and free tiers cover
+traffic.
 
 Runs on:
 
@@ -82,8 +81,6 @@ ages to scan).
   orientation="horizontal"
   caption="Original archive binder"
 />
-
-Using a translucent white overlay, adverts bleed through as you scroll.
 
 <SingleImage
   src="/blog/davison-menswear/website_background.jpg"
@@ -186,9 +183,7 @@ Rest of page is more practical. Clicking "Book" triggers:
 
 ## Admin Dashboard
 
-Private notepad replacement page. Independent
-[Cloudflare Worker](https://workers.cloudflare.com/) backed by
-[D1](https://developers.cloudflare.com/d1/).
+Private notepad replacement, backed by [D1](https://developers.cloudflare.com/d1/).
 
 <SingleImage
   src="/blog/davison-menswear/screenshot-admin-full.png"
@@ -259,14 +254,14 @@ audit rules, worker tests, and
 . If they pass, Workers deploy in sequence: calendar first, then reviews, admin
 dashboard with D1 migrations, then the main site.
 
-Health probes verify endpoints mid‑pipeline. Site uses a safe rollout: build,
-upload, promote.
+Health probes verify endpoints mid‑pipeline. Deploy stops if any probe fails.
 
 ## Final
 
 Binder's back, same marquee hangs, and
 [qualitykilts.com](https://qualitykilts.com/) is live. Marty still works in his
-showroom — now without missed calls or double-bookings.
+showroom — now without missed calls or double-bookings. Our family's a little
+bigger too.
 
 Thanks for reading. Reach out at
 [mail@charliemacnamara.uk](mailto:mail@charliemacnamara.uk).
