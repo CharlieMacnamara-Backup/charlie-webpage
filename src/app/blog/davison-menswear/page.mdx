@@ -46,17 +46,17 @@ down for years.
 
 Unrealistic to expect a kilt maker to learn new tools after decades on paper.
 
-Demoing [Sicamon](https://sicamon.com) — a Stripe CMS — understandably, was too
+Demoing [Sicamon](https://sicamon.com) — a Stripe CMS — was too
 much change. Not looking to become an overnight shop. Every tool had to feel
 familiar.
 
 ## Design
 
-Project splits into two main pages: public business and a private orders
+Project splits into two main pages: public business and private orders
 dashboard. [Tailwind](https://tailwindcss.com/) enforces a consistent design
-system — utility classes, no magic numbers. Fluid typography.
+system — utility classes, fluid typography.
 
-I wanted heritage design notes. Marty handed me a binder of original marketing
+We wanted heritage design notes. Marty handed me a binder of original marketing
 adverts from 1920/1950: hand-drawn illustrations, commissioned artwork (took
 ages to scan).
 
@@ -81,8 +81,7 @@ ages to scan).
 Status tracking, CSV exports, automated emails.
 
 **Calendar Worker** — Dedicated worker with its own credentials. Talks to Google
-Calendar for slot management — availability checks, event creation, and closure
-detection.
+Calendar for slot management — availability checks, event creation, closures.
 
 **Frontend Worker** — The shop window. Serves every page — hero, map, services,
 tartan search widget, reviews, and booking button. Static build, globally
@@ -100,7 +99,7 @@ distributed.
 
 ## Tech Stack
 
-Stack's free. Workers scale between bookings and free tiers cover traffic.
+Stack costs nothing. Workers scale between bookings and free tiers cover traffic.
 
 Runs on:
 
@@ -116,11 +115,11 @@ Runs on:
 
 ## Main Site
 
-Business site is a single page: header, map, services, tartan search, reviews,
+Business site's a single page: header, map, services, tartan search, reviews,
 and bookings.
 
-Tartan register is nice-to-have; searchable clan directory rendered from
-official tartan hex codes.
+Tartan register is nice-to-have — searchable clan directory from official
+hex codes.
 
 <SingleImage
   src="/blog/davison-menswear/tartan.png"
@@ -248,10 +247,10 @@ scores every deploy.
 ### CI/CD
 
 Every push to `main` runs lint, [TypeScript](https://www.typescriptlang.org/),
-audit rules, worker tests, and
-[<Definition term="playwright">Playwright</Definition>](https://playwright.dev/)
-. If they pass, Workers deploy in sequence: calendar first, then reviews, admin
-dashboard with D1 migrations, then the main site.
+audit rules, worker tests,
+[<Definition term="playwright">Playwright</Definition>](https://playwright.dev/).
+If they pass, Workers deploy in sequence: calendar, reviews, admin with D1
+migrations, then main site.
 
 Health probes verify endpoints mid‑pipeline. Deploy stops if any probe fails.
 
