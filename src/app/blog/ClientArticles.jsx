@@ -37,31 +37,6 @@ const Article = memo(function Article({
         </Card.Eyebrow>
         <Card.Title href={`/blog/${article.slug}`}>{article.title}</Card.Title>
         <Card.Description>{article.description}</Card.Description>
-        <div className="relative z-10 mt-2 flex items-center gap-3 text-xs text-zinc-400 dark:text-zinc-500">
-          <span className="inline-flex items-center gap-1">
-            <svg
-              className="h-3.5 w-3.5"
-              viewBox="0 0 16 16"
-              fill="none"
-              aria-hidden="true"
-            >
-              <circle
-                cx="8"
-                cy="8"
-                r="6"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M8 4.5V8l2.5 1.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-            {article.readingTime}
-          </span>
-        </div>
         <Card.Cta>{readArticleLabel}</Card.Cta>
       </Card>
     </article>

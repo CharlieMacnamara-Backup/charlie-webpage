@@ -3,23 +3,6 @@ import fs from 'fs'
 import path from 'path'
 import { messages } from '@/data/locales'
 
-function stripMdx(content) {
-  return content
-    .replace(/^import\s.*$/gm, '')
-    .replace(/^export\s.*$/gm, '')
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/<[^>]+>/g, '')
-    .replace(/[#*`_~\[\]()!>-]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-}
-
-function estimateReadingTime(content) {
-  const wordCount = stripMdx(content).split(/\s+/).length
-  const minutes = Math.max(1, Math.round(wordCount / 200))
-  return `${minutes} min read`
-}
-
 function importArticle(articleFilename) {
   try {
     const fullPath = path.join(
@@ -36,7 +19,6 @@ function importArticle(articleFilename) {
     }
 
     const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const readingTime = estimateReadingTime(fileContents)
 
     const articleMatch = fileContents.match(
       /export const article = ({[\s\S]*?})/m,
@@ -51,7 +33,6 @@ function importArticle(articleFilename) {
         return {
           slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),
           ...article,
-          readingTime,
         }
       } catch (e) {
         console.error(
@@ -79,7 +60,6 @@ function importArticle(articleFilename) {
           date: articleMetadata.date || new Date().toISOString().split('T')[0],
           author:
             articleMetadata.author || messages.getAllArticles.defaultAuthor,
-          readingTime,
         }
       } catch (e) {
         console.error(`Error parsing metadata for ${articleFilename}:`, e)
