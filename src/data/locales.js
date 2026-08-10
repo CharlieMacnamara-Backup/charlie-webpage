@@ -240,6 +240,7 @@ export const messages = {
     about: 'About',
     blog: 'Blog',
     portfolio: 'Portfolio',
+    contact: 'Contact',
     menu: 'Menu',
     siteNavigation: 'Site Navigation',
     openMenu: 'Open navigation menu',

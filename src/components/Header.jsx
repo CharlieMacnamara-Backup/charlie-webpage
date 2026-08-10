@@ -76,6 +76,7 @@ const MemoizedDesktopNavigation = memo(function DesktopNavigation(props) {
         <MemoizedNavItem href="/about">{t('about')}</MemoizedNavItem>
         <MemoizedNavItem href="/blog">{t('blog')}</MemoizedNavItem>
         <MemoizedNavItem href="/portfolio">{t('portfolio')}</MemoizedNavItem>
+        <MemoizedNavItem href="/contact">{t('contact')}</MemoizedNavItem>
       </ul>
     </nav>
   )
