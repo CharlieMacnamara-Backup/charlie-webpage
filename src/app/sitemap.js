@@ -33,6 +33,12 @@ export default async function sitemap() {
       changeFrequency: 'monthly',
     },
     {
+      url: `${BASE_URL}/contact`,
+      lastModified: new Date(),
+      priority: 0.8,
+      changeFrequency: 'monthly',
+    },
+    {
       url: `${BASE_URL}/privacy`,
       lastModified: new Date(),
       priority: 0.3,
