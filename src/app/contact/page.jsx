@@ -7,25 +7,25 @@ import { ContactForm } from './ContactForm'
 export const metadata = {
   title: 'Get a Fixed-Price Website',
   description:
-    'Fixed-price websites for local businesses: online booking, Stripe payments, Google visibility, and customer reviews. One fee, no subscriptions.',
+    'Fixed-price websites for local businesses: online booking, Stripe payments, Google visibility. One fee, no subscriptions.',
 }
 
 const features = [
   {
-    title: 'Take bookings without the phone tag',
-    body: 'Customers pick a time that suits them and get an instant confirmation. Your calendar updates itself, so no missed calls and no double-bookings.',
+    title: 'Online booking',
+    body: 'no missed calls or double-bookings',
   },
   {
-    title: 'Sell online with Stripe',
-    body: 'A shop that takes card payments around the clock. The same payment system millions of shops trust.',
+    title: 'Stripe payments',
+    body: 'sell around the clock',
   },
   {
-    title: 'Get found on Google',
-    body: 'Pages written and structured so local customers find you when they search for what you sell.',
+    title: 'Google visibility',
+    body: 'local customers find you',
   },
   {
-    title: 'Show your reviews',
-    body: 'Your Google reviews displayed on your site, refreshed automatically. Fresh proof, zero effort.',
+    title: 'Reviews on your site',
+    body: 'fresh proof, zero effort',
   },
 ]
 
@@ -37,44 +37,37 @@ export default function ContactPage() {
           Get a Fixed-Price Website
         </h1>
         <p className="mt-4 text-base/7 text-zinc-600 dark:text-zinc-400">
-          One fee. A website that works as hard as you do — no monthly
-          subscriptions, no hidden costs.
+          One fee. No subscriptions. I design, build, and maintain the whole
+          site — you just run your business.
         </p>
 
-        <h2 className="mt-12 text-xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-          What your website can do
-        </h2>
-        <ul className="mt-4 space-y-6">
+        <ul className="mt-8 space-y-3">
           {features.map((feature) => (
-            <li key={feature.title}>
-              <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
+            <li
+              key={feature.title}
+              className="text-sm/6 text-zinc-600 dark:text-zinc-400"
+            >
+              <span className="font-semibold text-zinc-800 dark:text-zinc-100">
                 {feature.title}
-              </h3>
-              <p className="mt-1 text-sm/6 text-zinc-600 dark:text-zinc-400">
-                {feature.body}
-              </p>
+              </span>
+              {' — '}
+              {feature.body}
             </li>
           ))}
         </ul>
 
-        <h2 className="mt-12 text-xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-          Built for local businesses
-        </h2>
-        <p className="mt-4 text-sm/6 text-zinc-600 dark:text-zinc-400">
-          This is what it looks like in practice.{' '}
+        <p className="mt-8 text-sm/6 text-zinc-600 dark:text-zinc-400">
           <Link
             href="/blog/davison-menswear"
             className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
           >
             Davison Menswear
           </Link>
-          , a family kilt shop in Bruntsfield, runs its whole business from one
-          page — bookings, reviews, orders, and a tartan finder. No monthly
-          fees. No training course.
+          , a Bruntsfield kilt shop, runs bookings, reviews, and orders from one
+          page.
         </p>
         <p className="mt-4 text-sm/6 text-zinc-600 dark:text-zinc-400">
-          Tell me about your business and I&apos;ll tell you what your website
-          needs — with a fixed price up front.
+          Tell me about your business. Fixed price, up front.
         </p>
 
         <div className="mt-10">
