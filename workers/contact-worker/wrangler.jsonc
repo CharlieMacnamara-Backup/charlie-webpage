@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "contact-worker",
+  "main": "index.js",
+  "compatibility_date": "2026-07-07",
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "head_sampling_rate": 1,
+    },
+  },
+  "routes": [{ "pattern": "charliemacnamara.uk/api/contact" }],
+}
