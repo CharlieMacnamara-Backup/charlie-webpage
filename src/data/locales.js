@@ -258,6 +258,7 @@ export const messages = {
     email: 'Email',
     phone: '',
     privacy: 'Privacy',
+    contact: 'Contact',
     copyright: '© {year} Charlie Macnamara. All rights reserved.',
     builtOn: 'Built on:',
     tech: ['Next.js', 'React', 'TailwindCSS', 'AWS'],

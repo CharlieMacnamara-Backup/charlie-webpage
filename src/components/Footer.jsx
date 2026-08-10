@@ -68,12 +68,20 @@ export const Footer = memo(function Footer() {
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">
                     {t('copyright', { year })}
                   </p>
-                  <Link
-                    href="/privacy"
-                    className="text-sm text-zinc-500 underline transition-colors hover:text-teal-500 dark:text-zinc-400 dark:hover:text-teal-400"
-                  >
-                    {t('privacy')}
-                  </Link>
+                  <div className="flex items-center gap-4">
+                    <Link
+                      href="/contact"
+                      className="text-sm text-zinc-500 underline transition-colors hover:text-teal-500 dark:text-zinc-400 dark:hover:text-teal-400"
+                    >
+                      {t('contact')}
+                    </Link>
+                    <Link
+                      href="/privacy"
+                      className="text-sm text-zinc-500 underline transition-colors hover:text-teal-500 dark:text-zinc-400 dark:hover:text-teal-400"
+                    >
+                      {t('privacy')}
+                    </Link>
+                  </div>
                 </div>
                 <div className="flex flex-wrap justify-center sm:justify-end">
                   <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:justify-end">
