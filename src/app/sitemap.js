@@ -15,31 +15,31 @@ export default async function sitemap() {
       changeFrequency: 'monthly',
     },
     {
-      url: `${BASE_URL}/about`,
+      url: `${BASE_URL}/about/`,
       lastModified: new Date(),
       priority: 0.8,
       changeFrequency: 'monthly',
     },
     {
-      url: `${BASE_URL}/blog`,
+      url: `${BASE_URL}/blog/`,
       lastModified: new Date(),
       priority: 0.9,
       changeFrequency: 'weekly',
     },
     {
-      url: `${BASE_URL}/portfolio`,
+      url: `${BASE_URL}/portfolio/`,
       lastModified: new Date(),
       priority: 0.8,
       changeFrequency: 'monthly',
     },
     {
-      url: `${BASE_URL}/contact`,
+      url: `${BASE_URL}/contact/`,
       lastModified: new Date(),
       priority: 0.8,
       changeFrequency: 'monthly',
     },
     {
-      url: `${BASE_URL}/privacy`,
+      url: `${BASE_URL}/privacy/`,
       lastModified: new Date(),
       priority: 0.3,
       changeFrequency: 'yearly',
@@ -47,7 +47,7 @@ export default async function sitemap() {
   ]
 
   const blogUrls = articles.map((article) => ({
-    url: `${BASE_URL}/blog/${article.slug}`,
+    url: `${BASE_URL}/blog/${article.slug}/`,
     lastModified: new Date(article.date),
     priority: 0.7,
     changeFrequency: 'yearly',
