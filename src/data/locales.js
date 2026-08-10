@@ -32,9 +32,9 @@ export const messages = {
         company: 'EVORA Global',
         title: 'Technical Writer',
         start: 'Aug 2022',
-        end: 'Aug 2023',
+        end: 'Sep 2023',
         startDateTime: '2022-08',
-        endDateTime: '2023-08',
+        endDateTime: '2023-09',
       },
       {
         company: 'Transloadit',
