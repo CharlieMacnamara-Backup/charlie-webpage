@@ -117,9 +117,13 @@ const Resume = memo(function Resume({ labels, entries }) {
                   .replace('{start}', role.start)
                   .replace('{end}', role.end)}
               >
-                <time dateTime={role.start}>{role.start}</time>{' '}
+                <time dateTime={role.startDateTime ?? role.start}>
+                  {role.start}
+                </time>{' '}
                 <span aria-hidden="true">—</span>{' '}
-                <time dateTime={role.end}>{role.end}</time>
+                <time dateTime={role.endDateTime ?? role.end}>
+                  {role.end}
+                </time>
               </dd>
             </dl>
           </li>
