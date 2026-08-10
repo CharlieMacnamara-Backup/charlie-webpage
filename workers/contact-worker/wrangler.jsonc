@@ -9,5 +9,10 @@
       "head_sampling_rate": 1,
     },
   },
-  "routes": [{ "pattern": "charliemacnamara.uk/api/contact" }],
+  "routes": [
+    {
+      "pattern": "charliemacnamara.uk/api/contact",
+      "zone_name": "charliemacnamara.uk",
+    },
+  ],
 }
