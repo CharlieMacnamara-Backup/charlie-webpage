@@ -85,7 +85,7 @@ export const messages = {
             'Stripe as CMS — inventory and pricing managed through the Stripe dashboard. Cloudflare Workers propagate changes automatically.',
         },
         {
-          name: 'QualityKilts.com',
+          name: 'Davison Menswear & Kilt Hire',
           description:
             '4 Cloudflare Workers (frontend, calendar, reviews, admin dashboard).',
           readMore: 'read the full story',
