@@ -411,8 +411,7 @@ export const messages = {
     ],
     testimonial:
       'Examples: <qualityKilts>QualityKilts.com</qualityKilts>, <sicamon>Sicamon</sicamon>, and <thisSite>this site</thisSite>.',
-    ctaPrompt: 'Tell me about your business. Fixed price, up front.',
-    form: {
+       form: {
       formAria: 'Contact form',
       nameLabel: 'Name',
       emailLabel: 'Email',
