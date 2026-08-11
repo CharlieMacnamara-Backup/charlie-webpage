@@ -364,12 +364,18 @@ export const messages = {
   },
   articleLayout: {
     returnToBlog: 'Return to blog',
+    readingProgress: 'Reading progress',
+  },
+  diagram: {
+    failedToRender: 'Diagram failed to render',
   },
   blogImages: {
     failedToLoad: 'Failed to load image',
   },
   schema: {
     personName: 'Charlie Macnamara',
+    breadcrumbHome: 'Home',
+    breadcrumbBlog: 'Blog',
     jobTitle: 'Technical Writer',
     personDescription:
       'Technical writer making systems and concepts clear and accessible.',
@@ -382,5 +388,63 @@ export const messages = {
   },
   getAllArticles: {
     defaultAuthor: 'Charlie Macnamara',
+  },
+  contact: {
+    metaTitle: 'Get a Fixed-Price Website',
+    metaDescription:
+      'Fixed-price websites for local businesses: online booking, Stripe payments, Google visibility. One fee, no subscriptions.',
+    heading: 'Get a Fixed-Price Website',
+    intro:
+      'One fee. No subscriptions. I design, build, and maintain the whole site — you just run your business.',
+    features: [
+      {
+        title: 'Online booking',
+        body: 'no missed calls or double-bookings',
+      },
+      {
+        title: 'Stripe payments',
+        body: 'sell around the clock',
+      },
+      {
+        title: 'Google visibility',
+        body: 'local customers find you',
+      },
+      {
+        title: 'Reviews on your site',
+        body: 'fresh proof, zero effort',
+      },
+    ],
+    testimonial:
+      '<link>Davison Menswear</link>, a Bruntsfield kilt shop, runs bookings, reviews, and orders from one page.',
+    ctaPrompt: 'Tell me about your business. Fixed price, up front.',
+    form: {
+      formAria: 'Contact form',
+      nameLabel: 'Name',
+      emailLabel: 'Email',
+      messageLabel: 'Message',
+      submit: 'Request Quote',
+      success: "Message received. I'll get back to you within 24 hours.",
+      errorRequired: 'Please fill in all fields.',
+      errorEmail: 'Please enter a valid email address.',
+      errorSubmit:
+        'Something went wrong sending your message. Please try again, or email mail@charliemacnamara.uk.',
+    },
+  },
+  privacy: {
+    metaTitle: 'Privacy Policy',
+    metaDescription: 'Privacy policy for Charlie Macnamara',
+    heading: 'Privacy Policy',
+    intro:
+      'This site collects no personal data beyond standard server logs. No cookies are used for tracking or analytics.',
+    dataCollectionHeading: 'Data Collection',
+    dataCollectionBody:
+      'This is a static site hosted on Cloudflare Pages. Cloudflare may log standard HTTP request data (IP address, user agent, requested URL) as part of normal operations. These logs are not used for profiling or advertising.',
+    cookiesHeading: 'Cookies',
+    cookiesBody:
+      'This site does not set any cookies. No analytics, tracking, or advertising cookies are used.',
+    contactHeading: 'Contact',
+    contactLead: 'If you have questions about this policy, contact ',
+    contactEmail: 'mail@charliemacnamara.uk',
+    lastUpdated: 'Last updated: July 2026',
   },
 }

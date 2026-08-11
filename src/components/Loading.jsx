@@ -1,12 +1,14 @@
 import { memo } from 'react'
 import clsx from 'clsx'
 
+import { messages } from '@/data/locales'
+
 export const Loading = memo(function Loading({
   size = 'md',
   className,
   fullScreen = false,
-  text = 'Loading...',
-  description = 'Please wait.',
+  text = messages.loading.defaultText,
+  description = messages.loading.defaultDescription,
 }) {
   const sizeClasses = {
     sm: 'h-4 w-4',

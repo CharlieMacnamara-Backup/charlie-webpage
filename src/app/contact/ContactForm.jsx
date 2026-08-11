@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/Button'
 
@@ -12,6 +13,7 @@ const inputClassName =
   'mt-2 w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100'
 
 export function ContactForm() {
+  const t = useTranslations('contact')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
@@ -29,13 +31,13 @@ export function ContactForm() {
 
     if (!trimmedName || !trimmedEmail || !trimmedMessage) {
       setStatus('error')
-      setError('Please fill in all fields.')
+      setError(t('form.errorRequired'))
       return
     }
 
     if (!EMAIL_REGEX.test(trimmedEmail)) {
       setStatus('error')
-      setError('Please enter a valid email address.')
+      setError(t('form.errorEmail'))
       return
     }
 
@@ -58,16 +60,14 @@ export function ContactForm() {
       setStatus('success')
     } catch {
       setStatus('error')
-      setError(
-        'Something went wrong sending your message. Please try again, or email mail@charliemacnamara.uk.',
-      )
+      setError(t('form.errorSubmit'))
     }
   }
 
   if (status === 'success') {
     return (
       <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
-        Message received. I'll get back to you within 24 hours.
+        {t('form.success')}
       </h2>
     )
   }
@@ -77,7 +77,7 @@ export function ContactForm() {
       <form
         onSubmit={handleSubmit}
         noValidate
-        aria-label="Contact form"
+        aria-label={t('form.formAria')}
         className="space-y-6"
       >
         <div>
@@ -85,7 +85,7 @@ export function ContactForm() {
             htmlFor="name"
             className="block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Name
+            {t('form.nameLabel')}
           </label>
           <input
             id="name"
@@ -102,7 +102,7 @@ export function ContactForm() {
             htmlFor="email"
             className="block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Email
+            {t('form.emailLabel')}
           </label>
           <input
             id="email"
@@ -119,7 +119,7 @@ export function ContactForm() {
             htmlFor="message"
             className="block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Message
+            {t('form.messageLabel')}
           </label>
           <textarea
             id="message"
@@ -137,7 +137,7 @@ export function ContactForm() {
           disabled={status === 'submitting'}
           className="w-full"
         >
-          Request Quote
+          {t('form.submit')}
         </Button>
       </form>
       {status === 'error' && error ? (

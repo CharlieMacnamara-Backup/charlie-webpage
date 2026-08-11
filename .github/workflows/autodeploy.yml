@@ -28,6 +28,8 @@ jobs:
       - run: npm run validate:mdx
       - run: npm run format:check
       - run: npm run lint
+      - name: i18n hardcoded strings check
+        run: npm run check:i18n
       - run: npm test
       - run: npm run build
       - name: Validate worker syntax

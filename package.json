@@ -14,10 +14,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "check": "npm run validate:mdx && npm run format:check && npm run lint && npm test && node -c workers/contact-worker/index.js && npm run build",
+    "check": "npm run validate:mdx && npm run format:check && npm run lint && npm run check:i18n && npm test && node -c workers/contact-worker/index.js && npm run build",
     "clean": "rm -rf .next .cache",
     "check:grammar": "find src/app/blog -name page.mdx ! -path '*_template*' -exec sh -c 'echo \"=== $1 ===\" && ~/.cargo/bin/harper-cli lint -d uk -u ~/.config/harper-ls/dictionary.txt --ignore UnclosedQuotes,SentenceCapitalization,Spaces,OrthographicConsistency,Dashes,UseEllipsisCharacter,LongSentences,PronounVerbAgreement,SpellCheck,SplitWords,CompoundNouns --quiet --format compact < \"$1\"' _ {} \\;",
     "validate:mdx": "node scripts/validate-mdx.js",
+    "check:i18n": "node scripts/check-hardcoded-strings.js",
     "format:check": "prettier --check \"src/**/*.{js,jsx,mdx,css}\" \"workers/**/*.{js,jsonc}\""
   },
   "browserslist": "defaults, not ie <= 11",

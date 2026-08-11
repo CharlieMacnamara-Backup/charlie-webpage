@@ -1,3 +1,4 @@
+import { messages } from '@/data/locales'
 import { articleSchema, breadcrumbSchema } from '@/lib/schema'
 
 export function ArticleJsonLd({ article }) {
@@ -6,8 +7,14 @@ export function ArticleJsonLd({ article }) {
   if (article.slug) {
     schemas.push(
       breadcrumbSchema([
-        { name: 'Home', url: 'https://charliemacnamara.uk' },
-        { name: 'Blog', url: 'https://charliemacnamara.uk/blog' },
+        {
+          name: messages.schema.breadcrumbHome,
+          url: 'https://charliemacnamara.uk',
+        },
+        {
+          name: messages.schema.breadcrumbBlog,
+          url: 'https://charliemacnamara.uk/blog',
+        },
         {
           name: article.title,
           url: `https://charliemacnamara.uk/blog/${article.slug}`,

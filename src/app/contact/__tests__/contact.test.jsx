@@ -2,8 +2,19 @@
 
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
+import { NextIntlClientProvider } from 'next-intl'
+
+import { messages } from '@/data/locales'
 
 import { ContactForm } from '../ContactForm'
+
+function renderForm() {
+  return render(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <ContactForm />
+    </NextIntlClientProvider>,
+  )
+}
 
 afterEach(() => {
   cleanup()
@@ -22,7 +33,7 @@ function fillForm() {
 
 describe('ContactForm', () => {
   it('renders the fields and submit button', () => {
-    render(<ContactForm />)
+    renderForm()
 
     expect(screen.getByLabelText('Name')).toBeTruthy()
     expect(screen.getByLabelText('Email')).toBeTruthy()
@@ -32,7 +43,7 @@ describe('ContactForm', () => {
 
   it('shows an error on empty submit and does not call fetch', async () => {
     vi.stubGlobal('fetch', vi.fn())
-    render(<ContactForm />)
+    renderForm()
 
     fireEvent.submit(screen.getByRole('form'))
 
@@ -42,7 +53,7 @@ describe('ContactForm', () => {
 
   it('shows an error for an invalid email and does not call fetch', async () => {
     vi.stubGlobal('fetch', vi.fn())
-    render(<ContactForm />)
+    renderForm()
 
     fireEvent.change(screen.getByLabelText('Name'), {
       target: { value: 'Jane' },
@@ -65,7 +76,7 @@ describe('ContactForm', () => {
       'fetch',
       vi.fn(() => new Promise(() => {})),
     )
-    render(<ContactForm />)
+    renderForm()
 
     fillForm()
     fireEvent.submit(screen.getByRole('form'))
@@ -89,7 +100,7 @@ describe('ContactForm', () => {
 
   it('swaps the form for the success banner on a 200 response', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }))
-    render(<ContactForm />)
+    renderForm()
 
     fillForm()
     fireEvent.submit(screen.getByRole('form'))
@@ -103,7 +114,7 @@ describe('ContactForm', () => {
       'fetch',
       vi.fn().mockResolvedValue({ ok: false, status: 400 }),
     )
-    render(<ContactForm />)
+    renderForm()
 
     fillForm()
     fireEvent.submit(screen.getByRole('form'))
@@ -117,7 +128,7 @@ describe('ContactForm', () => {
       'fetch',
       vi.fn().mockResolvedValue({ ok: false, status: 500 }),
     )
-    render(<ContactForm />)
+    renderForm()
 
     fillForm()
     fireEvent.submit(screen.getByRole('form'))
@@ -128,7 +139,7 @@ describe('ContactForm', () => {
 
   it('renders an alert and keeps the form on a network failure', async () => {
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('boom')))
-    render(<ContactForm />)
+    renderForm()
 
     fillForm()
     fireEvent.submit(screen.getByRole('form'))

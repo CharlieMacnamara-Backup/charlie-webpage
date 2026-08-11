@@ -46,7 +46,7 @@ function ReadingProgress() {
       aria-valuenow={Math.round(progress * 100)}
       aria-valuemin={0}
       aria-valuemax={100}
-      aria-label="Reading progress"
+      aria-label={messages.articleLayout.readingProgress}
     >
       <div
         className="h-full rounded-r-full bg-linear-to-r from-teal-500 to-cyan-500 transition-[width] duration-150 ease-out"

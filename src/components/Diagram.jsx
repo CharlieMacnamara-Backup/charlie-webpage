@@ -3,6 +3,8 @@
 import { useMemo } from 'react'
 import { renderMermaidSVG } from 'beautiful-mermaid'
 
+import { messages } from '@/data/locales'
+
 export default function Diagram({ definition, caption }) {
   const { svg, error } = useMemo(() => {
     try {
@@ -49,7 +51,7 @@ export default function Diagram({ definition, caption }) {
           </div>
           <div className="ml-3">
             <h3 className="text-sm font-medium text-amber-800 dark:text-amber-600">
-              Diagram failed to render
+              {messages.diagram.failedToRender}
             </h3>
             <div className="mt-1 text-sm text-amber-700 dark:text-amber-500">
               <p>{error.message}</p>
