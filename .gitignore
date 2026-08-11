@@ -45,5 +45,8 @@ src/app/skillio/
 worker-configuration.d.ts
 *.tsbuildinfo
 
+# OMO workflow (plans, drafts, evidence, session state)
+.omo/
+
 # Project instructions (AI context, not source)
 AGENTS.md

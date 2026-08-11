@@ -2,12 +2,12 @@ export const messages = {
   layout: {
     title: {
       template: '%s | Charlie Macnamara',
-      default: 'Charlie Macnamara (also McNamara) - Technical Writer',
+      default: 'Charlie Macnamara - Technical Writer',
     },
     description:
-      'Charlie Macnamara (also Charlie McNamara) — Technical writer making systems and concepts clear and accessible.',
+      'Charlie Macnamara — Technical writer making systems clear and accessible.',
     ogDescription:
-      'Charlie Macnamara — Technical writer making systems and concepts clear and accessible.',
+      'Charlie Macnamara — Technical writer making systems clear and accessible.',
     siteName: 'Charlie Macnamara',
     twitterTitle: 'Charlie Macnamara',
   },
@@ -23,7 +23,7 @@ export const messages = {
     resume: [
       {
         company: 'Freelance',
-        title: 'Freelance Technical Writer & Full-Stack Developer',
+        title: 'Technical Writer & Full-Stack Developer',
         start: 'Sep 2023',
         end: 'Present',
         startDateTime: '2023-09',
@@ -236,10 +236,9 @@ export const messages = {
   },
   blog: {
     title: 'Non-work Blog',
-    description:
-      'Thoughts beyond my professional work. Dives into movies, tech, and personal projects.',
+    description: 'Thoughts beyond my professional work.',
     pageTitle: 'Beyond Work',
-    pageIntro: 'Movies, tech, personal projects.',
+    pageIntro: 'Personal projects and such.',
     readArticle: 'Read article',
     loading: 'Loading articles...',
     loadingMore: 'Loading more articles...',
@@ -393,9 +392,9 @@ export const messages = {
     metaTitle: 'Get a Fixed-Price Website',
     metaDescription:
       'Fixed-price websites for local businesses: online booking, Stripe payments, Google visibility. One fee, no subscriptions.',
-    heading: 'Get a Fixed-Price Website',
+    heading: 'Fixed-Price Design',
     intro:
-      'One fee. No subscriptions. I design, build, and maintain the whole site — you just run your business.',
+      'Commision a website. One fee. No subscriptions. Design, build, and maintanance — you run your business.',
     features: [
       {
         title: 'Online booking',
@@ -409,13 +408,9 @@ export const messages = {
         title: 'Google visibility',
         body: 'local customers find you',
       },
-      {
-        title: 'Reviews on your site',
-        body: 'fresh proof, zero effort',
-      },
     ],
     testimonial:
-      '<link>Davison Menswear</link>, a Bruntsfield kilt shop, runs bookings, reviews, and orders from one page.',
+      'Examples: <qualityKilts>QualityKilts.com</qualityKilts>, <sicamon>Sicamon</sicamon>, and <thisSite>this site</thisSite>.',
     ctaPrompt: 'Tell me about your business. Fixed price, up front.',
     form: {
       formAria: 'Contact form',
@@ -435,13 +430,13 @@ export const messages = {
     metaDescription: 'Privacy policy for Charlie Macnamara',
     heading: 'Privacy Policy',
     intro:
-      'This site collects no personal data beyond standard server logs. No cookies are used for tracking or analytics.',
+      'This site collects no personal data beyond standard server logs and sets no tracking or analytics cookies.',
     dataCollectionHeading: 'Data Collection',
     dataCollectionBody:
-      'This is a static site hosted on Cloudflare Pages. Cloudflare may log standard HTTP request data (IP address, user agent, requested URL) as part of normal operations. These logs are not used for profiling or advertising.',
+      'This is a static site hosted on Cloudflare Pages. Cloudflare may log standard HTTP request data (IP address, user agent, requested URL) as part of normal operations. We never use these logs for profiling or advertising.',
     cookiesHeading: 'Cookies',
     cookiesBody:
-      'This site does not set any cookies. No analytics, tracking, or advertising cookies are used.',
+      'This site sets no cookies — not for analytics, tracking, or advertising.',
     contactHeading: 'Contact',
     contactLead: 'If you have questions about this policy, contact ',
     contactEmail: 'mail@charliemacnamara.uk',

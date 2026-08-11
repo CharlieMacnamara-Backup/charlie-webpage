@@ -45,9 +45,29 @@ export default async function ContactPage() {
 
         <p className="mt-8 text-sm/6 text-zinc-600 dark:text-zinc-400">
           {t.rich('testimonial', {
-            link: (chunks) => (
+            qualityKilts: (chunks) => (
+              <a
+                href="https://qualitykilts.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+              >
+                {chunks}
+              </a>
+            ),
+            sicamon: (chunks) => (
+              <a
+                href="https://sicamon.com/en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+              >
+                {chunks}
+              </a>
+            ),
+            thisSite: (chunks) => (
               <Link
-                href="/blog/davison-menswear"
+                href="/"
                 className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
               >
                 {chunks}
