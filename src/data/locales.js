@@ -75,9 +75,9 @@ export const messages = {
     intro: "Here's some varied work. For more examples, drop me a line.",
     introLinkText: 'drop me a line',
     activeSites: {
-      heading: 'Websites I Maintain',
+      heading: 'Projects I Maintain',
       description:
-        'Alongside Technical Writing, I also build and actively maintain full-stack web applications (like this one).',
+        'Alongside Technical Writing, I build and maintain software — from full-stack web apps to cross-platform mobile apps, all solo developed.',
       sites: [
         {
           name: 'Loquena: AAC & Skills',
