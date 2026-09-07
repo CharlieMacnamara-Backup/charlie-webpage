@@ -419,7 +419,7 @@ export const messages = {
     ],
     testimonial:
       'Examples: <qualityKilts>QualityKilts.com</qualityKilts>, <sicamon>Sicamon</sicamon>, and <thisSite>this site</thisSite>.',
-       form: {
+    form: {
       formAria: 'Contact form',
       nameLabel: 'Name',
       emailLabel: 'Email',

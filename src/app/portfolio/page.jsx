@@ -41,10 +41,7 @@ function ActiveSites({ data }) {
         {data.sites.map((site, i) => (
           <li key={i} className="text-sm">
             <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-              <a
-                href={site.href}
-                className="underline underline-offset-2"
-              >
+              <a href={site.href} className="underline underline-offset-2">
                 {site.name}
               </a>
             </span>
