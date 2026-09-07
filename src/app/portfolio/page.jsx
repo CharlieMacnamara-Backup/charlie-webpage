@@ -42,9 +42,7 @@ function ActiveSites({ data }) {
           <li key={i} className="text-sm">
             <span className="font-semibold text-zinc-900 dark:text-zinc-100">
               <a
-                href={
-                  i === 0 ? 'https://sicamon.com/' : 'https://qualitykilts.com/'
-                }
+                href={site.href}
                 className="underline underline-offset-2"
               >
                 {site.name}

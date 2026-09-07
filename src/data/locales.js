@@ -80,15 +80,23 @@ export const messages = {
         'Alongside Technical Writing, I also build and actively maintain full-stack web applications (like this one).',
       sites: [
         {
+          name: 'Loquena: AAC & Skills',
+          description:
+            'AAC communication and skills app built with Flutter and designed for accessibility.',
+          href: 'https://apps.apple.com/gb/app/loquena-aac-communication/id6754030254',
+        },
+        {
           name: 'Sicamon',
           description:
             'Stripe as CMS — inventory and pricing managed through the Stripe dashboard. Cloudflare Workers propagate changes automatically.',
+          href: 'https://sicamon.com/',
         },
         {
           name: 'Davison Menswear & Kilt Hire',
           description:
             '4 Cloudflare Workers (frontend, calendar, reviews, admin dashboard).',
           readMore: 'read the full story',
+          href: 'https://qualitykilts.com/',
         },
       ],
     },
