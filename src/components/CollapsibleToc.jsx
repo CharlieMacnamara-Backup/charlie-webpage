@@ -27,11 +27,12 @@ export default function TableOfContents({ title, className = '' }) {
     setIsDesktop(window.innerWidth >= 768)
 
     const timer = setTimeout(() => {
-      const headings = Array.from(document.querySelectorAll('h2, h3'))
+      const headings = Array.from(document.querySelectorAll('h2, h3, h4'))
       if (!headings.length) return
 
       const processed = []
       let current = null
+      let currentSub = null
 
       for (const heading of headings) {
         const text = heading.textContent || ''
@@ -44,8 +45,16 @@ export default function TableOfContents({ title, className = '' }) {
         if (heading.tagName === 'H2') {
           if (current) processed.push(current)
           current = { id, title: text, subsections: [] }
+          currentSub = null
         } else if (heading.tagName === 'H3' && current) {
-          current.subsections.push({ id, title: text })
+          currentSub = { id, title: text, subsections: [] }
+          current.subsections.push(currentSub)
+        } else if (heading.tagName === 'H4') {
+          if (currentSub) {
+            currentSub.subsections.push({ id, title: text })
+          } else if (current) {
+            current.subsections.push({ id, title: text, subsections: [] })
+          }
         }
       }
       if (current) processed.push(current)
@@ -60,7 +69,10 @@ export default function TableOfContents({ title, className = '' }) {
 
     const allIds = sections.flatMap((s) => [
       s.id,
-      ...s.subsections.map((sub) => sub.id),
+      ...s.subsections.flatMap((sub) => [
+        sub.id,
+        ...(sub.subsections ? sub.subsections.map((subsub) => subsub.id) : []),
+      ]),
     ])
     const elements = allIds
       .map((id) => document.getElementById(id))
@@ -157,19 +169,39 @@ export default function TableOfContents({ title, className = '' }) {
                     {section.subsections.length > 0 && (
                       <div className="ml-4 space-y-0.5">
                         {section.subsections.map((sub) => (
-                          <a
-                            key={sub.id}
-                            href={`#${sub.id}`}
-                            onClick={(e) => handleClick(e, sub.id)}
-                            className={clsx(
-                              'block rounded px-2 py-1 text-xs transition-colors',
-                              activeId === sub.id
-                                ? 'font-medium text-teal-500'
-                                : 'text-zinc-500 hover:text-teal-500 dark:text-zinc-400 dark:hover:text-teal-400',
+                          <div key={sub.id}>
+                            <a
+                              href={`#${sub.id}`}
+                              onClick={(e) => handleClick(e, sub.id)}
+                              className={clsx(
+                                'block rounded px-2 py-1 text-xs transition-colors',
+                                activeId === sub.id
+                                  ? 'font-medium text-teal-500'
+                                  : 'text-zinc-500 hover:text-teal-500 dark:text-zinc-400 dark:hover:text-teal-400',
+                              )}
+                            >
+                              {sub.title}
+                            </a>
+                            {sub.subsections && sub.subsections.length > 0 && (
+                              <div className="ml-4 space-y-0.5">
+                                {sub.subsections.map((subsub) => (
+                                  <a
+                                    key={subsub.id}
+                                    href={`#${subsub.id}`}
+                                    onClick={(e) => handleClick(e, subsub.id)}
+                                    className={clsx(
+                                      'block rounded px-2 py-1 text-[11px] transition-colors',
+                                      activeId === subsub.id
+                                        ? 'font-medium text-teal-500'
+                                        : 'text-zinc-400 hover:text-teal-500 dark:text-zinc-500 dark:hover:text-teal-400',
+                                    )}
+                                  >
+                                    {subsub.title}
+                                  </a>
+                                ))}
+                              </div>
                             )}
-                          >
-                            {sub.title}
-                          </a>
+                          </div>
                         ))}
                       </div>
                     )}

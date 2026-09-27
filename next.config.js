@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin()
 
 const withMDX = require('@next/mdx')({
   options: {
-    remarkPlugins: [],
+    remarkPlugins: ['remark-gfm'],
     rehypePlugins: [],
     // Removed providerImportSource to fix createContext error
   },

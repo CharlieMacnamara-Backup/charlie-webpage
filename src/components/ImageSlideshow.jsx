@@ -112,7 +112,12 @@ export function ImageSlideshow({ images, blogSlug = null }) {
       {images[current]?.caption && (
         <div className="mt-5 text-center">
           <p className="text-base font-medium text-zinc-800 dark:text-zinc-200">
-            {images[current].caption}
+            {images[current].caption.split(/(\*\*.*?\*\*)/).map((part, i) => {
+              if (part.startsWith('**') && part.endsWith('**')) {
+                return <strong key={i}>{part.slice(2, -2)}</strong>
+              }
+              return part
+            })}
           </p>
         </div>
       )}
