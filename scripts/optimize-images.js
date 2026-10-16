@@ -1,24 +1,27 @@
 #!/usr/bin/env node
 /**
- * Optimise images in a directory in place (or preview with --dry-run, the default).
+ * Optimise images in a directory in place (or preview with a dry run, the default).
  *
  * The site is a static export (`output: 'export'` forces `images.unoptimized: true`),
  * so next/image ships the original bytes with no resizing. Blog photos straight off a
  * phone are therefore served at 12MP into sub-1000px display slots.
  *
  * Usage:
- *   node scripts/optimize-images.js <dir> [--max=2048] [--quality=80] [--palette] [--write]
+ *   node scripts/optimize-images.js <dir> [--max=2048] [--quality=80] [--webp] [--palette] [--write]
  *
  *   --max      longest edge in px (default 2048; images already smaller are untouched)
  *   --quality  JPEG quality (default 80)
- *   --palette  allow PNG palette quantisation (<=256 colours). LOSSY — only suitable
+ *   --webp     convert PNGs to WebP. Tries lossless first and only falls back to
+ *              lossy (quality 90) if lossless does not beat the original PNG.
+ *              Writes `<name>.webp` and deletes the `.png` - references in MDX
+ *              must be updated to match (plain string replace on the path).
+ *   --palette  allow PNG palette quantisation (<=256 colours). LOSSY - only suitable
  *              for flat UI screenshots. Off by default because it bands photographs.
  *   --write    actually overwrite. Without it this only reports what would change.
  *
  * PNG output is lossless by default. Note that losslessly re-encoding an already
  * well-compressed PNG often saves nothing and can even grow the file; anything that
- * does not get smaller is left untouched. For real gains on photographic PNGs,
- * convert them to WebP/JPEG instead.
+ * does not get smaller is left untouched.
  *
  * EXIF orientation is baked into the pixels before metadata is stripped, so rotation
  * survives the removal of the orientation tag.
@@ -32,6 +35,7 @@ const args = process.argv.slice(2)
 const target = args.find((arg) => !arg.startsWith('--'))
 const write = args.includes('--write')
 const palette = args.includes('--palette')
+const toWebp = args.includes('--webp')
 
 function flag(name, fallback) {
   const match = args.find((arg) => arg.startsWith(`--${name}=`))
@@ -40,10 +44,11 @@ function flag(name, fallback) {
 
 const MAX = flag('max', 2048)
 const QUALITY = flag('quality', 80)
+const WEBP_LOSSY_QUALITY = 90
 
 if (!target) {
   console.error(
-    'usage: node scripts/optimize-images.js <dir> [--max=2048] [--quality=80] [--write]',
+    'usage: node scripts/optimize-images.js <dir> [--max=2048] [--quality=80] [--webp] [--palette] [--write]',
   )
   process.exit(1)
 }
@@ -67,34 +72,59 @@ async function optimise(file) {
   const isPng = meta.format === 'png'
   const longSide = Math.max(meta.width, meta.height)
 
-  // rotate() with no argument bakes in EXIF orientation.
-  let pipeline = sharp(file).rotate()
+  // fit: 'inside' constrains both axes, which matters because rotate() can swap
+  // width/height for photos carrying an EXIF orientation tag.
+  const geometry =
+    longSide > MAX
+      ? { width: MAX, height: MAX, fit: 'inside', withoutEnlargement: true }
+      : null
 
-  let resized = false
-  if (longSide > MAX) {
-    // fit: 'inside' constrains both axes, which matters because rotate() can swap
-    // width/height for photos carrying an EXIF orientation tag.
-    pipeline = pipeline.resize({
-      width: MAX,
-      height: MAX,
-      fit: 'inside',
-      withoutEnlargement: true,
-    })
-    resized = true
+  const chain = (encoder, options) => {
+    let pipeline = sharp(file).rotate()
+    if (geometry) pipeline = pipeline.resize(geometry)
+    return pipeline[encoder](options).toBuffer()
   }
 
-  pipeline = isPng
-    ? pipeline.png({ compressionLevel: 9, effort: 10, palette })
-    : pipeline.jpeg({ quality: QUALITY, mozjpeg: true, progressive: true })
+  let buffer
+  let encoding
+  let outPath = file
 
-  const buffer = await pipeline.toBuffer()
+  if (!isPng) {
+    buffer = await chain('jpeg', {
+      quality: QUALITY,
+      mozjpeg: true,
+      progressive: true,
+    })
+    encoding = `jpeg q${QUALITY}`
+  } else if (toWebp) {
+    // Prefer lossless WebP; only accept lossy if lossless cannot beat the PNG.
+    const lossless = await chain('webp', { lossless: true, effort: 6 })
+    const lossy = await chain('webp', {
+      quality: WEBP_LOSSY_QUALITY,
+      effort: 6,
+    })
+    if (lossless.length <= Math.min(lossy.length, before)) {
+      buffer = lossless
+      encoding = 'webp lossless'
+    } else {
+      buffer = lossy
+      encoding = `webp q${WEBP_LOSSY_QUALITY}`
+    }
+    outPath = file.replace(/\.png$/i, '.webp')
+  } else {
+    buffer = await chain('png', { compressionLevel: 9, effort: 10, palette })
+    encoding = palette ? 'png palette' : 'png lossless'
+  }
 
   return {
     file,
+    outPath,
+    rel: null,
     format: meta.format,
+    encoding,
     dims: `${meta.width}x${meta.height}`,
+    resized: Boolean(geometry),
     hasAlpha: Boolean(meta.hasAlpha),
-    resized,
     before,
     after: buffer.length,
     buffer,
@@ -119,73 +149,67 @@ async function optimise(file) {
 
   const pad = (value, width) => String(value).padEnd(width)
   console.log(
-    pad('file', 42) +
-      pad('fmt', 5) +
+    pad('file', 40) +
+      pad('enc', 14) +
       pad('dims', 12) +
       pad('before', 10) +
       pad('after', 10) +
       'saved',
   )
-  console.log('-'.repeat(95))
+  console.log('-'.repeat(100))
 
   for (const row of rows) {
     const rel = path.relative(target, row.file)
     const saved = row.before - row.after
     console.log(
-      pad(rel.slice(0, 41), 42) +
-        pad(row.format, 5) +
+      pad(rel.slice(0, 39), 40) +
+        pad(row.encoding, 14) +
         pad(row.dims, 12) +
         pad(`${mb(row.before).toFixed(2)}MB`, 10) +
         pad(`${mb(row.after).toFixed(2)}MB`, 10) +
         (saved > 0
           ? `${mb(saved).toFixed(2)}MB (${Math.round((saved / row.before) * 100)}%)`
-          : '0 (already optimal)'),
+          : '0 (skipped)'),
     )
   }
 
+  const kept = rows.filter((row) => row.after >= row.before)
+  const written = rows.filter((row) => row.after < row.before)
   const beforeTotal = rows.reduce((sum, row) => sum + row.before, 0)
-  const afterTotal = rows.reduce((sum, row) => sum + row.after, 0)
-  console.log('-'.repeat(95))
+  const afterTotal = rows.reduce(
+    (sum, row) => sum + Math.min(row.before, row.after),
+    0,
+  )
+
+  console.log('-'.repeat(100))
   console.log(
     `${rows.length} images: ${mb(beforeTotal).toFixed(1)}MB -> ${mb(afterTotal).toFixed(1)}MB` +
       ` (saves ${mb(beforeTotal - afterTotal).toFixed(1)}MB, ${Math.round(((beforeTotal - afterTotal) / beforeTotal) * 100)}%)`,
   )
+  console.log(`${written.length} to write, ${kept.length} left untouched`)
 
-  const skipped = rows.filter((row) => !row.resized)
-  if (skipped.length) {
-    console.log(
-      `\nNote: ${skipped.length} image(s) already within ${MAX}px and were only re-encoded: ` +
-        skipped.map((row) => path.relative(target, row.file)).join(', '),
-    )
+  if (!write) {
+    console.log('\nDRY RUN - nothing written. Re-run with --write to apply.')
+    return
   }
-  const pngs = rows.filter((row) => row.format === 'png')
-  if (pngs.length) {
+
+  for (const row of written) {
+    fs.writeFileSync(row.outPath, row.buffer)
+    if (row.outPath !== row.file) fs.unlinkSync(row.file)
+  }
+
+  if (toWebp && written.some((row) => row.outPath !== row.file)) {
     console.log(
-      `\nPNGs: ${pngs.length} encoded ${
-        palette
-          ? 'with palette quantisation (LOSSY, <=256 colours)'
-          : 'losslessly (palette disabled)'
-      }.`,
+      '\nPNGs converted to WebP - update any references to the old .png paths.',
     )
-    if (!palette) {
+    for (const row of written.filter((r) => r.outPath !== r.file)) {
       console.log(
-        'Note: lossless PNG re-encoding often saves little or nothing. Convert photographic PNGs to WebP/JPEG for real gains.',
+        `  ${path.relative(process.cwd(), row.file)} -> ${path.relative(process.cwd(), row.outPath)}`,
       )
     }
   }
 
-  if (!write) {
-    console.log('\nDRY RUN — nothing written. Re-run with --write to apply.')
-    return
-  }
-
-  const toWrite = rows.filter((row) => row.after < row.before)
-  for (const row of toWrite) {
-    fs.writeFileSync(row.file, row.buffer)
-  }
-  console.log(
-    `\nWROTE ${toWrite.length} file(s); left ${rows.length - toWrite.length} unchanged (already smaller).`,
-  )
+  console.log(`\nWROTE ${written.length} file(s).`)
 })().catch((error) => {
   console.error(error)
   process.exit(1)
