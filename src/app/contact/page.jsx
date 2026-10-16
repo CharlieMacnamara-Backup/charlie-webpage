@@ -34,7 +34,6 @@ export default async function ContactPage() {
   const t = await getTranslations('contact')
   const includes = t.raw('includes')
   const proofSites = t.raw('proofSites')
-  const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL
 
   return (
     <Container className="mt-16 sm:mt-32">
@@ -127,18 +126,6 @@ export default async function ContactPage() {
             {t('form.reassurance')}
           </p>
         </div>
-        {bookingUrl ? (
-          <p className="mt-2 text-sm/6 text-zinc-600 dark:text-zinc-400">
-            <a
-              href={bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkClassName}
-            >
-              {t('form.booking')}
-            </a>
-          </p>
-        ) : null}
       </section>
     </Container>
   )

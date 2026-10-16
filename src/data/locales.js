@@ -460,7 +460,6 @@ export const messages = {
       heading: 'Request a quote',
       intro: 'No obligation. Tell me about your project.',
       reassurance: 'Replies within 24 hours',
-      booking: 'Book a free consultation',
       formAria: 'Contact form',
       nameLabel: 'Name',
       emailLabel: 'Email',
