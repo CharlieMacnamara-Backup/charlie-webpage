@@ -458,7 +458,8 @@ export const messages = {
     ],
     form: {
       heading: 'Request a quote',
-      intro: 'No obligation. Tell me about your project.',
+      intro:
+        "No obligation. Tell me about your project — you'll review the site before it goes live.",
       reassurance: 'Replies within 24 hours',
       formAria: 'Contact form',
       nameLabel: 'Name',

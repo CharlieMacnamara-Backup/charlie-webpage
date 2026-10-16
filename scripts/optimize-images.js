@@ -89,15 +89,13 @@ async function optimise(file) {
   let encoding
   let outPath = file
 
-  if (!isPng) {
-    buffer = await chain('jpeg', {
-      quality: QUALITY,
-      mozjpeg: true,
-      progressive: true,
-    })
-    encoding = `jpeg q${QUALITY}`
-  } else if (toWebp) {
-    // Prefer lossless WebP; only accept lossy if lossless cannot beat the PNG.
+  // Key the WebP migration off the filename, not the detected format: some
+  // ".png" assets are actually JPEG data (sharp reports their real format), and
+  // they need converting all the same.
+  const isPngFile = /\.png$/i.test(file)
+
+  if (toWebp && isPngFile) {
+    // Prefer lossless WebP; only accept lossy if lossless cannot beat the original.
     const lossless = await chain('webp', { lossless: true, effort: 6 })
     const lossy = await chain('webp', {
       quality: WEBP_LOSSY_QUALITY,
@@ -111,6 +109,13 @@ async function optimise(file) {
       encoding = `webp q${WEBP_LOSSY_QUALITY}`
     }
     outPath = file.replace(/\.png$/i, '.webp')
+  } else if (!isPng) {
+    buffer = await chain('jpeg', {
+      quality: QUALITY,
+      mozjpeg: true,
+      progressive: true,
+    })
+    encoding = `jpeg q${QUALITY}`
   } else {
     buffer = await chain('png', { compressionLevel: 9, effort: 10, palette })
     encoding = palette ? 'png palette' : 'png lossless'

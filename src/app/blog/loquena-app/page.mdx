@@ -11,9 +11,16 @@ export const article = {
   date: '2026-09-08',
   title: 'Loquena: Speak, Regulate, Grow',
   description:
-    'Offline first app giving non-verbal users a voice + games that build communication, regulation, and early literacy.',
+    'Offline first app giving non-verbal users a voice + games that build communication, regulation, and literacy.',
   slug: 'loquena-app',
   published: false,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+  alternates: { canonical: '/blog/loquena-app/' },
+  robots: { index: false, follow: false },
 }
 
 export default ({ children }) => (
@@ -36,7 +43,7 @@ Neurodivergent diagnosis are at an all time high. For many, speech/regulation so
 
 </div>
 
-Loquena's an offline first development toolkit for neurodivergent users.
+Loquena's an offline first development toolkit. AAC + social skills.
 
 <TableOfContents />
 
@@ -90,7 +97,7 @@ Every design started with neurodivergent users. The home screen opens on a <Term
 <div className="max-w-xs mx-auto">
 
 <SingleImage
-  src="/blog/loquena-app/home-iphone.png"
+  src="/blog/loquena-app/home-iphone.webp"
   alt="Loquena home screen with radial hub"
   orientation="vertical"
   blogSlug="loquena-app"
@@ -107,7 +114,7 @@ Tap tiles to build a sentence, and your device speaks aloud. Vocabulary sorts ac
 <div className="max-w-xs mx-auto">
 
 <SingleImage
-  src="/blog/loquena-app/aac-iphone.png"
+  src="/blog/loquena-app/aac-iphone.webp"
   alt="AAC soundboard with vocabulary grid and sentence bar"
   orientation="vertical"
   blogSlug="loquena-app"
@@ -131,18 +138,18 @@ Adjust:
 <ImageSlideshow
   images={[
     {
-      src: '/blog/loquena-app/iphone-config-intro.png',
+      src: '/blog/loquena-app/iphone-config-intro.webp',
       alt: 'Config page with Move/Edit Tiles button and custom words section',
       caption: 'Move and edit tiles from the config page.',
     },
     {
-      src: '/blog/loquena-app/iphone-config-voices.png',
+      src: '/blog/loquena-app/iphone-config-voices.webp',
       alt: 'Config page with voice setup guide and sound effects toggle',
       caption:
         'Voice setup guide walks users through downloading premium voices.',
     },
     {
-      src: '/blog/loquena-app/iphone-config-options.png',
+      src: '/blog/loquena-app/iphone-config-options.webp',
       alt: 'Config page with vocabulary level, language, tile size, and icon type options',
       caption: 'Vocabulary level, language, tile size, and icon type.',
     },
@@ -156,7 +163,7 @@ Moving tiles gets its own page: drag-and-drop to arrange per profile.
 <div className="max-w-xs mx-auto">
 
 <SingleImage
-  src="/blog/loquena-app/iphone-move-tiles.png"
+  src="/blog/loquena-app/iphone-move-tiles.webp"
   alt="Tiles being rearranged in move mode with drag-and-drop"
   orientation="vertical"
   blogSlug="loquena-app"
@@ -171,12 +178,12 @@ Vocabulary fringes leading AAC lists. User lists are personal, append whenever.
 <ImageSlideshow
   images={[
     {
-      src: '/blog/loquena-app/iphone-custom-word.png',
+      src: '/blog/loquena-app/iphone-custom-word.webp',
       alt: 'Config page showing empty custom words state with Add first word button',
       caption: 'Build a unique word list for each profile.',
     },
     {
-      src: '/blog/loquena-app/iphone-aac-custom-word.png',
+      src: '/blog/loquena-app/iphone-aac-custom-word.webp',
       alt: 'AAC page showing rendered custom word',
       caption: 'Access added words.',
     },
@@ -194,27 +201,27 @@ Enhanced and Premium variants sound noticeably natural. Download under iOS Acces
 <ImageSlideshow
   images={[
     {
-      src: '/blog/loquena-app/voice-setup-1-accessibility.png',
+      src: '/blog/loquena-app/voice-setup-1-accessibility.webp',
       alt: 'iOS Settings Accessibility page',
       caption: 'Open Settings, tap **Accessibility**.',
     },
     {
-      src: '/blog/loquena-app/voice-setup-2-spoken-content.png',
+      src: '/blog/loquena-app/voice-setup-2-spoken-content.webp',
       alt: 'Spoken Content settings with Voices option',
       caption: 'Tap **Spoken Content**, then **Voices**.',
     },
     {
-      src: '/blog/loquena-app/voice-setup-3-voices-list.png',
+      src: '/blog/loquena-app/voice-setup-3-voices-list.webp',
       alt: 'List of available languages for voice download',
       caption: 'Select your **language**.',
     },
     {
-      src: '/blog/loquena-app/voice-setup-4-voice-settings.png',
+      src: '/blog/loquena-app/voice-setup-4-voice-settings.webp',
       alt: 'Voice settings with rate, pitch, and speech volume controls',
       caption: 'Adjust **rate, pitch, and volume** to suit your child.',
     },
     {
-      src: '/blog/loquena-app/voice-setup-5-voice-options.png',
+      src: '/blog/loquena-app/voice-setup-5-voice-options.webp',
       alt: 'Voice options with Enhanced and Premium variants available for download',
       caption: 'Tap the **cloud icon** to download Enhanced or Premium voices.',
     },
@@ -232,7 +239,7 @@ Google's [ML Kit](https://developers.google.com/ml-kit) turns practice, into a g
 <div className="max-w-xs mx-auto">
 
 <SingleImage
-  src="/blog/loquena-app/emotion-cards-iphone.png"
+  src="/blog/loquena-app/emotion-cards-iphone.webp"
   alt="Emotion Cards with face detection"
   orientation="vertical"
   blogSlug="loquena-app"
@@ -249,7 +256,7 @@ Three blurred circles scaled with `flutter_animate`, paced to each phase. Audio 
 <div className="max-w-xs mx-auto">
 
 <SingleImage
-  src="/blog/loquena-app/breathing-iphone.png"
+  src="/blog/loquena-app/breathing-iphone.webp"
   alt="Breathing focus mode with liquid bubble animation"
   orientation="vertical"
   blogSlug="loquena-app"
@@ -266,7 +273,7 @@ Type a word and a custom TeX hyphenation engine splits it into syllables on-devi
 <div className="max-w-xs mx-auto">
 
 <SingleImage
-  src="/blog/loquena-app/syllables-iphone.png"
+  src="/blog/loquena-app/syllables-iphone.webp"
   alt="Syllable Library with search and audio playback"
   orientation="vertical"
   blogSlug="loquena-app"
@@ -283,7 +290,7 @@ Pass between the same device, or against a local CPU opponent.
 <div className="max-w-xs mx-auto">
 
 <SingleImage
-  src="/blog/loquena-app/ttt-iphone.png"
+  src="/blog/loquena-app/ttt-iphone.webp"
   alt="Tic Tac Toe grid mid-game"
   orientation="vertical"
   blogSlug="loquena-app"

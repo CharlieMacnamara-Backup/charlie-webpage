@@ -23,11 +23,22 @@ test.describe('blog', () => {
     await expect(page.locator('a[href*="loquena"]')).toHaveCount(0)
 
     // ...but the route still exists so the link can be shared for review.
+    const { consoleErrors, failedRequests, serverErrors } = watch(page)
     const response = await page.goto('/blog/loquena-app/')
+
     expect(response?.status(), 'unlisted posts stay reachable').toBe(200)
     await expect(page.locator('h1')).toHaveText(
       'Loquena: Speak, Regulate, Grow',
     )
+
+    // Its assets must resolve like any published post - this is what catches a
+    // stale image reference after a filename change.
+    await scrollThrough(page)
+    expect(serverErrors, 'unlisted post requested something missing').toEqual(
+      [],
+    )
+    expect(failedRequests, 'unlisted post had a failed request').toEqual([])
+    expect(consoleErrors, 'unlisted post logged console errors').toEqual([])
   })
 
   test('the renamed post keeps its old URL alive', async ({ page }) => {
