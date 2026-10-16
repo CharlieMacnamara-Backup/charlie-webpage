@@ -7,11 +7,18 @@
  * phone are therefore served at 12MP into sub-1000px display slots.
  *
  * Usage:
- *   node scripts/optimize-images.js <dir> [--max=2048] [--quality=80] [--write]
+ *   node scripts/optimize-images.js <dir> [--max=2048] [--quality=80] [--palette] [--write]
  *
  *   --max      longest edge in px (default 2048; images already smaller are untouched)
  *   --quality  JPEG quality (default 80)
+ *   --palette  allow PNG palette quantisation (<=256 colours). LOSSY — only suitable
+ *              for flat UI screenshots. Off by default because it bands photographs.
  *   --write    actually overwrite. Without it this only reports what would change.
+ *
+ * PNG output is lossless by default. Note that losslessly re-encoding an already
+ * well-compressed PNG often saves nothing and can even grow the file; anything that
+ * does not get smaller is left untouched. For real gains on photographic PNGs,
+ * convert them to WebP/JPEG instead.
  *
  * EXIF orientation is baked into the pixels before metadata is stripped, so rotation
  * survives the removal of the orientation tag.
@@ -24,6 +31,7 @@ const sharp = require('sharp')
 const args = process.argv.slice(2)
 const target = args.find((arg) => !arg.startsWith('--'))
 const write = args.includes('--write')
+const palette = args.includes('--palette')
 
 function flag(name, fallback) {
   const match = args.find((arg) => arg.startsWith(`--${name}=`))
@@ -76,7 +84,7 @@ async function optimise(file) {
   }
 
   pipeline = isPng
-    ? pipeline.png({ compressionLevel: 9, effort: 10 })
+    ? pipeline.png({ compressionLevel: 9, effort: 10, palette })
     : pipeline.jpeg({ quality: QUALITY, mozjpeg: true, progressive: true })
 
   const buffer = await pipeline.toBuffer()
@@ -150,12 +158,20 @@ async function optimise(file) {
         skipped.map((row) => path.relative(target, row.file)).join(', '),
     )
   }
-  const alpha = rows.filter((row) => row.hasAlpha)
-  if (alpha.length) {
+  const pngs = rows.filter((row) => row.format === 'png')
+  if (pngs.length) {
     console.log(
-      `\nNote: ${alpha.length} PNG(s) have transparency and were kept as PNG: ` +
-        alpha.map((row) => path.relative(target, row.file)).join(', '),
+      `\nPNGs: ${pngs.length} encoded ${
+        palette
+          ? 'with palette quantisation (LOSSY, <=256 colours)'
+          : 'losslessly (palette disabled)'
+      }.`,
     )
+    if (!palette) {
+      console.log(
+        'Note: lossless PNG re-encoding often saves little or nothing. Convert photographic PNGs to WebP/JPEG for real gains.',
+      )
+    }
   }
 
   if (!write) {
