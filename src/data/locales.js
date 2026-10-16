@@ -86,7 +86,7 @@ export const messages = {
           href: 'https://apps.apple.com/gb/app/loquena-aac-communication/id6754030254',
         },
         {
-          name: 'Sicamon',
+          name: 'Sicamon Rugs',
           description:
             'Stripe as CMS — inventory and pricing managed through the Stripe dashboard. Cloudflare Workers propagate changes automatically.',
           href: 'https://sicamon.com/',

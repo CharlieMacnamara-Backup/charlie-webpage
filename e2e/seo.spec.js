@@ -55,8 +55,11 @@ test.describe('seo files and 404 handling', () => {
     }
   })
 
-  test('unknown URLs return 404', async ({ page }) => {
+  test('unknown URLs serve the styled 404 page', async ({ page }) => {
     const response = await page.goto('/definitely-not-a-real-page/')
+
     expect(response?.status()).toBe(404)
+    await expect(page.locator('h1')).toHaveText('Page not found')
+    await expect(page.getByRole('link', { name: 'Go back home' })).toBeVisible()
   })
 })
