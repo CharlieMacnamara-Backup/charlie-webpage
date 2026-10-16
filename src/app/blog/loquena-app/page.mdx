@@ -11,8 +11,9 @@ export const article = {
   date: '2026-09-08',
   title: 'Loquena: Speak, Regulate, Grow',
   description:
-    ‘Offline first app giving non-verbal users a voice + games that build communication, regulation, and early literacy.',
+    'Offline first app giving non-verbal users a voice + games that build communication, regulation, and early literacy.',
   slug: 'loquena-app',
+  published: false,
 }
 
 export default ({ children }) => (
@@ -35,7 +36,7 @@ Neurodivergent diagnosis are at an all time high. For many, speech/regulation so
 
 </div>
 
-Loquena's an offline first toolkit for neurodivergent users to develop.
+Loquena's an offline first development toolkit for neurodivergent users.
 
 <TableOfContents />
 
@@ -45,7 +46,7 @@ Loquena's an offline first toolkit for neurodivergent users to develop.
 
 AAC users are varied: cerebral palsy, adults after a stroke, autistic people with unreliable speech.
 
-Then the cost. Dedicated devices run into thousands — forget those. Look at  apps:
+Then the cost. Dedicated devices run into thousands — forget those. Look at apps:
 
 <div className="overflow-x-auto">
 
@@ -68,17 +69,17 @@ Then the cost. Dedicated devices run into thousands — forget those. Look at  a
 
 </div>
 
-For a tool families need, these prices are for institutions.
+For a tool families need, these prices are **wrong**.
 
 Loquena's core is free — no ads, no subscription, no trial timer.
 
-Games sit alongside, each aimed at teaching: reading faces, steadying the breath, hearing the sounds inside words, taking turns. All offline, no scores, or pressure.
+Games sit aside, each aimed at teaching: reading faces, steadying the breath, hearing the sounds inside words, taking turns. All offline, no scores, or pressure.
 
 ## It's 2026, AI?
 
-Initially, I leaned on AI <Term term="api">APIs</Term>. Worked right until Wi-Fi dropped or prices changed. For a tool someone relies on, not acceptable.
+Initially, I leaned on AI <Term term="api">APIs</Term>. Worked right until Wi-Fi dropped or prices changed. For a daily tool, not acceptable.
 
-On-device AI is promising. [Gemma 4](https://ai.google.dev/gemma/docs/core) ships E2B and E4B for mobile, but the 4-bit builds still want between 3 and 4.5GB of RAM. Hand-me-down iPhones and iPads often have under 2GB. 
+On-device AI is promising. [Gemma 4](https://ai.google.dev/gemma/docs/core) ships E2B and E4B for mobile, but the 4-bit builds still want between 3 and 4.5GB of RAM. Hand-me-down iPhones and iPads often have under 2GB.
 
 The project runs [PowerSync](https://powersync.com) throughout. Data lives in a local [SQLite](https://sqlite.org/) database and syncs to [supabase](https://supabase.com/) whenever a connection returns.
 
@@ -119,6 +120,7 @@ Tap tiles to build a sentence, and your device speaks aloud. Vocabulary sorts ac
 Most AACs cram settings onto one screen. Loquena seperates, keeping design clean.
 
 Adjust:
+
 - tile size
 - icon style
 - vocabulary level
@@ -225,7 +227,7 @@ Enhanced and Premium variants sound noticeably natural. Download under iOS Acces
 
 Naming an emotion tends to take the sting out of it, and a common language helps a child tell an adult what's wrong.
 
-Google's [ML Kit](https://developers.google.com/ml-kit) turns practice, into a game. Face detection runs entirely on-device: the camera reads facial landmarks and the model's smiling and eye-open probabilities, and a heuristic matches those against the deck's theme. The camera never uploads a frame, and the match errs soft — ML Kit measures expressions, not feelings.
+Google's [ML Kit](https://developers.google.com/ml-kit) turns practice, into a game. Face detection runs entirely on-device: the camera reads facial landmarks and the model's smiling and eye-open probabilities, and a heuristic matches those against the deck's theme. The camera never uploads.
 
 <div className="max-w-xs mx-auto">
 
@@ -240,9 +242,9 @@ Google's [ML Kit](https://developers.google.com/ml-kit) turns practice, into a g
 
 ### Breathing
 
-Pull your body out of stress. Finding self-regulation hard, a visual guide does the counting.
+Find self-regulation hard? Let a visual guide help.
 
-Three blurred circles scaled with `flutter_animate`, paced to each phase so the inhale, hold, and exhale stay in step. Audio tracks play underneath, and <Term>haptic</Term> pulses carry the same cue. Sessions ends when the user decides.
+Three blurred circles scaled with `flutter_animate`, paced to each phase. Audio tracks play underneath, and <Term>haptic</Term> pulses carry the cue. Sessions ends when the user decides.
 
 <div className="max-w-xs mx-auto">
 
@@ -257,7 +259,7 @@ Three blurred circles scaled with `flutter_animate`, paced to each phase so the 
 
 ### Syllables
 
-Clapping out the beats in a word is one of the first exercises a speech and language therapist sets, and for apraxia, repeating sounds is core practice.
+For apraxia - something I deal with - repeating sounds is core practice.
 
 Type a word and a custom TeX hyphenation engine splits it into syllables on-device — no dictionary lookup. Tap each syllable to hear it, record your attempt, then play it back. Every session ties to a profile. Pattern hyphenation captures the rhythm of most words, but where English is awkward it's a close approximation, corrected by a common dictionary.
 
@@ -276,7 +278,7 @@ Type a word and a custom TeX hyphenation engine splits it into syllables on-devi
 
 Turn-taking — you go, then I go. Tic Tac Toe strips back.
 
-Play passes between two people on the same device, or against a local CPU opponent, entirely offline.
+Pass between the same device, or against a local CPU opponent.
 
 <div className="max-w-xs mx-auto">
 

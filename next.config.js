@@ -1,6 +1,5 @@
 const path = require('path')
 const createNextIntlPlugin = require('next-intl/plugin')
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -19,9 +18,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   trailingSlash: true,
   output: 'export',
-  // `.mdx` = published posts. `dev.mdx` is appended in development only (see the
-  // phase function below), so `page.dev.mdx` drafts get a real route under
-  // `next dev` but are never discovered, built, or exported in production.
+  // Every post is a real route. Unlisted posts are marked `published: false`
+  // in their `article` object (see src/lib/getAllArticles.js) rather than being
+  // hidden by filename.
   pageExtensions: ['js', 'jsx', 'mdx'],
   images: {
     unoptimized: true,
@@ -82,15 +81,4 @@ const nextConfig = {
   compress: true,
 }
 
-module.exports = (phase) => {
-  const isDev = phase === PHASE_DEVELOPMENT_SERVER
-
-  const config = {
-    ...nextConfig,
-    pageExtensions: isDev
-      ? [...nextConfig.pageExtensions, 'dev.mdx']
-      : nextConfig.pageExtensions,
-  }
-
-  return withBundleAnalyzer(withMDX(withNextIntl(config)))
-}
+module.exports = withBundleAnalyzer(withMDX(withNextIntl(nextConfig)))

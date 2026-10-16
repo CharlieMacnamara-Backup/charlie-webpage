@@ -115,18 +115,25 @@ Wrap a word to get a hover/tap tooltip explaining it:
 
 MDX files live in `src/app/blog/*/page.mdx`. Each exports `const article = {...}` with `title`, `description`, `date`, `author`, `slug`. The listing page (`/blog`) uses `getAllArticles()` which reads MDX files at build time via `fast-glob` + regex parsing.
 
-The `_template` directory is excluded. Three live posts: `davison-menswear`, `sourdough-journey`, `markdown-cv`.
+The `_template` directory is excluded (a `_`-prefixed folder is private to Next). Three live posts: `davison-menswear`, `sourdough-journey`, `markdown-cv`.
 
-### Draft posts (dev-only preview)
+### Unlisted posts (`published: false`)
 
-Name a work-in-progress post `page.dev.mdx` instead of `page.mdx` (e.g. `src/app/blog/loquena-app/page.dev.mdx`). It is then viewable at its real URL under `npm run dev` but is never built, routed, or exported in production.
+Every post is a real route. To keep one out of the listing, the sitemap and the home page while leaving its URL reachable, set `published: false` in its `article` object:
 
-How it works — two coordinated switches, both keyed to the development environment:
+```js
+export const article = {
+  // …
+  slug: 'loquena-app',
+  published: false,
+}
+```
 
-- `next.config.js` appends `'dev.mdx'` to `pageExtensions` only when `phase === PHASE_DEVELOPMENT_SERVER`, so production never even sees the file as a route.
-- `getAllArticles()` globs `*/page.dev.mdx` only when `NODE_ENV === 'development'`, so drafts appear in the dev listing/sitemap but not in prod (and not in `npm test`, where `NODE_ENV === 'test'`).
+`getAllArticles()` filters on `published !== false`, and it is the single source for the blog index, the sitemap and the home page. A post is published by default — remove the flag (or set it to `true`) to list it.
 
-`**/*.dev.mdx` is listed in `.prettierignore` — drafts are exempt from `format:check` so a rough draft can never fail `npm run check` or block a push. Rename `page.dev.mdx` → `page.mdx` to publish.
+The URL stays live, so the link can be shared for review. Post bodies of unlisted posts are still served, so treat the URL as the only thing keeping it quiet — add `robots: { index: false }` to the post's `metadata` export if it must stay out of search results.
+
+Unlisted posts are **not** exempt from `format:check` (the old `page.dev.mdx` filename exemption is gone). Add the file path to `.prettierignore` if a rough draft should not gate a push.
 
 ## SEO
 

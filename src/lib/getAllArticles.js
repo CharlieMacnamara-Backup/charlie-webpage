@@ -3,10 +3,8 @@ import fs from 'fs'
 import path from 'path'
 import { messages } from '@/data/locales'
 
-const IS_DEV = process.env.NODE_ENV === 'development'
-
 function articleSlug(articleFilename) {
-  return articleFilename.replace(/(\/page)?(\.dev)?\.mdx$/, '')
+  return articleFilename.replace(/(\/page)?\.mdx$/, '')
 }
 
 function importArticle(articleFilename) {
@@ -81,10 +79,10 @@ function importArticle(articleFilename) {
 
 export function getAllArticles() {
   try {
-    // Use sync version of glob
-    const patterns = IS_DEV ? ['*/page.mdx', '*/page.dev.mdx'] : ['*/page.mdx']
-
-    const articleFilenames = glob.sync(patterns, {
+    // Every post is a route; `published: false` in the `article` object keeps a
+    // post out of the listing, the sitemap and the home page while leaving its
+    // URL reachable for anyone given the link.
+    const articleFilenames = glob.sync(['*/page.mdx'], {
       cwd: path.join(process.cwd(), 'src', 'app', 'blog'),
       ignore: ['_*/**'],
     })
@@ -93,7 +91,7 @@ export function getAllArticles() {
 
     const articles = articleFilenames
       .map(importArticle)
-      .filter((article) => article !== null)
+      .filter((article) => article !== null && article.published !== false)
 
     return articles.sort((a, z) => new Date(z.date) - new Date(a.date))
   } catch (e) {

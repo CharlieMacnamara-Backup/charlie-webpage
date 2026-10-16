@@ -14,13 +14,20 @@ test.describe('blog', () => {
     }
   })
 
-  test('the draft post stays unpublished', async ({ page }) => {
+  test('an unlisted post is shareable by URL but stays out of the listing', async ({
+    page,
+  }) => {
     await page.goto('/blog/')
 
+    // published: false keeps it out of the index...
     await expect(page.locator('a[href*="loquena"]')).toHaveCount(0)
 
+    // ...but the route still exists so the link can be shared for review.
     const response = await page.goto('/blog/loquena-app/')
-    expect(response?.status(), 'draft must not have a route').toBe(404)
+    expect(response?.status(), 'unlisted posts stay reachable').toBe(200)
+    await expect(page.locator('h1')).toHaveText(
+      'Loquena: Speak, Regulate, Grow',
+    )
   })
 
   test('the renamed post keeps its old URL alive', async ({ page }) => {
