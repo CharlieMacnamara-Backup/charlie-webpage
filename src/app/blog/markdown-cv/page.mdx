@@ -11,10 +11,10 @@ export const article = {
   slug: 'markdown-cv',
 }
 
-export default (props) => (
+export default ({ children }) => (
   <>
     <ArticleJsonLd article={article} />
-    <ArticleLayout article={article} {...props} />
+    <ArticleLayout article={article}>{children}</ArticleLayout>
   </>
 )
 

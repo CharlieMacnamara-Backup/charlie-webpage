@@ -52,7 +52,7 @@ npm run diagram:blog:davison
 ### Styling
 
 - All diagrams use the **dagre** layout engine (bundled with D2, no extra install).
-- Arrows use `#14b8a6` (teal-500), the site accent color.
+- Arrows use `#14b8a6` (teal-500), the site accent colour.
 - Text nodes use `#52525b` (zinc-500) at font-size 12.
 - Container groups use dashed teal borders with transparent fill.
 
@@ -60,9 +60,9 @@ npm run diagram:blog:davison
 
 Diagrams are authored as SVG and rendered via Next.js `<Image>` at 100% width. Key constraints:
 
-- **Aspect ratio**: Favor portrait/tall layouts (`direction: down`) so the diagram fits narrow viewports without horizontal scroll. The current pipeline produces `viewBox` ~189×935 (1:5 aspect ratio).
+- **Aspect ratio**: Favour portrait/tall layouts (`direction: down`) so the diagram fits narrow viewports without horizontal scroll. The current pipeline produces `viewBox` ~189×935 (1:5 aspect ratio).
 - **Font size**: Node text uses `font-size: 12` in SVG coordinates. With the viewBox scaled to viewport width, text remains legible on 375px+ screens.
-- **Container groups**: Phases are wrapped in dashed containers with explicit labels — no reliance on color alone.
+- **Container groups**: Phases are wrapped in dashed containers with explicit labels — no reliance on colour alone.
 - **No prose duplication**: Each step label is 2–4 words at a higher level of abstraction than the surrounding paragraph text.
 
 ### Layout rules

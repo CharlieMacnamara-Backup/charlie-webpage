@@ -28,7 +28,7 @@ npm run build      # static export via next.config.js output:'export'
 npm run lint       # next lint
 npm run check      # validate:mdx + format:check + lint + test + build — catch issues before committing
 npm run clean      # rm -rf .next .cache (stale cache fix)
-npm run validate:mdx  # checks all <Definition term=""> usages have glossary entries
+npm run validate:mdx  # checks all <Definition term=""> and <Term> usages have glossary entries
 npm run check:grammar  # harper-cli UK English grammar check on all blog MDX files
 ```
 
@@ -92,17 +92,41 @@ Then hard-refresh browser (`Ctrl+Shift+R`) to purge cached chunks.
 
 ## Components
 
-- **`mdx-components.jsx`** — registers `StaticPlayer`, `Definition` globally for MDX
+- **`mdx-components.jsx`** — registers `StaticPlayer`, `Definition`, `Term` globally for MDX
 - **`Definition`** — Radix Tooltip popup, uses `@/data/glossary.js` (JSON import fails)
+- **`Term`** — streamlined wrapper over `Definition`; derives its glossary key from its own text (case-insensitive) and renders a semantic `<dfn>` trigger
 - **`Analytics`** — CLS check wrapped in `PerformanceObserver.supportedEntryTypes?.includes('layout-shift')` to suppress browser warning
 - **`ArticleLayout`** — blog post wrapper; uses `next/head` (pre-app-router pattern, triggers migration warning but works)
 - **`SEO.jsx`** — `generateMetadata()` helper with defaults for title, OG, Twitter, canonical
+
+### Hover explanations (glossary terms)
+
+Wrap a word to get a hover/tap tooltip explaining it:
+
+```mdx
+<Term>JWT</Term>
+<Term term="jwt">JSON Web Token</Term>
+```
+
+`Term` resolves the glossary key from its text automatically (case-insensitive); use `term="…"` when the display text differs from the key. It renders as `<dfn>`. `Definition term="JWT"` is the lower-level form and still supported. Missing glossary entries fail `npm run validate:mdx` at build.
+
 
 ## Blog
 
 MDX files live in `src/app/blog/*/page.mdx`. Each exports `const article = {...}` with `title`, `description`, `date`, `author`, `slug`. The listing page (`/blog`) uses `getAllArticles()` which reads MDX files at build time via `fast-glob` + regex parsing.
 
 The `_template` directory is excluded. Three live posts: `davison-menswear`, `sourdough-journey`, `markdown-cv`.
+
+### Draft posts (dev-only preview)
+
+Name a work-in-progress post `page.dev.mdx` instead of `page.mdx` (e.g. `src/app/blog/loquena-app/page.dev.mdx`). It is then viewable at its real URL under `npm run dev` but is never built, routed, or exported in production.
+
+How it works — two coordinated switches, both keyed to the development environment:
+
+- `next.config.js` appends `'dev.mdx'` to `pageExtensions` only when `phase === PHASE_DEVELOPMENT_SERVER`, so production never even sees the file as a route.
+- `getAllArticles()` globs `*/page.dev.mdx` only when `NODE_ENV === 'development'`, so drafts appear in the dev listing/sitemap but not in prod (and not in `npm test`, where `NODE_ENV === 'test'`).
+
+`**/*.dev.mdx` is listed in `.prettierignore` — drafts are exempt from `format:check` so a rough draft can never fail `npm run check` or block a push. Rename `page.dev.mdx` → `page.mdx` to publish.
 
 ## SEO
 

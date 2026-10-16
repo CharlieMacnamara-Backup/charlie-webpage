@@ -180,7 +180,7 @@ export function SingleImage({
 
 export function TwoColGrid({
   images,
-  aspectRatio = '4/3', // Can be customized per layout needs
+  aspectRatio = '4/3', // Can be customised per layout needs
   gap = 4, // Tailwind gap size
   blogSlug = null, // Optional blog slug for path resolution
   objectFit = 'contain', // Default object-fit for all images in the grid

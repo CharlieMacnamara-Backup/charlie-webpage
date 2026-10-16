@@ -13,10 +13,10 @@ export const article = {
   slug: 'sourdough-journey',
 }
 
-export default (props) => (
+export default ({ children }) => (
   <>
     <ArticleJsonLd article={article} />
-    <ArticleLayout article={article} {...props} />
+    <ArticleLayout article={article}>{children}</ArticleLayout>
   </>
 )
 
@@ -348,11 +348,11 @@ Dust bannetons with rice flour so gluten doesn't stick.
 Create tension without degassing:
 
 1. Flip a round onto a lightly floured surface
-2. Fold the far edge two-thirds toward you
+2. Fold the far edge two-thirds towards you
 3. Fold the near edge over that
 4. Rotate 90° and repeat
 5. Flip seam-side down
-6. Drag toward you to tighten
+6. Drag towards you to tighten
 7. Rotate a quarter turn and repeat
 
 <ThreeColGrid
@@ -495,7 +495,7 @@ Move fast:
 Two phases:
 
 1. **Steam (30 minutes)**
-   - Steam delays crust, maximizes expansion
+   - Steam delays crust, maximises expansion
    - Hold 250°C/480°F
 2. **Crust (15–20 minutes)**
    - Remove steam pan and inverted tray (watch your hands)
@@ -521,7 +521,7 @@ You're looking for:
   aspectRatio="1/1"
 />
 
-Don't slice warm. Let crumb set and moisture equalize. Crust and flavour improve
+Don't slice warm. Let crumb set and moisture equalise. Crust and flavour improve
 as it cools.
 
 ### Keep It Simple

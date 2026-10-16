@@ -54,4 +54,29 @@ export const glossary = {
     definition:
       'Content management system — software for creating and managing digital content without writing code.',
   },
+  AAC: {
+    term: 'AAC',
+    definition:
+      'Augmentative and Alternative Communication — tools and methods that support or replace speech, from picture boards to speech-generating apps.',
+  },
+  TTS: {
+    term: 'TTS',
+    definition:
+      'Text-to-speech — software that reads written words aloud, usually with voices already built into the device.',
+  },
+  API: {
+    term: 'API',
+    definition:
+      'Application Programming Interface — the defined way one piece of software asks another for data or actions.',
+  },
+  'offline-first': {
+    term: 'Offline-first',
+    definition:
+      'A design approach where the app works fully without a connection and syncs in the background once one returns.',
+  },
+  haptic: {
+    term: 'Haptic',
+    definition:
+      'Touch feedback — a small vibration or resistance that lets you feel an interaction.',
+  },
 }

@@ -117,9 +117,9 @@ export const messages = {
           },
           {
             title:
-              'How to dockerize a Django, Preact, and PostgreSQL Application',
+              'How to dockerise a Django, Preact, and PostgreSQL Application',
             description:
-              'Dockerization guide for Django, Preact, and PostgreSQL.',
+              'Dockerisation guide for Django, Preact, and PostgreSQL.',
             cta: 'View',
           },
           {
@@ -184,7 +184,7 @@ export const messages = {
           },
           {
             title: 'FIUKA: Streamlining Metal Processing',
-            description: 'Manufacturing processes modernized with Wisej.NET.',
+            description: 'Manufacturing processes modernised with Wisej.NET.',
             cta: 'View',
           },
           {
@@ -399,38 +399,98 @@ export const messages = {
   contact: {
     metaTitle: 'Get a Fixed-Price Website',
     metaDescription:
-      'Fixed-price websites for local businesses: online booking, Stripe payments, Google visibility. One fee, no subscriptions.',
-    heading: 'Fixed-Price Design',
+      'Fixed-price websites for local businesses: online booking, card payments, Google Business Profile. No monthly fees.',
+    eyebrow: 'Fixed price · No monthly fees',
+    heading: 'Websites that win customers',
     intro:
-      'Commision a website. One fee. No subscriptions. Design, build, and maintanance — you run your business.',
-    features: [
+      'One fee covers design, build and maintenance. You run the business; I keep the site online.',
+    pricing:
+      "Sites cost <price>£300–£600</price>, depending on the features. Free consultations, in person where possible — I'm in Kirkcaldy.",
+    includesHeading: "What's included",
+    includes: [
       {
         title: 'Online booking',
         body: 'no missed calls or double-bookings',
       },
       {
-        title: 'Stripe payments',
-        body: 'sell around the clock',
+        title: 'Online payments',
+        body: 'get paid around the clock',
       },
       {
-        title: 'Google visibility',
-        body: 'local customers find you',
+        title: 'Google Business Profile',
+        body: 'claimed, verified and optimised',
+      },
+      {
+        title: 'Custom domain email',
+        body: 'you@yourbusiness.co.uk',
+      },
+      {
+        title: 'Domain, hosting and SSL',
+        body: 'registered in your name, renewing at cost',
+      },
+      {
+        title: 'Analytics and Search Console',
+        body: 'see where enquiries come from',
+      },
+      {
+        title: 'Google reviews',
+        body: 'direct customer feedback',
+      },
+      {
+        title: 'Local listings',
+        body: 'name, address and phone, consistent across the web',
       },
     ],
-    testimonial:
-      'Examples: <qualityKilts>QualityKilts.com</qualityKilts>, <sicamon>Sicamon</sicamon>, and <thisSite>this site</thisSite>.',
+    proofHeading: 'Recent work',
+    proofSites: [
+      {
+        name: 'Davison Menswear & Kilt Hire',
+        href: 'https://qualitykilts.com',
+      },
+      {
+        name: 'Sicamon Rugs',
+        href: 'https://sicamon.com/en',
+      },
+      {
+        name: 'Loquena',
+        href: 'https://loquena.com',
+      },
+    ],
+    stepsHeading: 'How it works',
+    steps: [
+      {
+        title: 'Tell me what you need',
+        body: 'your business, your customers, the site you want',
+      },
+      {
+        title: 'Get a fixed quote',
+        body: 'no hourly rates, no surprises',
+      },
+      {
+        title: 'I build and launch it',
+        body: 'you review, then I maintain',
+      },
+    ],
     form: {
+      heading: 'Request a quote',
+      intro: 'No obligation. Tell me about your project.',
+      reassurance: 'Replies within 24 hours',
+      booking: 'Book a free consultation',
       formAria: 'Contact form',
       nameLabel: 'Name',
       emailLabel: 'Email',
       messageLabel: 'Message',
       submit: 'Request Quote',
-      success: "Message received. I'll get back to you within 24 hours.",
+      success: 'Message received.',
       errorRequired: 'Please fill in all fields.',
-      errorEmail: 'Please enter a valid email address.',
+      errorEmail: 'Please enter a valid email.',
       errorSubmit:
-        'Something went wrong sending your message. Please try again, or email mail@charliemacnamara.uk.',
+        "Couldn't send your message. Try again, or email mail@charliemacnamara.uk.",
     },
+  },
+  appStoreButton: {
+    downloadOn: 'Download on the',
+    appStore: 'App Store',
   },
   privacy: {
     metaTitle: 'Privacy Policy',

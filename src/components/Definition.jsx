@@ -5,7 +5,12 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { cn, renderMarkdownLinks } from '@/lib/utils'
 import { glossary } from '../data/glossary.js'
 
-export function Definition({ term, children, className }) {
+export function Definition({
+  term,
+  children,
+  className,
+  as: TriggerTag = 'span',
+}) {
   const entry = glossary[term]
   const [open, setOpen] = useState(false)
 
@@ -26,16 +31,16 @@ export function Definition({ term, children, className }) {
     <TooltipPrimitive.Provider delayDuration={0} skipDelayDuration={0}>
       <TooltipPrimitive.Root open={open} onOpenChange={setOpen}>
         <TooltipPrimitive.Trigger asChild>
-          <span
+          <TriggerTag
             tabIndex={0}
             onPointerDown={handlePointerDown}
             className={cn(
-              'cursor-pointer border-b-2 border-dotted border-teal-500/50 hover:border-teal-500 dark:border-teal-400/40 dark:hover:border-teal-400 text-teal-700 dark:text-teal-300 transition-colors',
+              'cursor-pointer not-italic border-b-2 border-dotted border-teal-500/50 hover:border-teal-500 dark:border-teal-400/40 dark:hover:border-teal-400 text-teal-700 dark:text-teal-300 transition-colors',
               className,
             )}
           >
             {children}
-          </span>
+          </TriggerTag>
         </TooltipPrimitive.Trigger>
         <TooltipPrimitive.Portal>
           <TooltipPrimitive.Content

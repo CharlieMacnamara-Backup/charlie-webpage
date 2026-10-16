@@ -16,7 +16,7 @@ A space for my:
 - Dark mode support
 - MDX blog with syntax highlighting
 - ARIA-compliant accessibility
-- Optimized performance and SEO
+- Optimised performance and SEO
 
 ## Tech Stack
 
@@ -54,7 +54,7 @@ npm run build
 npm run start
 ```
 
-Optimize images:
+Optimise images:
 ```bash
 npm run optimize-images
 ```

@@ -20,8 +20,35 @@ function findDefinitionTerms(content) {
   return terms
 }
 
+function findTermKeys(content) {
+  const keys = []
+  const regex = /<Term(\s[^>]*)?>([\s\S]*?)<\/Term>/g
+  let match
+  while ((match = regex.exec(content)) !== null) {
+    const attrs = match[1] || ''
+    const termMatch = attrs.match(/\bterm="([^"]+)"/)
+    const innerText = match[2].replace(/<[^>]+>/g, '').trim()
+    const candidate = termMatch ? termMatch[1] : innerText
+    if (candidate) keys.push(candidate)
+  }
+  return keys
+}
+
 function findMdxFiles() {
   return glob.sync('**/page.mdx', { cwd: blogDir, ignore: '**/_template/**' })
+}
+
+function findDraftFiles() {
+  return glob.sync('**/page.dev.mdx', {
+    cwd: blogDir,
+    ignore: '**/_template/**',
+  })
+}
+
+function resolveGlossaryKey(glossary, candidate) {
+  return Object.keys(glossary).find(
+    (entry) => entry.toLowerCase() === candidate.toLowerCase(),
+  )
 }
 
 function checkImportErrors(content, file) {
@@ -126,6 +153,19 @@ function validate() {
       }
     }
 
+    const termKeys = findTermKeys(content)
+    for (const key of termKeys) {
+      const resolved = resolveGlossaryKey(glossary, key)
+      if (!resolved) {
+        console.error(
+          `  ERROR: <Term>${key}</Term> used in ${file} but "${key}" is not defined in glossary.json`,
+        )
+        hasErrors = true
+      } else {
+        usedTerms.add(resolved)
+      }
+    }
+
     const importErrors = checkImportErrors(content, file)
     for (const err of importErrors) {
       console.error(`  ERROR: ${file} — ${err}`)
@@ -148,6 +188,18 @@ function validate() {
     for (const err of imageImportErrors) {
       console.error(`  ERROR: ${file} — ${err}`)
       hasErrors = true
+    }
+  }
+
+  // Dev-only drafts aren't validated (they must never fail a check), but any
+  // glossary terms they use still count as "used" so the unused-terms warning
+  // stays accurate.
+  for (const file of findDraftFiles()) {
+    const content = fs.readFileSync(path.join(blogDir, file), 'utf-8')
+    const keys = [...findTermKeys(content), ...findDefinitionTerms(content)]
+    for (const key of keys) {
+      const resolved = resolveGlossaryKey(glossary, key)
+      if (resolved) usedTerms.add(resolved)
     }
   }
 

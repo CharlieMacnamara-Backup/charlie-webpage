@@ -3,6 +3,12 @@ import fs from 'fs'
 import path from 'path'
 import { messages } from '@/data/locales'
 
+const IS_DEV = process.env.NODE_ENV === 'development'
+
+function articleSlug(articleFilename) {
+  return articleFilename.replace(/(\/page)?(\.dev)?\.mdx$/, '')
+}
+
 function importArticle(articleFilename) {
   try {
     const fullPath = path.join(
@@ -31,7 +37,7 @@ function importArticle(articleFilename) {
         const article = evalMetadata()
 
         return {
-          slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),
+          slug: articleSlug(articleFilename),
           ...article,
         }
       } catch (e) {
@@ -51,7 +57,7 @@ function importArticle(articleFilename) {
         const evalMetadata = new Function(`return ${metadata}`)
         const articleMetadata = evalMetadata()
 
-        const slug = articleFilename.replace(/(\/page)?\.mdx$/, '')
+        const slug = articleSlug(articleFilename)
 
         return {
           slug,
@@ -76,7 +82,9 @@ function importArticle(articleFilename) {
 export function getAllArticles() {
   try {
     // Use sync version of glob
-    const articleFilenames = glob.sync('*/page.mdx', {
+    const patterns = IS_DEV ? ['*/page.mdx', '*/page.dev.mdx'] : ['*/page.mdx']
+
+    const articleFilenames = glob.sync(patterns, {
       cwd: path.join(process.cwd(), 'src', 'app', 'blog'),
       ignore: ['_*/**'],
     })

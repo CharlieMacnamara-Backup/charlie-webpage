@@ -203,7 +203,7 @@ The worker uses the platform-native `fetch` API to call Resend's REST endpoint d
 
 - No `node_modules` or `package.json` in the worker directory
 - No bundler step — wrangler deploys the raw ESM
-- Deterministic behavior — no dependency versions to drift
+- Deterministic behaviour — no dependency versions to drift
 - Smaller bundle (3.62 KiB uploaded, 1.30 KiB gzipped)
 
 ### Trailing slash interaction
