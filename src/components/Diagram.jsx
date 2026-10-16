@@ -8,7 +8,7 @@ import { messages } from '@/data/locales'
 export default function Diagram({ definition, caption }) {
   const { svg, error } = useMemo(() => {
     try {
-      const svg = renderMermaidSVG(definition, {
+      const raw = renderMermaidSVG(definition, {
         bg: 'transparent',
         fg: 'var(--diagram-fg)',
         accent: 'var(--diagram-accent)',
@@ -22,6 +22,16 @@ export default function Diagram({ definition, caption }) {
         thoroughness: 7,
         transparent: true,
       })
+
+      // beautiful-mermaid builds a Google Fonts @import from whatever font it is
+      // given. Ours is a CSS stack ("'Geist Variable', sans-serif"), which is not a
+      // Google Fonts family, so the request 400s and the browser blocks it. Geist is
+      // self-hosted via @fontsource and already loaded on the page, so the import is
+      // redundant - stripping it removes a failing third-party request.
+      // Note: encodeURIComponent leaves apostrophes unencoded, so the generated URL
+      // contains raw quotes; match to the closing parenthesis instead of a quote.
+      const svg = raw.replace(/@import url\([^)]*\);?/g, '')
+
       return { svg, error: null }
     } catch (err) {
       return {

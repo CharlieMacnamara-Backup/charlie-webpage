@@ -11,6 +11,12 @@ export const article = {
   slug: 'markdown-cv',
 }
 
+export const metadata = {
+  title: article.title,
+  description: article.description,
+  alternates: { canonical: '/blog/markdown-cv/' },
+}
+
 export default ({ children }) => (
   <>
     <ArticleJsonLd article={article} />

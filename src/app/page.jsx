@@ -140,6 +140,12 @@ const Resume = memo(function Resume({ labels, entries }) {
   )
 })
 
+export async function generateMetadata() {
+  return {
+    alternates: { canonical: '/' },
+  }
+}
+
 export default async function Home() {
   const articles = await getAllArticles()
   const t = await getTranslations('home')

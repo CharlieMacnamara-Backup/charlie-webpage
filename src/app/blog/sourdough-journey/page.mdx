@@ -13,6 +13,12 @@ export const article = {
   slug: 'sourdough-journey',
 }
 
+export const metadata = {
+  title: article.title,
+  description: article.description,
+  alternates: { canonical: '/blog/sourdough-journey/' },
+}
+
 export default ({ children }) => (
   <>
     <ArticleJsonLd article={article} />

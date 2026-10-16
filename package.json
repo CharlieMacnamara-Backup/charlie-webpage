@@ -14,12 +14,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:e2e": "npm run build && playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "check": "npm run validate:mdx && npm run format:check && npm run lint && npm run check:i18n && npm test && node -c workers/contact-worker/index.js && npm run build",
     "clean": "rm -rf .next .cache",
     "check:grammar": "find src/app/blog -name page.mdx ! -path '*_template*' -exec sh -c 'echo \"=== $1 ===\" && ~/.cargo/bin/harper-cli lint -d uk -u ~/.config/harper-ls/dictionary.txt --ignore UnclosedQuotes,SentenceCapitalization,Spaces,OrthographicConsistency,Dashes,UseEllipsisCharacter,LongSentences,PronounVerbAgreement,SpellCheck,SplitWords,CompoundNouns --quiet --format compact < \"$1\"' _ {} \\;",
     "validate:mdx": "node scripts/validate-mdx.js",
     "check:i18n": "node scripts/check-hardcoded-strings.js",
-    "format:check": "prettier --check \"src/**/*.{js,jsx,mdx,css}\" \"workers/**/*.{js,jsonc}\""
+    "format:check": "prettier --check \"src/**/*.{js,jsx,mdx,css}\" \"workers/**/*.{js,jsonc}\" \"e2e/**/*.js\" \"playwright.config.js\""
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
@@ -55,6 +57,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
     "@next/bundle-analyzer": "^16.2.10",
+    "@playwright/test": "^1.64.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^26.1.0",

@@ -50,3 +50,9 @@ worker-configuration.d.ts
 
 # Project instructions (AI context, not source)
 AGENTS.md
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
