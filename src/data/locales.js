@@ -456,21 +456,6 @@ export const messages = {
         href: 'https://loquena.com',
       },
     ],
-    stepsHeading: 'How it works',
-    steps: [
-      {
-        title: 'Tell me what you need',
-        body: 'your business, your customers, the site you want',
-      },
-      {
-        title: 'Get a fixed quote',
-        body: 'no hourly rates, no surprises',
-      },
-      {
-        title: 'I build and launch it',
-        body: 'you review, then I maintain',
-      },
-    ],
     form: {
       heading: 'Request a quote',
       intro: 'No obligation. Tell me about your project.',

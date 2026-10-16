@@ -34,7 +34,6 @@ export default async function ContactPage() {
   const t = await getTranslations('contact')
   const includes = t.raw('includes')
   const proofSites = t.raw('proofSites')
-  const steps = t.raw('steps')
   const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL
 
   return (
@@ -84,88 +83,63 @@ export default async function ContactPage() {
         </ul>
       </section>
 
-      <div className="mt-16 grid grid-cols-1 gap-x-12 gap-y-12 lg:mt-20 lg:grid-cols-2 lg:items-start">
-        <div>
-          <h2 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
-            {t('proofHeading')}
-          </h2>
-          <ul
-            role="list"
-            className="mt-6 list-disc space-y-2 pl-5 text-sm/6 text-zinc-600 dark:text-zinc-400"
-          >
-            {proofSites.map((site) => (
-              <li key={site.name}>
-                {site.href.startsWith('/') ? (
-                  <Link href={site.href} className={linkClassName}>
-                    {site.name}
-                  </Link>
-                ) : (
-                  <a
-                    href={site.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={linkClassName}
-                  >
-                    {site.name}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
-
-          <h2 className="mt-10 text-sm font-semibold text-zinc-800 dark:text-zinc-100">
-            {t('stepsHeading')}
-          </h2>
-          <ol className="mt-6 space-y-4">
-            {steps.map((step, index) => (
-              <li key={step.title} className="flex gap-3">
-                <span
-                  className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-zinc-100 text-xs font-semibold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
-                  aria-hidden="true"
+      <section className="mt-16 max-w-2xl lg:mt-20">
+        <h2 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
+          {t('proofHeading')}
+        </h2>
+        <ul
+          role="list"
+          className="mt-6 list-disc space-y-2 pl-5 text-sm/6 text-zinc-600 dark:text-zinc-400"
+        >
+          {proofSites.map((site) => (
+            <li key={site.name}>
+              {site.href.startsWith('/') ? (
+                <Link href={site.href} className={linkClassName}>
+                  {site.name}
+                </Link>
+              ) : (
+                <a
+                  href={site.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClassName}
                 >
-                  {index + 1}
-                </span>
-                <p className="text-sm/6 text-zinc-600 dark:text-zinc-400">
-                  <span className="font-semibold text-zinc-800 dark:text-zinc-100">
-                    {step.title}
-                  </span>
-                  {' — '}
-                  {step.body}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
+                  {site.name}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <div>
-          <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm sm:p-8 dark:border-zinc-700/40 dark:bg-zinc-800/40">
-            <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-              {t('form.heading')}
-            </h2>
-            <p className="mt-1 text-sm/6 text-zinc-600 dark:text-zinc-400">
-              {t('form.intro')}
-            </p>
-            <div className="mt-6">
-              <ContactForm />
-            </div>
-            <p className="mt-4 text-sm/6 text-zinc-500 dark:text-zinc-400">
-              {t('form.reassurance')}
-            </p>
+      <section className="mt-16 max-w-xl lg:mt-20">
+        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm sm:p-8 dark:border-zinc-700/40 dark:bg-zinc-800/40">
+          <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+            {t('form.heading')}
+          </h2>
+          <p className="mt-1 text-sm/6 text-zinc-600 dark:text-zinc-400">
+            {t('form.intro')}
+          </p>
+          <div className="mt-6">
+            <ContactForm />
           </div>
-          {bookingUrl ? (
-            <p className="mt-2 text-sm/6 text-zinc-600 dark:text-zinc-400">
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkClassName}
-              >
-                {t('form.booking')}
-              </a>
-            </p>
-          ) : null}
+          <p className="mt-4 text-sm/6 text-zinc-500 dark:text-zinc-400">
+            {t('form.reassurance')}
+          </p>
         </div>
-      </div>
+        {bookingUrl ? (
+          <p className="mt-2 text-sm/6 text-zinc-600 dark:text-zinc-400">
+            <a
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClassName}
+            >
+              {t('form.booking')}
+            </a>
+          </p>
+        ) : null}
+      </section>
     </Container>
   )
 }
